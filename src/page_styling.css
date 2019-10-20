@@ -1,0 +1,218 @@
+* {
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+}
+
+body {
+  background-color: slategray;
+}
+
+.wrapper_div {
+  margin: 0 auto;
+  min-width: 300px;
+  max-width: 960px;
+  border: solid black 1px;
+  border-radius: 15px;
+  text-align: center;
+  background-color: lightgray;
+}
+
+.wrapper_header {
+  display: inline-block;
+  padding: 10px;
+  color: black;
+}
+
+.wrapper_body_div_profile,
+.contact_wrapper_body_div {
+  margin: 10px;
+  overflow: hidden;
+}
+
+.wrapper_body_div_profile {
+  display: flex;
+  align-items: center;
+}
+
+.contact_wrapper_body_div {
+  margin: 10px;
+  display: inline-block;
+}
+
+.wrapper_nav_ul {
+  list-style-type: none;
+  padding: 10px;
+  margin: 10px;
+  overflow: auto;
+}
+
+.wrapper_nav_ul input {
+  background-color: lightgray;
+  color: black;
+  font-family: inherit;
+  font-size: 20px;
+}
+
+.profile_redirect {
+  background-color: lightgray;
+  color: black;
+  font-size: 20px;
+  height: 30px;
+  width: 100px;
+  display: inline-block;
+}
+
+.profile_redirect_hidden {
+  display: none;
+}
+
+/*
+the wrapper_nav_li and form styling combination below
+represents the nav links and consists of the li and form 
+encasing each li so that PHP can process each li link action
+*/
+.wrapper_nav_li,
+form {
+  display: inline;
+  margin: 2px;
+}
+
+.wrapper_body_content_div {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.wrapper_body_div_content_paragraph {
+  text-align: justify;
+  text-indent: 50px;
+  color: black;
+}
+
+.wrapper_body_div_content_paragraph_header {
+  color: black;
+}
+
+.landing_wrapper_body_div_content_paragraph {
+  overflow: hidden;
+  text-align: justify;
+  text-indent: 50px;
+  color: black;
+}
+
+.left_image,
+.right_image {
+  height: 300px;
+  border-radius: 15px;
+}
+
+.left_image {
+  float: left;
+  margin-right: 15px;
+}
+
+.right_image {
+  float: right;
+  margin-left: 15px;
+}
+
+.contact_form_div {
+  padding: 15px;
+  display: inline-block;
+  width: 300px;
+  text-align: center;
+}
+
+.contact_form_div a {
+  padding: 5px;
+  margin: 5px;
+}
+
+.contact_form_div input {
+  width: 300px;
+}
+
+textarea {
+  width: 300px;
+  height: 100px;
+  max-width: 300px;
+  max-height: 300px;
+}
+
+.contact_form_button {
+  width: 100px;
+}
+
+.login_form_div input {
+  width: 200px;
+}
+
+.login_form_div {
+  width: 300px;
+  margin: 0 auto;
+  overflow: hidden;
+  padding: 15px;
+}
+
+.login_form_button {
+  width: 80px;
+}
+
+.wrapper_body_div_column_profile_left,
+.wrapper_body_div_column_profile_right {
+  padding: 15px;
+  margin: 10px;
+  display: inline-block;
+}
+.wrapper_body_div_column_profile_left {
+  width: 400px;
+}
+
+.wrapper_body_div_column_profile_right {
+  width: 400px;
+}
+
+.wrapper_body_div_column_item a:hover,
+a:visited,
+a:link {
+  color: black;
+}
+/*
+media query for responsiveness; adjusts the nav links 
+to be stacked horizontally when screen size is smaller
+*/
+@media only screen and (max-width: 600px) {
+  .wrapper_nav_li form {
+    display: block;
+  }
+
+  .wrapper_nav_ul input {
+    width: 280px;
+  }
+
+  .landing_wrapper_body_div_content_paragraph {
+    padding: 15px;
+    margin: 15px;
+    overflow: hidden;
+    text-align: justify;
+    text-indent: 50px;
+  }
+
+  .left_image {
+    margin-right: 15px;
+  }
+
+  .right_image {
+    margin-left: 15px;
+  }
+
+  .left_image,
+  .right_image {
+    width: 200px;
+    height: 200px;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .contact_wrapper_body_div {
+    width: 600px;
+  }
+}

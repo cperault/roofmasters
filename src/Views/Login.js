@@ -1,0 +1,160 @@
+/******************************************************************************************************************\
+ *File:    Login.js                                                                                                *
+ *Author:  Christopher Perault                                                                                     *
+ *Project: Roofmasters CMS (Customer Management System)                                                            *
+ *Date:    August 28th, 2019                                                                                       *
+ *Purpose: This is the login page view component.                                                                  *
+\******************************************************************************************************************/
+import React, { useState } from "react";
+import axios from "axios";
+import Validation from "../Models/Validation.js";
+
+const Login = ({ loggedInUser, userIsLoggedIn, stateHandler, Nav, Footer }) => {
+  //useState hooks to store email and password from the form
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  let user = [];
+  //useState hook to manage the "page loading effect"
+  const [pageLoading, setPageLoading] = useState(false);
+  //authentication handler function
+  const authenticate = (email, password) => {
+    //page-loading effect should display while request is in progress
+    setPageLoading(true);
+    //array to hold login email and password
+    const credentials = [email, password];
+    //the login email and password will be sent to Validation to check for valid input.
+    //If true is returned, user login will proceed; if false, user will be forced to retry login
+    //either due to missing credentials or incorrect credentials.
+    if (Validation(credentials, "login")) {
+      //send the password to the backend for comparison; if true, user may proceed in login;
+      //React files will be served via port 3000;
+      //Apache proxy will be hit at 3001 and send to PHP backend at 3003
+      axios
+        .post(
+          "http://localhost:80/roofmasters-backend/index.php/authenticate",
+          {
+            email: email,
+            password: password
+          }
+        )
+        .then(response => {
+          if (response.data.verification === "Password verified.") {
+            const user_data = JSON.stringify(response.data.user);
+            const user_object = JSON.parse(user_data);
+
+            /*
+        User Object from back end will return as:
+        user_object[index].value
+            [0] for .userID
+            [1] for .firstName
+            [2] for .lastName
+            [3] for .phoneNumber
+            [4] for .emailAddress
+        */
+
+            user = [
+              {
+                userID: user_object[0].userID,
+                firstName: user_object[1].firstName,
+                lastName: user_object[2].lastName,
+                phoneNumber: user_object[3].phoneNumber,
+                emailAddress: user_object[4].emailAddress
+              }
+            ];
+            localStorage.setItem("loggedIn", "true");
+            localStorage.setItem("user", JSON.stringify(user));
+            stateHandler();
+            window.location.assign("/profile");
+          } else if (
+            response.data.verification === "Password does not match."
+          ) {
+            alert("Invalid credentials. Please try again.");
+            window.location.reload();
+          } else if (response.data === "Missing credentials.") {
+            //if user somehow manages to bypass first input check, server will check to make sure input isn't empty
+            alert("Sorry, you can't proceed with missing credentials.");
+            window.location.reload();
+          }
+          setPageLoading(false);
+        })
+        .catch(error => {
+          if (String(error) === "Error: Network Error") {
+            alert(
+              "Uh oh, looks like there was an issue talking to the server. " +
+                "Please contact us or try back in a few minutes."
+            );
+          } else {
+            console.log("Error logging in:" + error);
+          }
+          //refresh the page for new login attempt
+          window.location.reload();
+        });
+    } else {
+      alert("Both an email and a password are required for authentication.");
+      window.location.reload();
+    }
+    //end of authenticate method
+  };
+
+  /* 
+    This method is fired off when user presses Return key at log-in screen
+    note: 'key' will be passed from onKeyUp event as number; 13 is Enter key.
+  */
+  const returnKeyPressedHandler = (key, email = "", password = "") => {
+    if (email.trim() !== "" && password !== "") {
+      if (key === 13) {
+        authenticate(email, password);
+      }
+    }
+  };
+
+  return (
+    <div className="wrapper_div">
+      <h1 className="wrapper_header">Let's Get You Signed In</h1>
+      <nav>
+        <Nav userIsLoggedIn={userIsLoggedIn} />
+      </nav>
+      <div className="wrapper_body_div">
+        <div className="login_form_div">
+          <br />
+          <input
+            type="text"
+            name="login_email"
+            value={email}
+            onChange={text => setEmail(text.target.value)}
+            placeholder="Email"
+            onKeyUp={e => returnKeyPressedHandler(e.keyCode, email, password)}
+          />
+          <br />
+          <input
+            type="password"
+            name="login_password"
+            value={password}
+            onChange={text => setPassword(text.target.value)}
+            placeholder="Password"
+            onKeyUp={e => returnKeyPressedHandler(e.keyCode, email, password)}
+          />
+          <br />
+          <input
+            type="submit"
+            value="Login"
+            className="login_form_button"
+            onClick={() => authenticate(email, password)}
+          />
+        </div>
+        <p>
+          <a href="/registration">No account? Sign up!</a>
+          <input type="hidden" name="action" value="signup" />
+        </p>
+      </div>
+      <p className="loading-message">
+        {pageLoading ? "Authentication request in progress..." : ""}
+      </p>
+      <footer>
+        <Footer userIsLoggedIn={userIsLoggedIn} loggedInUser={loggedInUser} />
+      </footer>
+    </div>
+  );
+};
+
+export default Login;
