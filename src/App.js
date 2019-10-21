@@ -21,6 +21,8 @@ import Profile from "./Views/Profile.js";
 import SafeLocalStorage from "./Models/SafeLocalStorageHandler.js";
 
 const App = () => {
+  //an invite code will prevent spam registrations to site while in development; passed to Contact.js and Registration.js
+  const [inviteCode, setInviteCode] = useState("");
   //set up the ReactJS useState hook to store logged-in user across website
   const [loggedInUser, setLoggedInUser] = useState(
     JSON.parse(SafeLocalStorage("user", "json"))
@@ -101,6 +103,8 @@ const App = () => {
             loggedInUser={loggedInUser}
             Nav={Nav}
             Footer={Footer}
+            inviteCode={inviteCode}
+            setInviteCode={setInviteCode}
           />
         )}
       />
@@ -119,7 +123,14 @@ const App = () => {
       />
       <Route
         path={"/registration"}
-        render={() => <Registration Nav={Nav} Footer={Footer} />}
+        render={() => (
+          <Registration
+            Nav={Nav}
+            Footer={Footer}
+            inviteCode={inviteCode}
+            setInviteCode={setInviteCode}
+          />
+        )}
       />
       <Route
         path={"/profile"}

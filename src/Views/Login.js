@@ -31,7 +31,7 @@ const Login = ({ loggedInUser, userIsLoggedIn, stateHandler, Nav, Footer }) => {
       //Apache proxy will be hit at 3001 and send to PHP backend at 3003
       axios
         .post(
-          "http://localhost:80/roofmasters-backend/index.php/authenticate",
+          "https://roofmasters-backend.herokuapp.com/index.php/authenticate",
           {
             email: email,
             password: password
@@ -135,12 +135,7 @@ const Login = ({ loggedInUser, userIsLoggedIn, stateHandler, Nav, Footer }) => {
             onKeyUp={e => returnKeyPressedHandler(e.keyCode, email, password)}
           />
           <br />
-          <input
-            type="submit"
-            value="Login"
-            className="login_form_button"
-            onClick={() => authenticate(email, password)}
-          />
+          <button onClick={() => authenticate(email, password)}>Login</button>
         </div>
         <p>
           <a href="/registration">No account? Sign up!</a>

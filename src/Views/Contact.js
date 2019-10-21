@@ -9,7 +9,14 @@ import React, { useState } from "react";
 import Validation from "../Models/Validation.js";
 import axios from "axios";
 
-const Contact = ({ userIsLoggedIn, loggedInUser, Nav, Footer }) => {
+const Contact = ({
+  userIsLoggedIn,
+  loggedInUser,
+  Nav,
+  Footer,
+  inviteCode,
+  setInviteCode
+}) => {
   //hook to store entered text in contact form
   let [contactName, setContactName] = useState("");
   let [contactEmail, setContactEmail] = useState("");
@@ -26,21 +33,24 @@ const Contact = ({ userIsLoggedIn, loggedInUser, Nav, Footer }) => {
   const processContactForm = () => {
     let formData = [];
     if (userIsLoggedIn) {
-      formData = [userName, userEmail, contactDescriptionText];
+      formData = [userName, userEmail, contactDescriptionText, inviteCode];
     } else {
-      formData = [contactName, contactEmail, contactDescriptionText];
+      formData = [contactName, contactEmail, contactDescriptionText, inviteCode];
     }
     //make sure contact form is valid before sending
     if (Validation(formData, "contact")) {
       //the contact form is valid; submit the backend request
       axios
-        .post("http://localhost:80/roofmasters-backend/index.php/contact", {
+        .post("https://roofmasters-backend.herokuapp.com/index.php/contact", {
           contactName: formData[0],
           contactEmail: formData[1],
-          contactDescriptionText: formData[2]
+          contactDescriptionText: formData[2],
+          inviteCode: formData[3]
         })
         .then(response => {
-          if (response.data) {
+          if (response.data.invite_response === "Denied.") {
+            setInviteCode("Invite code is invalid.");
+          } else if (response.data) {
             alert(
               "Your message was submitted! We will be in touch with you as soon possible.\n" +
                 response.data
@@ -90,17 +100,18 @@ const Contact = ({ userIsLoggedIn, loggedInUser, Nav, Footer }) => {
           />
           <br />
           <input
-            type="submit"
-            value="Send"
-            className="contact_form_button"
-            onClick={processContactForm}
+            type="text"
+            name="invite_code"
+            value={inviteCode}
+            onChange={text => setInviteCode(text.target.value)}
+            placeHolder="Please enter your invite code"
           />
-          <input
-            type="button"
-            value="Use Different Contact Info"
-            className="contact_form_button"
-            onClick={changeContactInfoHandler}
-          />
+          <button className="contact_form_button" onClick={processContactForm}>
+            Send
+          </button>
+          <button onClick={changeContactInfoHandler}>
+            Use Different Contact Info
+          </button>
         </div>
       </div>
       <footer>

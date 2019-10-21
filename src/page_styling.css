@@ -152,7 +152,11 @@ textarea {
   padding: 15px;
 }
 
-.login_form_button {
+.login_form_div button {
+  width: 80px;
+}
+
+.signup_form_div button {
   width: 80px;
 }
 

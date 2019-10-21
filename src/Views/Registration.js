@@ -9,22 +9,42 @@ import React, { useState } from "react";
 import axios from "axios";
 import Validation from "../Models/Validation.js";
 
-const Registration = ({ loggedInUser, userIsLoggedIn, Nav, Footer }) => {
+const Registration = ({
+  loggedInUser,
+  userIsLoggedIn,
+  Nav,
+  Footer,
+  inviteCode,
+  setInviteCode
+}) => {
   //useState hooks to store first/last name, email and password from the form
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   //useState hook to manage the "page loading effect"
   const [pageLoading, setPageLoading] = useState(false);
 
   //submit email address and password from registration for account to be created
   //note: data will be sanitized server-side but protected by HTTPS client side
-  const registerUser = (firstName, lastName, phoneNumber, email, password) => {
+  const registerUser = (
+    firstName,
+    lastName,
+    phoneNumber,
+    email,
+    password,
+    inviteCode
+  ) => {
     //create array to hold credentials
-    const credentials = [firstName, lastName, phoneNumber, email, password];
+    const credentials = [
+      firstName,
+      lastName,
+      phoneNumber,
+      email,
+      password,
+      inviteCode
+    ];
     //Validation will be passed the credentials array as well as the form (registration). On true,
     //registration will be completed and on false, the user will be informed to retry form input.
     if (Validation(credentials, "registration")) {
@@ -32,15 +52,18 @@ const Registration = ({ loggedInUser, userIsLoggedIn, Nav, Footer }) => {
       setPageLoading(true);
       //send axios POST request
       axios
-        .post("http://localhost:80/roofmasters-backend/index.php/register", {
+        .post("https://roofmasters-backend.herokuapp.com/index.php/register", {
           firstName: firstName,
           lastName: lastName,
           phoneNumber: phoneNumber,
           email: email,
-          password: password
+          password: password,
+          inviteCode: inviteCode
         })
         .then(response => {
-          if (response.data) {
+          if (response.data.invite_response === "Denied.") {
+            setInviteCode("Invite code is invalid.");
+          } else if (response.data) {
             setPageLoading(false);
             alert("Thank you! You're now registered! Let's get you logged in.");
             //redirect to login once registration complete
@@ -126,14 +149,22 @@ const Registration = ({ loggedInUser, userIsLoggedIn, Nav, Footer }) => {
             placeholder="Password"
           />
           <br />
+          <br />
           <input
-            type="submit"
-            value="Register"
-            className="login_form_button"
-            onClick={() =>
-              registerUser(firstName, lastName, phoneNumber, email, password)
-            }
+            type="text"
+            name="invite_code"
+            value={inviteCode}
+            onChange={text => setInviteCode(text.target.value)}
+            placeHolder="Please enter your invite code"
           />
+          <br />
+          <button
+            onClick={() =>
+              registerUser(firstName, lastName, phoneNumber, email, password, inviteCode)
+            }
+          >
+            Register
+          </button>
         </div>
       </div>
       <p className="loading-message">
