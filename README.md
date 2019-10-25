@@ -6,3 +6,4 @@
 | asmith@gmail.com       |     CatMeow*        |
 | emorris@gmail.com      |     Okurrt!         |
 | gray@scc.edu           |     BestTeacher19*  |
+| cgermaine@yahoo.com    |     Talula19*!      |
