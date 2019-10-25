@@ -9,7 +9,7 @@
 
 import React from "react";
 
-const Jobs = ({ Nav }) => {
+const Jobs = ({ Nav }, jobType = "") => {
   return (
     <div>
       <nav>

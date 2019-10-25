@@ -7,6 +7,7 @@
 \******************************************************************************************************************/
 
 import React from "react";
+import { Tab } from "@material-ui/core";
 const URLNav = ({ userIsLoggedIn }) => {
   const navArray = [
     { name: "Home", value: "/landing" },
@@ -14,31 +15,38 @@ const URLNav = ({ userIsLoggedIn }) => {
     { name: "Services", value: "/services" },
     { name: "Contact Us", value: "/contact" },
     {
-      name: userIsLoggedIn === "false" ? "Log In" : "Log Out",
-      value: userIsLoggedIn === "false" ? "/login" : "/logout"
+      name: userIsLoggedIn === "false" ? "Login" : "",
+      value: userIsLoggedIn === "false" ? "/login" : ""
+    },
+    {
+      name: userIsLoggedIn === "false" ? "" : "Profile",
+      value: userIsLoggedIn === "false" ? "" : "/profile"
     }
   ];
+
   const navRedirectHandler = link => {
     window.location.assign(link);
   };
 
-  return (
-    <ul className="wrapper_nav_ul">
-      {navArray.map(link => {
-        return (
-          <form key={link.name + "_form_key"}>
-            <li key={link.name + "_form_key"} className="wrapper_nav_li">
-              <input
-                type="button"
-                onClick={() => navRedirectHandler(link.value)}
-                value={link.name}
-              />
-            </li>
-          </form>
-        );
-      })}
-    </ul>
-  );
+  return navArray
+    .filter(link => link.name !== "")
+    .map(link => {
+      return (
+        <Tab
+          label={link.name}
+          onClick={() => navRedirectHandler(link.value)}
+          style={{
+            backgroundColor: "#C9BE99",
+            width: "auto",
+            height: "auto",
+            margin: "5px",
+            borderRadius: "10px",
+            color: "black",
+            position: "static"
+          }}
+        />
+      );
+    });
 };
 
 export default URLNav;

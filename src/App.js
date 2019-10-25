@@ -34,11 +34,6 @@ const App = () => {
     setLoggedInUser([...loggedInUser, SafeLocalStorage("user", "json")]);
   };
 
-  //function to handle logging out
-  const logoutHandler = () => {
-    localStorage.clear();
-    window.location.assign("/landing");
-  };
   console.log(SafeLocalStorage("user", "json"));
   //check to see if a user is logged in currently
   console.log("Is user logged in?: " + userIsLoggedIn);
@@ -113,7 +108,6 @@ const App = () => {
         render={() => (
           <Login
             userIsLoggedIn={userIsLoggedIn}
-            logoutHandler={logoutHandler}
             stateHandler={stateHandler}
             loggedInUser={loggedInUser}
             Nav={Nav}
@@ -138,7 +132,6 @@ const App = () => {
           userIsLoggedIn === "false" ? (
             <Login
               userIsLoggedIn={userIsLoggedIn}
-              logoutHandler={logoutHandler}
               stateHandler={stateHandler}
               loggedInUser={loggedInUser}
               Nav={Nav}
@@ -154,7 +147,6 @@ const App = () => {
           )
         }
       />
-      <Route path={"/logout"} render={logoutHandler} />
     </BrowserRouter>
   );
 };

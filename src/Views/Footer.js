@@ -13,11 +13,13 @@
 \******************************************************************************************************************/
 
 import React from "react";
+import { Tab } from "@material-ui/core";
 
 const Footer = ({ userIsLoggedIn, loggedInUser }) => {
-
-  const handleProfileRedirect = () => {
-    window.location.assign("/profile");
+  //function to handle logging out
+  const logoutHandler = () => {
+    localStorage.clear();
+    window.location.assign("/landing");
   };
   return (
     <div className="contact_form_div">
@@ -54,16 +56,24 @@ const Footer = ({ userIsLoggedIn, loggedInUser }) => {
           />
         </a>
       </p>
-      <button
-        className={
+
+      <Tab
+        label="Logout"
+        onClick={logoutHandler}
+        style={
           userIsLoggedIn === "true"
-            ? "profile_redirect"
-            : "profile_redirect_hidden"
+            ? {
+                backgroundColor: "#C9BE99",
+                width: "auto",
+                height: "auto",
+                margin: "5px",
+                borderRadius: "10px",
+                color: "black",
+                position: "static"
+              }
+            : { display: "none" }
         }
-        onClick={handleProfileRedirect}
-      >
-        {userIsLoggedIn === "true" ? "Profile" : ""}
-      </button>
+      />
     </div>
   );
 };

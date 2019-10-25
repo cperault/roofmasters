@@ -7,6 +7,12 @@
 \******************************************************************************************************************/
 
 import React from "react";
+import { Button } from "@material-ui/core";
+import { Card } from "@material-ui/core";
+import { ExpansionPanel } from "@material-ui/core";
+import { ExpansionPanelSummary } from "@material-ui/core";
+import { ExpansionPanelDetails } from "@material-ui/core";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 const Profile = ({ userIsLoggedIn, loggedInUser, Nav, Footer }) => {
   const userFirstName = loggedInUser[0].firstName;
@@ -17,32 +23,54 @@ const Profile = ({ userIsLoggedIn, loggedInUser, Nav, Footer }) => {
   //         account-related items.
   //role:    Who will see this.
   const profileItems = [
-    { name: "New Job", link: "/new_job", side: "tasks", role: "both" },
-    { name: "Open Jobs", link: "/open_obs", side: "tasks", role: "both" },
+    {
+      name: "New Job",
+      link: "/new_job",
+      side: "tasks",
+      role: "both",
+      summary: "Create a new job"
+    },
+    {
+      name: "Open Jobs",
+      link: "/open_obs",
+      side: "tasks",
+      role: "both",
+      summary: "View currently open jobs"
+    },
     {
       name: "Completed Jobs",
       link: "/completed_jobs",
       side: "tasks",
-      role: "both"
+      role: "both",
+      summary: "View completed jobs"
     },
     {
       name: "My Account",
       link: "/my_account",
       side: "account",
-      role: "both"
+      role: "both",
+      summary: "Account settings"
     },
-    { name: "Messages", link: "/messages", side: "account", role: "both" },
+    {
+      name: "Messages",
+      link: "/messages",
+      side: "account",
+      role: "both",
+      summary: "Message inbox"
+    },
     {
       name: "Billing",
       link: "/my_billing",
       side: "account",
-      role: "customer"
+      role: "customer",
+      summary: "View your billing"
     },
     {
       name: "Customer Billing",
       link: "/customer_billing",
       side: "account",
-      role: "admin"
+      role: "admin",
+      summary: "View all customer billing"
     }
   ];
 
@@ -52,9 +80,25 @@ const Profile = ({ userIsLoggedIn, loggedInUser, Nav, Footer }) => {
       .filter(item => item.side === side)
       .map(item => {
         return (
-          <p className="wrapper_body_div_column_item">
-            <a href={item.link}>{item.name}</a>
-          </p>
+          <Card style={{ margin: "5px", backgroundColor: "transparent" }}>
+            <ExpansionPanel
+              style={{ margin: "10px", backgroundColor: "#C9BE99" }}
+            >
+              <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                {item.summary}
+              </ExpansionPanelSummary>
+              <ExpansionPanelDetails>
+                <Button
+                  className="wrapper_body_div_column_item"
+                  size="medium"
+                  variant="outlined"
+                  style={{ margin: "5px" }}
+                >
+                  <a href={item.link}>{item.name}</a>
+                </Button>
+              </ExpansionPanelDetails>
+            </ExpansionPanel>
+          </Card>
         );
       });
 
@@ -68,13 +112,15 @@ const Profile = ({ userIsLoggedIn, loggedInUser, Nav, Footer }) => {
         <Nav userIsLoggedIn={userIsLoggedIn} />
       </nav>
       <div className="wrapper_body_div_profile">
-        <div className="wrapper_body_div_column_profile_left">
-          {/*Tasks items from profileItems will be inserted here.*/}
-          {fillContentArea("tasks")}
-        </div>
-        <div className="wrapper_body_div_column_profile_right">
-          {/*Account items from profileItems will be inserted here.*/}
-          {fillContentArea("account")}
+        <div className="wrapper_body_div_profile_inner">
+          <div className="wrapper_body_div_column_profile_left">
+            {/*Tasks items from profileItems will be inserted here.*/}
+            {fillContentArea("tasks")}
+          </div>
+          <div className="wrapper_body_div_column_profile_right">
+            {/*Account items from profileItems will be inserted here.*/}
+            {fillContentArea("account")}
+          </div>
         </div>
       </div>
       <footer>
