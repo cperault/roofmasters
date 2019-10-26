@@ -7,12 +7,13 @@
 \******************************************************************************************************************/
 
 import React from "react";
-import { Button } from "@material-ui/core";
 import { Card } from "@material-ui/core";
 import { ExpansionPanel } from "@material-ui/core";
 import { ExpansionPanelSummary } from "@material-ui/core";
 import { ExpansionPanelDetails } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import Jobs from "./Jobs.js";
+import Account from "./Account.js";
 
 const Profile = ({ userIsLoggedIn, loggedInUser, Nav, Footer }) => {
   const userFirstName = loggedInUser[0].firstName;
@@ -28,49 +29,56 @@ const Profile = ({ userIsLoggedIn, loggedInUser, Nav, Footer }) => {
       link: "/new_job",
       side: "tasks",
       role: "both",
-      summary: "Create a new job"
+      summary: "Create a new job",
+      jobType: "new"
     },
     {
       name: "Open Jobs",
       link: "/open_obs",
       side: "tasks",
       role: "both",
-      summary: "View currently open jobs"
+      summary: "View currently open jobs",
+      jobType: "open"
     },
     {
       name: "Completed Jobs",
       link: "/completed_jobs",
       side: "tasks",
       role: "both",
-      summary: "View completed jobs"
+      summary: "View completed jobs",
+      jobType: "completed"
     },
     {
       name: "My Account",
       link: "/my_account",
       side: "account",
       role: "both",
-      summary: "Account settings"
+      summary: "Account settings",
+      accountCriteria: "settings"
     },
     {
       name: "Messages",
       link: "/messages",
       side: "account",
       role: "both",
-      summary: "Message inbox"
+      summary: "Message inbox",
+      accountCriteria: "messages"
     },
     {
       name: "Billing",
       link: "/my_billing",
       side: "account",
       role: "customer",
-      summary: "View your billing"
+      summary: "View your billing",
+      accountCriteria: "billing"
     },
     {
       name: "Customer Billing",
       link: "/customer_billing",
       side: "account",
       role: "admin",
-      summary: "View all customer billing"
+      summary: "View all customer billing",
+      accountCriteria: "billing"
     }
   ];
 
@@ -88,14 +96,14 @@ const Profile = ({ userIsLoggedIn, loggedInUser, Nav, Footer }) => {
                 {item.summary}
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
-                <Button
-                  className="wrapper_body_div_column_item"
-                  size="medium"
-                  variant="outlined"
-                  style={{ margin: "5px" }}
-                >
-                  <a href={item.link}>{item.name}</a>
-                </Button>
+                {item.side === "tasks" ? (
+                  <Jobs jobType={item.jobType} loggedInUser={loggedInUser} />
+                ) : (
+                  <Account
+                    accountCriteria={item.accountCriteria}
+                    loggedInUser={loggedInUser}
+                  />
+                )}
               </ExpansionPanelDetails>
             </ExpansionPanel>
           </Card>
@@ -112,7 +120,10 @@ const Profile = ({ userIsLoggedIn, loggedInUser, Nav, Footer }) => {
         <Nav userIsLoggedIn={userIsLoggedIn} />
       </nav>
       <div className="wrapper_body_div_profile">
-        <div className="wrapper_body_div_profile_inner">
+        <div
+          className="wrapper_body_div_profile_inner"
+          style={{ display: "flex", alignItems: "center" }}
+        >
           <div className="wrapper_body_div_column_profile_left">
             {/*Tasks items from profileItems will be inserted here.*/}
             {fillContentArea("tasks")}

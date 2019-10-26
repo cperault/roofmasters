@@ -157,6 +157,32 @@ a:link {
   color: black;
   text-decoration: none;
 }
+
+.new_job_form {
+  padding: 10px;
+  border: solid #92896f 2px;
+  border-radius: 15px;
+}
+.messages_container {
+  border: solid #92896f 2px;
+  border-radius: 15px;
+  padding: 10px;
+}
+.account_message_preview {
+  text-align: left;
+  border: solid #92896f 2px;
+  border-radius: 15px;
+  padding: 10px;
+}
+
+.account_message_preview a {
+  padding: 10px;
+  text-decoration: underline;
+}
+
+.account_message_header {
+  font-weight: bold;
+}
 /*
 media query for responsiveness; adjusts the nav links 
 to be stacked horizontally when screen size is smaller
