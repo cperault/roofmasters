@@ -16,14 +16,12 @@ const Messages = ({ loggedInUser }) => {
   const getMessages = () => {
     //set up the axios request to fetch all messages for associatedID (loggedInUsers ID)
     axios
-      .post(
-        "https://roofmasters-backend.herokuapp.com/index.php/message_fetch",
-        {
-          myID: loggedInUser[0].userID
-        }
-      )
+      .post("https://roofmasters-backend.herokuapp.com/index.php/messages", {
+        myID: 1,
+        messageAction: "fetch"
+      })
       .then(response => {
-        return alert(response.data);
+        console.log(response.request);
 
         // const message_data = JSON.stringify(response.data.messages);
         // const message_object = JSON.parse(message_data);
