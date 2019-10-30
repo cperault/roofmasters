@@ -93,7 +93,7 @@ const Profile = ({ userIsLoggedIn, loggedInUser, Nav, Footer }) => {
               style={{ margin: "10px", backgroundColor: "#C9BE99" }}
             >
               <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                {item.summary}
+                <span className="item_summary_profile">{item.summary}</span>
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
                 {item.side === "tasks" ? (
@@ -120,10 +120,7 @@ const Profile = ({ userIsLoggedIn, loggedInUser, Nav, Footer }) => {
         <Nav userIsLoggedIn={userIsLoggedIn} />
       </nav>
       <div className="wrapper_body_div_profile">
-        <div
-          className="wrapper_body_div_profile_inner"
-          style={{ display: "flex", alignItems: "center" }}
-        >
+        <div className="wrapper_body_div_profile_inner">
           <div className="wrapper_body_div_column_profile_left">
             {/*Tasks items from profileItems will be inserted here.*/}
             {fillContentArea("tasks")}

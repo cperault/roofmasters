@@ -8,7 +8,6 @@ body {
 
 .wrapper_div {
   margin: 0 auto;
-  margin-top: 60px;
   min-width: 300px;
   max-width: 960px;
   border: solid black 1px;
@@ -22,16 +21,16 @@ body {
   padding: 10px;
   color: black;
 }
-.wrapper_body_div_profile {
-  display: flex;
-}
+
 .wrapper_body_div_profile,
 .contact_wrapper_body_div {
   margin: 10px;
   overflow: hidden;
 }
 
-.contact_wrapper_body_div {
+.contact_wrapper_body_div,
+.login_wrapper_body_div,
+.registration_form_div {
   margin: 10px;
   display: inline-block;
 }
@@ -86,26 +85,14 @@ form {
 }
 
 .contact_form_div {
-  padding: 15px;
+  padding: 10px;
   display: inline-block;
   width: 300px;
-  text-align: center;
-}
-
-.contact_form_div a {
-  padding: 5px;
-  margin: 5px;
+  text-align: right;
 }
 
 .contact_form_div input {
   width: 300px;
-}
-
-textarea {
-  width: 300px;
-  height: 100px;
-  max-width: 300px;
-  max-height: 300px;
 }
 
 .contact_form_button {
@@ -116,11 +103,13 @@ textarea {
   width: 200px;
 }
 
-.login_form_div {
+.login_form_div,
+.registration_form_div {
   width: 300px;
   margin: 0 auto;
   overflow: hidden;
   padding: 15px;
+  text-align: right;
 }
 
 .login_form_div button {
@@ -183,25 +172,31 @@ a:link {
 .account_message_header {
   font-weight: bold;
 }
+
+.contact_form_div_footer img {
+  padding: 5px;
+}
+
+.register_form_div_header {
+  text-align: center;
+}
 /*
 media query for responsiveness; adjusts the nav links 
 to be stacked horizontally when screen size is smaller
 */
 @media only screen and (max-width: 600px) {
-  .wrapper_nav_li form {
-    display: block;
-  }
-
-  .wrapper_nav_ul input {
-    width: 280px;
-  }
-
   .landing_wrapper_body_div_content_paragraph {
     padding: 15px;
     margin: 15px;
     overflow: hidden;
     text-align: justify;
     text-indent: 50px;
+  }
+
+  .contact_form_div,
+  .login_form_div,
+  .registration_form_div {
+    width: 260px;
   }
 
   .left_image {
@@ -217,10 +212,29 @@ to be stacked horizontally when screen size is smaller
     width: 200px;
     height: 200px;
   }
+  .wrapper_body_div_column_profile_left,
+  .wrapper_body_div_column_profile_right {
+    width: 280px;
+  }
+  .item_summary_profile {
+    font-size: smaller;
+  }
 }
 
 @media only screen and (min-width: 600px) {
   .contact_wrapper_body_div {
     width: 600px;
+  }
+  .contact_form_div,
+  .login_form_div,
+  .registration_form_div {
+    width: 500px;
+  }
+  .wrapper_body_div_profile {
+    display: flex;
+  }
+  .wrapper_body_div_profile_inner {
+    display: flex;
+    align-items: center;
   }
 }

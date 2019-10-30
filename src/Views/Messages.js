@@ -17,15 +17,17 @@ const Messages = ({ loggedInUser }) => {
     //set up the axios request to fetch all messages for associatedID (loggedInUsers ID)
     axios
       .post("https://roofmasters-backend.herokuapp.com/index.php/messages", {
-        myID: 1,
+        myID: "1",
         messageAction: "fetch"
       })
       .then(response => {
-        console.log(response.request);
-
+        alert(JSON.stringify(response.data));
         // const message_data = JSON.stringify(response.data.messages);
         // const message_object = JSON.parse(message_data);
         // console.log(JSON.stringify(message_object[0].messageContent));
+      })
+      .catch(error => {
+        console.log("Error: " + error);
       });
   };
 

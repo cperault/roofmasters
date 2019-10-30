@@ -8,6 +8,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Validation from "../Models/Validation.js";
+import { TextField, Button } from "@material-ui/core";
 
 const Login = ({ loggedInUser, userIsLoggedIn, stateHandler, Nav, Footer }) => {
   //useState hooks to store email and password from the form
@@ -114,28 +115,40 @@ const Login = ({ loggedInUser, userIsLoggedIn, stateHandler, Nav, Footer }) => {
       <nav>
         <Nav userIsLoggedIn={userIsLoggedIn} />
       </nav>
-      <div className="wrapper_body_div">
+      <div className="login_wrapper_body_div">
         <div className="login_form_div">
           <br />
-          <input
-            type="text"
+          <TextField
             name="login_email"
             value={email}
+            style={{ marginBottom: "10px" }}
+            fullWidth
+            variant="outlined"
             onChange={text => setEmail(text.target.value)}
             placeholder="Email"
             onKeyUp={e => returnKeyPressedHandler(e.keyCode, email, password)}
           />
           <br />
-          <input
+          <TextField
             type="password"
             name="login_password"
+            style={{ marginBottom: "10px" }}
+            fullWidth
+            variant="outlined"
             value={password}
             onChange={text => setPassword(text.target.value)}
             placeholder="Password"
             onKeyUp={e => returnKeyPressedHandler(e.keyCode, email, password)}
           />
           <br />
-          <button onClick={() => authenticate(email, password)}>Login</button>
+          <Button
+            onClick={() => authenticate(email, password)}
+            variant="contained"
+            color="primary"
+            size="small"
+          >
+            Login
+          </Button>
         </div>
         <p>
           <a href="/registration">No account? Sign up!</a>

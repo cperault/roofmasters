@@ -8,6 +8,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Validation from "../Models/Validation.js";
+import { TextField, Button } from "@material-ui/core";
 
 const Registration = ({
   loggedInUser,
@@ -103,46 +104,57 @@ const Registration = ({
       <nav>
         <Nav />
       </nav>
-      <div className="wrapper_body_div">
-        <div className="signup_form_div">
-          <p>
+      <div className="registrationg_wrapper_body_div">
+        <div className="registration_form_div">
+          <p className="register_form_div_header">
             Please enter your information and create a unique, secure password.
           </p>
           <br />
-          <input
-            type="text"
+          <TextField
+            variant="outlined"
+            fullWidth
+            style={{ marginBottom: "10px" }}
             name="signup_first_name"
             value={firstName}
             onChange={text => setFirstName(text.target.value)}
             placeholder="First Name"
           />
           <br />
-          <input
-            type="text"
+          <TextField
+            variant="outlined"
+            fullWidth
+            style={{ marginBottom: "10px" }}
             name="signup_last_name"
             value={lastName}
             onChange={text => setLastName(text.target.value)}
             placeholder="Last Name"
           />
           <br />
-          <input
-            type="text"
+          <TextField
+            variant="outlined"
+            fullWidth
+            style={{ marginBottom: "10px" }}
             name="signup_phone_number"
             value={phoneNumber}
             onChange={text => setPhoneNumber(text.target.value)}
             placeholder="Phone Number (no dashes)"
           />
           <br />
-          <input
-            type="text"
+          <TextField
+            variant="outlined"
+            fullWidth
+            style={{ marginBottom: "10px" }}
             name="signup_email"
             value={email}
             onChange={text => setEmail(text.target.value)}
             placeholder="Email"
           />
           <br />
-          <input
+          <TextField
             type="password"
+            variant="outlined"
+            fullWidth
+            style={{ marginBottom: "10px" }}
             name="signup_password"
             value={password}
             onChange={text => setPassword(text.target.value)}
@@ -150,21 +162,33 @@ const Registration = ({
           />
           <br />
           <br />
-          <input
-            type="text"
+          <TextField
+            variant="outlined"
+            fullWidth
+            style={{ marginBottom: "10px" }}
             name="invite_code"
             value={inviteCode}
             onChange={text => setInviteCode(text.target.value)}
-            placeHolder="Please enter your invite code"
+            placeholder="Please enter your invite code"
           />
           <br />
-          <button
+          <Button
             onClick={() =>
-              registerUser(firstName, lastName, phoneNumber, email, password, inviteCode)
+              registerUser(
+                firstName,
+                lastName,
+                phoneNumber,
+                email,
+                password,
+                inviteCode
+              )
             }
+            variant="contained"
+            color="primary"
+            size="small"
           >
             Register
-          </button>
+          </Button>
         </div>
       </div>
       <p className="loading-message">

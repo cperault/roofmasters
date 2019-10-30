@@ -15,14 +15,14 @@
 import React from "react";
 import { Tab } from "@material-ui/core";
 
-const Footer = ({ userIsLoggedIn, loggedInUser }) => {
+const Footer = ({ userIsLoggedIn }) => {
   //function to handle logging out
   const logoutHandler = () => {
     localStorage.clear();
     window.location.assign("/landing");
   };
   return (
-    <div className="contact_form_div">
+    <div className="contact_form_div_footer">
       <p>
         <a href="tel:402-714-2250">
           <img

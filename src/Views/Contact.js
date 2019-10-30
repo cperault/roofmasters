@@ -8,6 +8,7 @@
 import React, { useState } from "react";
 import Validation from "../Models/Validation.js";
 import axios from "axios";
+import { TextField, Button } from "@material-ui/core";
 
 const Contact = ({
   userIsLoggedIn,
@@ -25,17 +26,18 @@ const Contact = ({
   let userName = user[0].firstName + " " + user[0].lastName;
   let userEmail = user[0].emailAddress;
 
-  const changeContactInfoHandler = () => {
-    //if user wants to use different email address and/or name, they can do that
-  };
-
   //set up the request to PHP backend for contact form processing
   const processContactForm = () => {
     let formData = [];
     if (userIsLoggedIn) {
       formData = [userName, userEmail, contactDescriptionText, inviteCode];
     } else {
-      formData = [contactName, contactEmail, contactDescriptionText, inviteCode];
+      formData = [
+        contactName,
+        contactEmail,
+        contactDescriptionText,
+        inviteCode
+      ];
     }
     //make sure contact form is valid before sending
     if (Validation(formData, "contact")) {
@@ -75,47 +77,60 @@ const Contact = ({
       <div className="contact_wrapper_body_div">
         <div className="contact_form_div">
           <br />
-          <input
-            type="text"
+          <TextField
+            variant="outlined"
+            fullWidth
+            style={{ marginBottom: "10px" }}
             name="contact_name"
             value={userIsLoggedIn === "false" ? contactName : userName}
             placeholder="Your Name"
             onChange={text => setContactName(text.target.value)}
           />
           <br />
-          <input
-            type="text"
+          <TextField
+            variant="outlined"
+            fullWidth
+            style={{ marginBottom: "10px" }}
             name="contact_mail"
             value={userIsLoggedIn === "false" ? contactEmail : userEmail}
             placeholder="Your Email Address"
             onChange={text => setContactEmail(text.target.value)}
           />
           <br />
-          <textarea
-            name="contact_message"
-            maxLength="300"
+          <TextField
+            style={{ marginBottom: "10px" }}
+            multiline
+            fullWidth
+            variant="outlined"
+            rows="1"
+            rowsMax="8"
             placeholder="Let us know how we can help..."
             value={contactDescriptionText}
             onChange={text => setContactDescriptionText(text.target.value)}
           />
           <br />
-          <input
-            type="text"
+          <TextField
+            variant="outlined"
+            style={{ marginBottom: "10px" }}
             name="invite_code"
+            fullWidth
             value={inviteCode}
             onChange={text => setInviteCode(text.target.value)}
-            placeHolder="Please enter your invite code"
+            required
+            placeholder="Please enter your invite code"
           />
-          <button className="contact_form_button" onClick={processContactForm}>
+          <Button
+            onClick={processContactForm}
+            variant="contained"
+            color="primary"
+            size="small"
+          >
             Send
-          </button>
-          <button onClick={changeContactInfoHandler}>
-            Use Different Contact Info
-          </button>
+          </Button>
         </div>
       </div>
-      <footer>
-        <Footer userIsLoggedIn={userIsLoggedIn} loggedInUser={loggedInUser} />
+      <footer className="footer">
+        <Footer userIsLoggedIn={userIsLoggedIn} />
       </footer>
     </div>
   );
