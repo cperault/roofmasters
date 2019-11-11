@@ -126,7 +126,7 @@ const Registration = ({
       });
   };
 
-  return userNeedsToConfirm === "" ? (
+  return userNeedsToConfirm ? (
     <div className="wrapper_div">
       <h1 className="wrapper_header">Let's Get You Registered</h1>
       <nav>
