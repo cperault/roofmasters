@@ -10,10 +10,10 @@ import axios from "axios";
 import Validation from "../Models/Validation.js";
 import { TextField, Button } from "@material-ui/core";
 
-const ConfirmRegistration = ({ Nav, Footer, userRegistering }) => {
-  const email = userRegistering;
+const ConfirmRegistration = ({ Nav, Footer }) => {
   //useState hook to manage the "page loading effect"
   const [pageLoading, setPageLoading] = useState(false);
+  const [emailAddress, setEmailAddress] = useState("");
   const [registrationCode, setRegistrationCode] = useState("");
   //prompt user to enter the code they receive via email before proceeding
   const confirmRegistration = registrationCode => {
@@ -24,12 +24,13 @@ const ConfirmRegistration = ({ Nav, Footer, userRegistering }) => {
         "https://roofmasters-backend.herokuapp.com/index.php/confirm_registration",
         {
           registrationCode: registrationCode,
-          email: email
+          emailAddress: emailAddress
         }
       )
       .then(response => {
         if (response.data.registration_verification === "Failed") {
           setRegistrationCode("Invalid registration code.");
+          alert(response.data.reasoning);
         } else if (response.data.registration_verification === "Passed") {
           setPageLoading(false);
           alert(
@@ -56,14 +57,24 @@ const ConfirmRegistration = ({ Nav, Footer, userRegistering }) => {
             variant="outlined"
             fullWidth
             style={{ marginBottom: "10px" }}
+            name="email_address"
+            value={emailAddress}
+            onChange={text => setEmailAddress(text.target.value)}
+            placeholder="Enter the email address you provided"
+          ></TextField>
+          <br />
+          <TextField
+            variant="outlined"
+            fullWidth
+            style={{ marginBottom: "10px" }}
             name="registration_code"
             value={registrationCode}
             onChange={text => setRegistrationCode(text.target.value)}
-            placeholder="Confirmation code"
+            placeholder="Enter the confirmation code"
           ></TextField>
           <br />
           <Button
-            onClick={() => confirmRegistration(registrationCode, email)}
+            onClick={() => confirmRegistration(registrationCode, emailAddress)}
             variant="contained"
             color="primary"
             size="small"

@@ -17,6 +17,8 @@ const Login = ({ loggedInUser, userIsLoggedIn, stateHandler, Nav, Footer }) => {
   let user = [];
   //useState hook to manage the "page loading effect"
   const [pageLoading, setPageLoading] = useState(false);
+  //useState hook to store errors from form
+  let errorArray = [];
   //authentication handler function
   const authenticate = (email, password) => {
     //page-loading effect should display while request is in progress
@@ -39,7 +41,24 @@ const Login = ({ loggedInUser, userIsLoggedIn, stateHandler, Nav, Footer }) => {
           }
         )
         .then(response => {
-          if (response.data.verification === "Password verified.") {
+          if (response.data.verification === "Failed validation") {
+            alert(response.data.reasoning);
+            window.location.reload();
+          } else if (response.data.verification === "Email does not exist") {
+            alert(response.data.reasoning);
+            window.location.reload();
+          } else if (response.data.email_status === "Failed") {
+            alert(response.data.reasoning);
+            window.location.reload();
+          } else if (response.data.verification === "Verification needed") {
+            alert(response.data.reasoning);
+            window.location.assign("/confirm_registration");
+          } else if (
+            response.data.verification === "Password does not match."
+          ) {
+            alert("Incorrect credentials, please try again.");
+            window.location.reload();
+          } else if (response.data.verification === "Password verified.") {
             const user_data = JSON.stringify(response.data.user);
             const user_object = JSON.parse(user_data);
 
@@ -66,15 +85,6 @@ const Login = ({ loggedInUser, userIsLoggedIn, stateHandler, Nav, Footer }) => {
             localStorage.setItem("user", JSON.stringify(user));
             stateHandler();
             window.location.assign("/profile");
-          } else if (
-            response.data.verification === "Password does not match."
-          ) {
-            alert("Invalid credentials. Please try again.");
-            window.location.reload();
-          } else if (response.data === "Missing credentials.") {
-            //if user somehow manages to bypass first input check, server will check to make sure input isn't empty
-            alert("Sorry, you can't proceed with missing credentials.");
-            window.location.reload();
           }
           setPageLoading(false);
         })

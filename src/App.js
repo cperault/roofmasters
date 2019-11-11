@@ -28,17 +28,12 @@ const App = () => {
   const [loggedInUser, setLoggedInUser] = useState(
     JSON.parse(SafeLocalStorage("user", "json"))
   );
-  const [userRegistering, setUserRegistering] = useState(""); //this will receive the email of the user registering and be passed to ConfirmRegistration.js
   //keep track of if user is logged in
   const userIsLoggedIn = SafeLocalStorage("loggedIn", "false");
 
   const stateHandler = () => {
     setLoggedInUser([...loggedInUser, SafeLocalStorage("user", "json")]);
   };
-
-  console.log(SafeLocalStorage("user", "json"));
-  //check to see if a user is logged in currently
-  console.log("Is user logged in?: " + userIsLoggedIn);
   return (
     /* 
       Available paths:
@@ -126,19 +121,12 @@ const App = () => {
             Footer={Footer}
             inviteCode={inviteCode}
             setInviteCode={setInviteCode}
-            setUserRegistering={setUserRegistering}
           />
         )}
       />
       <Route
         path={"/confirm_registration"}
-        render={() => (
-          <ConfirmRegistration
-            Nav={Nav}
-            Footer={Footer}
-            userRegistering={userRegistering}
-          />
-        )}
+        render={() => <ConfirmRegistration Nav={Nav} Footer={Footer} />}
       />
       <Route
         path={"/profile"}

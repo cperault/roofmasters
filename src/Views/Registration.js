@@ -16,23 +16,33 @@ const Registration = ({
   Nav,
   Footer,
   inviteCode,
-  setInviteCode,
-  setUserRegistering
+  setInviteCode
 }) => {
   //useState hooks to store first/last name, email and password from the form
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
+  const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   //useState hook to manage the "page loading effect"
   const [pageLoading, setPageLoading] = useState(false);
+
+  const addDashes = number => {
+    let formatted_phone = number.replace(/\D[^\.]/g, "");
+    formatted_phone =
+      formatted_phone.slice(0, 3) +
+      "-" +
+      formatted_phone.slice(3, 6) +
+      "-" +
+      formatted_phone.slice(6);
+    return formatted_phone;
+  };
   //submit email address and password from registration for account to be created
   //note: data will be sanitized server-side but protected by HTTPS client side
   const registerUser = (
     firstName,
     lastName,
-    phoneNumber,
+    phone,
     email,
     password,
     inviteCode
@@ -41,7 +51,7 @@ const Registration = ({
     const credentials = [
       firstName,
       lastName,
-      phoneNumber,
+      phone,
       email,
       password,
       inviteCode
@@ -49,6 +59,8 @@ const Registration = ({
     //Validation will be passed the credentials array as well as the form (registration). On true,
     //registration will be completed and on false, the user will be informed to retry form input.
     if (Validation(credentials, "registration")) {
+      //add dashes to phone number before sending
+      let phoneNumber = addDashes(phone);
       //page loading effect should display while the registration request is being processed
       setPageLoading(true);
       //send axios POST request
@@ -70,7 +82,6 @@ const Registration = ({
           } else if (response.data.email_status === "Failed") {
             alert("Uh oh. " + response.data.reasoning);
           } else {
-            setUserRegistering(email);
             //send user to the ConfirmRegistration.js view
             window.location.assign("/confirm_registration");
           }
@@ -140,8 +151,8 @@ const Registration = ({
             fullWidth
             style={{ marginBottom: "10px" }}
             name="signup_phone_number"
-            value={phoneNumber}
-            onChange={text => setPhoneNumber(text.target.value)}
+            value={phone}
+            onChange={text => setPhone(text.target.value)}
             placeholder="Phone Number (no dashes)"
           />
           <br />
@@ -182,7 +193,7 @@ const Registration = ({
               registerUser(
                 firstName,
                 lastName,
-                phoneNumber,
+                phone,
                 email,
                 password,
                 inviteCode
