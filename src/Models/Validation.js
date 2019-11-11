@@ -36,6 +36,11 @@ const Validation = (credentials = [], formToValidate = "") => {
       if (inputIsValid(credentials[0]) && inputIsValid(credentials[1])) {
         isValid = true;
       }
+      //check for valid email input; this will be simple client-side validation, but the server will check as well.
+      let regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; //regex obtained from StackOverflow community user's comment (Andrew) on https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript
+      if (regex.test(credentials[0])) {
+        isValid = true;
+      }
       break;
     case "registration":
       if (
