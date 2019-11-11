@@ -26,7 +26,8 @@ const Registration = ({
   const [password, setPassword] = useState("");
   //useState hook to manage the "page loading effect"
   const [pageLoading, setPageLoading] = useState(false);
-
+  const [registrationCode, setRegistrationCode] = useState("");
+  const [userNeedsToConfirm, setUserNeedsToConfirm] = useState(false);
   //submit email address and password from registration for account to be created
   //note: data will be sanitized server-side but protected by HTTPS client side
   const registerUser = (
@@ -66,9 +67,8 @@ const Registration = ({
             setInviteCode("Invite code is invalid.");
           } else if (response.data) {
             setPageLoading(false);
-            alert("Thank you! You're now registered! Let's get you logged in.");
-            //redirect to login once registration complete
-            window.location.assign("/login");
+            //prompt user to confirm registration by entering the code they received via email
+            confirmRegistration();
           }
         })
         .catch(error => {
@@ -98,7 +98,35 @@ const Registration = ({
       window.location.reload();
     }
   };
-  return (
+
+  //prompt user to enter the code they receive via email before proceeding
+  const confirmRegistration = (registrationCode, email) => {
+    setUserNeedsToConfirm(true);
+
+    setPageLoading(true);
+    //send request back to confirm user registration code
+    axios
+      .post(
+        "https://roofmasters-backend.herokuapp.com/index.php/confirm_registration",
+        {
+          registrationCode: registrationCode,
+          email: email
+        }
+      )
+      .then(response => {
+        if (response.data.verification === "Failed") {
+          setRegistrationCode("Invalid registration code.");
+        } else if (response.data) {
+          setPageLoading(false);
+          alert(
+            "Thank you confirming your email address. You will now be redirected to the login page."
+          );
+          window.location.assign("/login");
+        }
+      });
+  };
+
+  return userNeedsToConfirm === "" ? (
     <div className="wrapper_div">
       <h1 className="wrapper_header">Let's Get You Registered</h1>
       <nav>
@@ -197,6 +225,31 @@ const Registration = ({
       <footer>
         <Footer userIsLoggedIn={userIsLoggedIn} loggedInUser={loggedInUser} />
       </footer>
+    </div>
+  ) : (
+    <div>
+      <p className="register_form_div_header">
+        We have emailed you a confirmation code to the email you provided.
+        Please enter that below.
+      </p>
+      <TextField
+        variant="outlined"
+        fullWidth
+        style={{ marginBottom: "10px" }}
+        name="registration_code"
+        value={registrationCode}
+        onChange={text => setRegistrationCode(text.target.value)}
+        placeholder="Confirmation code"
+      ></TextField>
+      <br />
+      <Button
+        onClick={() => confirmRegistration(registrationCode, email)}
+        variant="contained"
+        color="primary"
+        size="small"
+      >
+        Verify
+      </Button>
     </div>
   );
 };
