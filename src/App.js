@@ -19,6 +19,7 @@ import Login from "./Views/Login.js";
 import Registration from "./Views/Registration.js";
 import Profile from "./Views/Profile.js";
 import SafeLocalStorage from "./Models/SafeLocalStorageHandler.js";
+import ConfirmRegistration from "./Views/ConfirmRegistration.js";
 
 const App = () => {
   //an invite code will prevent spam registrations to site while in development; passed to Contact.js and Registration.js
@@ -27,6 +28,7 @@ const App = () => {
   const [loggedInUser, setLoggedInUser] = useState(
     JSON.parse(SafeLocalStorage("user", "json"))
   );
+  const [userRegistering, setUserRegistering] = useState(""); //this will receive the email of the user registering and be passed to ConfirmRegistration.js
   //keep track of if user is logged in
   const userIsLoggedIn = SafeLocalStorage("loggedIn", "false");
 
@@ -46,6 +48,7 @@ const App = () => {
         /contact
         /login
         /registration
+        /confirm_registration
         /profile
         /new_job
         /open_jobs
@@ -123,6 +126,17 @@ const App = () => {
             Footer={Footer}
             inviteCode={inviteCode}
             setInviteCode={setInviteCode}
+            setUserRegistering={setUserRegistering}
+          />
+        )}
+      />
+      <Route
+        path={"/confirm_registration"}
+        render={() => (
+          <ConfirmRegistration
+            Nav={Nav}
+            Footer={Footer}
+            userRegistering={userRegistering}
           />
         )}
       />
