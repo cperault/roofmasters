@@ -10,7 +10,7 @@ import axios from "axios";
 import Validation from "../Models/Validation.js";
 import { TextField, Button } from "@material-ui/core";
 
-const ConfirmRegistration = ({Nav, Footer, userRegistering}) => {
+const ConfirmRegistration = ({ Nav, Footer, userRegistering }) => {
   const email = userRegistering;
   //useState hook to manage the "page loading effect"
   const [pageLoading, setPageLoading] = useState(false);
@@ -28,9 +28,9 @@ const ConfirmRegistration = ({Nav, Footer, userRegistering}) => {
         }
       )
       .then(response => {
-        if (response.data.verification === "Failed") {
+        if (response.data.registration_verification === "Failed") {
           setRegistrationCode("Invalid registration code.");
-        } else if (response.data) {
+        } else if (response.data.registration_verification === "Passed") {
           setPageLoading(false);
           alert(
             "Thank you confirming your email address! You will now be redirected to the login page."

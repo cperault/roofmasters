@@ -62,13 +62,12 @@ const Registration = ({
           inviteCode: inviteCode
         })
         .then(response => {
+          setPageLoading(false);
           if (response.data.invite_response === "Denied.") {
             setInviteCode("Invite code is invalid.");
           } else if (response.data.verification === "Failed") {
-            setPageLoading(false);
             alert("Uh oh. " + response.data.reasoning);
           } else if (response.data.email_status === "Failed") {
-            setPageLoading(false);
             alert("Uh oh. " + response.data.reasoning);
           } else {
             setUserRegistering(email);
