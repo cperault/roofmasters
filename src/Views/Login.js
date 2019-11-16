@@ -18,7 +18,7 @@ const Login = ({ loggedInUser, userIsLoggedIn, stateHandler, Nav, Footer }) => {
   //useState hook to manage the "page loading effect"
   const [pageLoading, setPageLoading] = useState(false);
   //useState hook to store errors from form
-  let errorArray = [];
+  const [errors, setErrors] = useState([]);
   //authentication handler function
   const authenticate = (email, password) => {
     //page-loading effect should display while request is in progress
@@ -41,15 +41,9 @@ const Login = ({ loggedInUser, userIsLoggedIn, stateHandler, Nav, Footer }) => {
           }
         )
         .then(response => {
-          if (response.data.verification === "Failed validation") {
-            alert(response.data.reasoning);
-            window.location.reload();
-          } else if (response.data.verification === "Email does not exist") {
-            alert(response.data.reasoning);
-            window.location.reload();
-          } else if (response.data.email_status === "Failed") {
-            alert(response.data.reasoning);
-            window.location.reload();
+          if (response.data.verification === "Failed") {
+            let errors = JSON.stringify(response.data.reasoning);
+            setErrors(JSON.parse(errors));
           } else if (response.data.verification === "Verification needed") {
             alert(response.data.reasoning);
             window.location.assign("/confirm_registration");
@@ -159,6 +153,18 @@ const Login = ({ loggedInUser, userIsLoggedIn, stateHandler, Nav, Footer }) => {
           >
             Login
           </Button>
+          {errors.length > 0 ? (
+            <div className="registration-form-error-div">
+              <h2>Please correct the following:</h2>
+              <ul>
+                {errors.map(e => {
+                  return <li>-{e}</li>;
+                })}
+              </ul>
+            </div>
+          ) : (
+            ""
+          )}
         </div>
         <p>
           <a href="/registration">No account? Sign up!</a>

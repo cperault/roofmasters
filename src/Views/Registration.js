@@ -7,8 +7,8 @@
 \******************************************************************************************************************/
 import React, { useState } from "react";
 import axios from "axios";
-import Validation from "../Models/Validation.js";
 import { TextField, Button } from "@material-ui/core";
+import NumberFormat from "react-number-format";
 
 const Registration = ({
   loggedInUser,
@@ -26,17 +26,7 @@ const Registration = ({
   const [password, setPassword] = useState("");
   //useState hook to manage the "page loading effect"
   const [pageLoading, setPageLoading] = useState(false);
-
-  const addDashes = number => {
-    let formatted_phone = number.replace(/\D[^\.]/g, "");
-    formatted_phone =
-      formatted_phone.slice(0, 3) +
-      "-" +
-      formatted_phone.slice(3, 6) +
-      "-" +
-      formatted_phone.slice(6);
-    return formatted_phone;
-  };
+  const [errors, setErrors] = useState([]);
   //submit email address and password from registration for account to be created
   //note: data will be sanitized server-side but protected by HTTPS client side
   const registerUser = (
@@ -47,71 +37,42 @@ const Registration = ({
     password,
     inviteCode
   ) => {
-    //create array to hold credentials
-    const credentials = [
-      firstName,
-      lastName,
-      phone,
-      email,
-      password,
-      inviteCode
-    ];
-    //Validation will be passed the credentials array as well as the form (registration). On true,
-    //registration will be completed and on false, the user will be informed to retry form input.
-    if (Validation(credentials, "registration")) {
-      //add dashes to phone number before sending
-      let phoneNumber = addDashes(phone);
-      //page loading effect should display while the registration request is being processed
-      setPageLoading(true);
-      //send axios POST request
-      axios
-        .post("https://roofmasters-backend.herokuapp.com/index.php/register", {
-          firstName: firstName,
-          lastName: lastName,
-          phoneNumber: phoneNumber,
-          email: email,
-          password: password,
-          inviteCode: inviteCode
-        })
-        .then(response => {
-          setPageLoading(false);
-          if (response.data.invite_response === "Denied.") {
-            setInviteCode("Invite code is invalid.");
-          } else if (response.data.verification === "Failed") {
-            alert("Uh oh. " + response.data.reasoning);
-          } else if (response.data.email_status === "Failed") {
-            alert("Uh oh. " + response.data.reasoning);
-          } else {
-            //send user to the ConfirmRegistration.js view
-            window.location.assign("/confirm_registration");
-          }
-        })
-        .catch(error => {
-          if (
-            firstName === "" ||
-            lastName === "" ||
-            email === "" ||
-            password === "" ||
-            phoneNumber === ""
-          ) {
-            alert(
-              "All fields are required to create an account. Please try again."
-            );
-          } else if (String(error) === "Error: Network Error") {
-            alert(
-              "Uh oh, looks like there was an issue talking to the server. Please contact us or try back in a few minutes."
-            );
-          } else {
-            console.log("Error registering your account: " + error);
-          }
-          //refresh the page for a new registration attempt
-          window.location.reload();
-        });
-    } else {
-      //
-      alert("I'm sorry, your registration is missing credentials.");
-      window.location.reload();
-    }
+    //page loading effect should display while the registration request is being processed
+    setPageLoading(true);
+    //send axios POST request
+    axios
+      .post("https://roofmasters-backend.herokuapp.com/index.php/register", {
+        firstName: firstName,
+        lastName: lastName,
+        phone: phone,
+        email: email,
+        password: password,
+        inviteCode: inviteCode
+      })
+      .then(response => {
+        setPageLoading(false);
+        if (response.data.invite_response === "Denied.") {
+          setInviteCode("Invite code is invalid. Please re-enter.");
+        } else if (response.data.verification === "Failed") {
+          let errors = JSON.stringify(response.data.reasoning);
+          setErrors(JSON.parse(errors));
+        } else if (response.status === 500) {
+          registerUser();
+        } else {
+          //send user to the ConfirmRegistration.js view
+          window.location.assign("/confirm_registration");
+        }
+      })
+      .catch(error => {
+        setPageLoading(false);
+        if (String(error) === "Error: Network Error") {
+          alert(
+            "Uh oh, looks like there was an issue talking to the server. Please contact us or try back in a few minutes."
+          );
+        } else {
+          console.log(error);
+        }
+      });
   };
 
   return (
@@ -146,14 +107,17 @@ const Registration = ({
             placeholder="Last Name"
           />
           <br />
-          <TextField
+          <NumberFormat
+            customInput={TextField}
             variant="outlined"
             fullWidth
-            style={{ marginBottom: "10px" }}
-            name="signup_phone_number"
             value={phone}
+            name="signup_phone"
             onChange={text => setPhone(text.target.value)}
             placeholder="Phone Number (no dashes)"
+            style={{ marginBottom: "10px" }}
+            format="###-###-####"
+            mask="_"
           />
           <br />
           <TextField
@@ -205,6 +169,18 @@ const Registration = ({
           >
             Register
           </Button>
+          {errors.length > 0 ? (
+            <div className="registration-form-error-div">
+              <h2>Please correct the following:</h2>
+              <ul>
+                {errors.map(e => {
+                  return <li>-{e}</li>;
+                })}
+              </ul>
+            </div>
+          ) : (
+            ""
+          )}
         </div>
       </div>
       <p className="loading-message">

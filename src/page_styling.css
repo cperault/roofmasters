@@ -180,6 +180,17 @@ a:link {
 .register_form_div_header {
   text-align: center;
 }
+
+.registration-form-error-div {
+  margin: 0 auto;
+}
+.registration-form-error-div ul {
+  margin: 0 auto;
+  list-style-type: none;
+}
+.registration-form-error-div p {
+  font-weight: bold;
+}
 /*
 media query for responsiveness; adjusts the nav links 
 to be stacked horizontally when screen size is smaller
