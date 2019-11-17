@@ -36,7 +36,11 @@ const URLNav = ({ userIsLoggedIn }) => {
           label={link.name}
           onClick={() => navRedirectHandler(link.value)}
           style={{
+<<<<<<< .merge_file_oIM4a4
             backgroundColor: "#9e643c",
+=======
+            backgroundColor: "#746d75",
+>>>>>>> .merge_file_9HNuV4
             border: "solid 1px #ede6f2",
             opacity: "1",
             width: "auto",
