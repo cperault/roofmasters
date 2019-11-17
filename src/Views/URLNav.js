@@ -36,7 +36,9 @@ const URLNav = ({ userIsLoggedIn }) => {
           label={link.name}
           onClick={() => navRedirectHandler(link.value)}
           style={{
-            backgroundColor: "#9e643c",
+            backgroundColor: "#746d75",
+            border: "solid 1px #ede6f2",
+            opacity: "1",
             width: "auto",
             height: "auto",
             margin: "5px",
