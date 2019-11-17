@@ -68,6 +68,10 @@ form {
   color: #ede6f2;
 }
 
+.landing_wrapper_body_div_content_paragraph img {
+  border: solid 1px #ede6f2;
+}
+
 .left_image,
 .right_image {
   height: 300px;
