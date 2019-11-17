@@ -117,6 +117,7 @@ const App = () => {
         path={"/registration"}
         render={() => (
           <Registration
+            userIsLoggedIn={userIsLoggedIn}
             Nav={Nav}
             Footer={Footer}
             inviteCode={inviteCode}

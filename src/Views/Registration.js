@@ -51,13 +51,15 @@ const Registration = ({
       })
       .then(response => {
         setPageLoading(false);
-        if (response.data.invite_response === "Denied.") {
+        if (response.data.status === "result") {
+          alert(JSON.stringify(response.data.details));
+        } else if (response.data.invite_response === "Denied.") {
           setInviteCode("Invite code is invalid. Please re-enter.");
         } else if (response.data.verification === "Failed") {
           let errors = JSON.stringify(response.data.reasoning);
           setErrors(JSON.parse(errors));
-        } else if (response.status === 500) {
-          registerUser();
+        } else if (response.data.email_status === "Failed") {
+          console.log(response.data.reasoning);
         } else {
           //send user to the ConfirmRegistration.js view
           window.location.assign("/confirm_registration");
@@ -79,7 +81,7 @@ const Registration = ({
     <div className="wrapper_div">
       <h1 className="wrapper_header">Let's Get You Registered</h1>
       <nav>
-        <Nav />
+        <Nav userIsLoggedIn={userIsLoggedIn} />
       </nav>
       <div className="registrationg_wrapper_body_div">
         <div className="registration_form_div">

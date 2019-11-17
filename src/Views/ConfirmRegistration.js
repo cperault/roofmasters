@@ -7,7 +7,6 @@
 \******************************************************************************************************************/
 import React, { useState } from "react";
 import axios from "axios";
-import Validation from "../Models/Validation.js";
 import { TextField, Button } from "@material-ui/core";
 
 const ConfirmRegistration = ({ Nav, Footer }) => {

@@ -7,7 +7,6 @@
 \******************************************************************************************************************/
 import React, { useState } from "react";
 import axios from "axios";
-import Validation from "../Models/Validation.js";
 import { TextField, Button } from "@material-ui/core";
 
 const Login = ({ loggedInUser, userIsLoggedIn, stateHandler, Nav, Footer }) => {
@@ -23,40 +22,29 @@ const Login = ({ loggedInUser, userIsLoggedIn, stateHandler, Nav, Footer }) => {
   const authenticate = (email, password) => {
     //page-loading effect should display while request is in progress
     setPageLoading(true);
-    //array to hold login email and password
-    const credentials = [email, password];
-    //the login email and password will be sent to Validation to check for valid input.
-    //If true is returned, user login will proceed; if false, user will be forced to retry login
-    //either due to missing credentials or incorrect credentials.
-    if (Validation(credentials, "login")) {
-      //send the password to the backend for comparison; if true, user may proceed in login;
-      //React files will be served via port 3000;
-      //Apache proxy will be hit at 3001 and send to PHP backend at 3003
-      axios
-        .post(
-          "https://roofmasters-backend.herokuapp.com/index.php/authenticate",
-          {
-            email: email,
-            password: password
-          }
-        )
-        .then(response => {
-          if (response.data.verification === "Failed") {
-            let errors = JSON.stringify(response.data.reasoning);
-            setErrors(JSON.parse(errors));
-          } else if (response.data.verification === "Verification needed") {
-            alert(response.data.reasoning);
-            window.location.assign("/confirm_registration");
-          } else if (
-            response.data.verification === "Password does not match."
-          ) {
-            alert("Incorrect credentials, please try again.");
-            window.location.reload();
-          } else if (response.data.verification === "Password verified.") {
-            const user_data = JSON.stringify(response.data.user);
-            const user_object = JSON.parse(user_data);
+    axios
+      .post(
+        "https://roofmasters-backend.herokuapp.com/index.php/authenticate",
+        {
+          email: email,
+          password: password
+        }
+      )
+      .then(response => {
+        if (response.data.verification === "Failed") {
+          let errors = JSON.stringify(response.data.reasoning);
+          setErrors(JSON.parse(errors));
+        } else if (response.data.verification === "Verification needed") {
+          alert(response.data.reasoning);
+          window.location.assign("/confirm_registration");
+        } else if (response.data.verification === "Password does not match.") {
+          alert("Incorrect credentials, please try again.");
+          window.location.reload();
+        } else if (response.data.verification === "Password verified.") {
+          const user_data = JSON.stringify(response.data.user);
+          const user_object = JSON.parse(user_data);
 
-            /*
+          /*
         User Object from back end will return as:
         user_object[index].value
             [0] for .userID
@@ -66,38 +54,32 @@ const Login = ({ loggedInUser, userIsLoggedIn, stateHandler, Nav, Footer }) => {
             [4] for .emailAddress
         */
 
-            user = [
-              {
-                userID: user_object[0].userID,
-                firstName: user_object[1].firstName,
-                lastName: user_object[2].lastName,
-                phoneNumber: user_object[3].phoneNumber,
-                emailAddress: user_object[4].emailAddress
-              }
-            ];
-            localStorage.setItem("loggedIn", "true");
-            localStorage.setItem("user", JSON.stringify(user));
-            stateHandler();
-            window.location.assign("/profile");
-          }
-          setPageLoading(false);
-        })
-        .catch(error => {
-          if (String(error) === "Error: Network Error") {
-            alert(
-              "Uh oh, looks like there was an issue talking to the server. " +
-                "Please contact us or try back in a few minutes."
-            );
-          } else {
-            console.log("Error logging in:" + error);
-          }
-          //refresh the page for new login attempt
-          window.location.reload();
-        });
-    } else {
-      alert("Both an email and a password are required for authentication.");
-      window.location.reload();
-    }
+          user = [
+            {
+              userID: user_object[0].userID,
+              firstName: user_object[1].firstName,
+              lastName: user_object[2].lastName,
+              phoneNumber: user_object[3].phoneNumber,
+              emailAddress: user_object[4].emailAddress
+            }
+          ];
+          localStorage.setItem("loggedIn", "true");
+          localStorage.setItem("user", JSON.stringify(user));
+          stateHandler();
+          window.location.assign("/profile");
+        }
+        setPageLoading(false);
+      })
+      .catch(error => {
+        setPageLoading(false);
+        if (String(error) === "Error: Network Error") {
+          alert(
+            "Uh oh, looks like there was an issue talking to the server. Please contact us or try back in a few minutes."
+          );
+        } else {
+          console.log(error);
+        }
+      });
     //end of authenticate method
   };
 

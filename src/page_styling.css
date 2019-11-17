@@ -99,10 +99,6 @@ form {
   width: 100px;
 }
 
-.login_form_div input {
-  width: 200px;
-}
-
 .login_form_div,
 .registration_form_div {
   width: 300px;

@@ -6,7 +6,6 @@
  *Purpose: This is the contact page view component.                                                                *
 \******************************************************************************************************************/
 import React, { useState } from "react";
-import Validation from "../Models/Validation.js";
 import axios from "axios";
 import { TextField, Button } from "@material-ui/core";
 
@@ -39,34 +38,26 @@ const Contact = ({
         inviteCode
       ];
     }
-    //make sure contact form is valid before sending
-    if (Validation(formData, "contact")) {
-      //the contact form is valid; submit the backend request
-      axios
-        .post("https://roofmasters-backend.herokuapp.com/index.php/contact", {
-          contactName: formData[0],
-          contactEmail: formData[1],
-          contactDescriptionText: formData[2],
-          inviteCode: formData[3]
-        })
-        .then(response => {
-          if (response.data.invite_response === "Denied.") {
-            setInviteCode("Invite code is invalid.");
-          } else if (response.data) {
-            alert(
-              "Your message was submitted! We will be in touch with you as soon possible.\n" +
-                response.data
-            );
-            //refresh page after the alert
-            window.location.reload();
-          }
-        });
-    } else {
-      //contact form is missing data or invalid
-      alert(
-        "Sorry, but you're missing some data. Please correct before submitting."
-      );
-    }
+    //the contact form is valid; submit the backend request
+    axios
+      .post("https://roofmasters-backend.herokuapp.com/index.php/contact", {
+        contactName: formData[0],
+        contactEmail: formData[1],
+        contactDescriptionText: formData[2],
+        inviteCode: formData[3]
+      })
+      .then(response => {
+        if (response.data.invite_response === "Denied.") {
+          setInviteCode("Invite code is invalid.");
+        } else if (response.data) {
+          alert(
+            "Your message was submitted! We will be in touch with you as soon possible.\n" +
+              response.data
+          );
+          //refresh page after the alert
+          window.location.reload();
+        }
+      });
   };
   return (
     <div className="wrapper_div">
