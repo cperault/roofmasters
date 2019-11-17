@@ -25,6 +25,11 @@ const Contact = ({
   let userName = user[0].firstName + " " + user[0].lastName;
   let userEmail = user[0].emailAddress;
 
+  const inputStyle = {
+    marginBottom: "10px",
+    border: "solid 1px #ede6f2",
+    borderRadius: "5px"
+  };
   //set up the request to PHP backend for contact form processing
   const processContactForm = () => {
     let formData = [];
@@ -71,25 +76,35 @@ const Contact = ({
           <TextField
             variant="outlined"
             fullWidth
-            style={{ marginBottom: "10px" }}
+            style={inputStyle}
             name="contact_name"
             value={userIsLoggedIn === "false" ? contactName : userName}
             placeholder="Your Name"
             onChange={text => setContactName(text.target.value)}
+            InputProps={{
+              style: {
+                color: "#ede6f2"
+              }
+            }}
           />
           <br />
           <TextField
             variant="outlined"
             fullWidth
-            style={{ marginBottom: "10px" }}
+            style={inputStyle}
             name="contact_mail"
             value={userIsLoggedIn === "false" ? contactEmail : userEmail}
             placeholder="Your Email Address"
             onChange={text => setContactEmail(text.target.value)}
+            InputProps={{
+              style: {
+                color: "#ede6f2"
+              }
+            }}
           />
           <br />
           <TextField
-            style={{ marginBottom: "10px" }}
+            style={inputStyle}
             multiline
             fullWidth
             variant="outlined"
@@ -98,22 +113,33 @@ const Contact = ({
             placeholder="Let us know how we can help..."
             value={contactDescriptionText}
             onChange={text => setContactDescriptionText(text.target.value)}
+            InputProps={{
+              style: {
+                color: "#ede6f2"
+              }
+            }}
           />
           <br />
           <TextField
             variant="outlined"
-            style={{ marginBottom: "10px" }}
+            style={inputStyle}
             name="invite_code"
             fullWidth
             value={inviteCode}
             onChange={text => setInviteCode(text.target.value)}
             required
             placeholder="Please enter your invite code"
+            InputProps={{
+              style: {
+                color: "#ede6f2",
+                outlineColor: "red"
+              }
+            }}
           />
           <Button
             onClick={processContactForm}
             variant="contained"
-            color="primary"
+            style={{ backgroundColor: "#8acdea" }}
             size="small"
           >
             Send

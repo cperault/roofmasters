@@ -3,23 +3,23 @@
 }
 
 body {
-  background-color: #92896f;
+  background-color: #746d75;
 }
 
 .wrapper_div {
   margin: 0 auto;
   min-width: 300px;
   max-width: 960px;
-  border: solid black 1px;
+  border: solid #ede6f2 1px;
   border-radius: 15px;
   text-align: center;
-  background-color: lightgray;
+  background-color: #8c4843;
 }
 
 .wrapper_header {
   display: inline-block;
   padding: 10px;
-  color: black;
+  color: #8acdea;
 }
 
 .wrapper_body_div_profile,
@@ -54,18 +54,18 @@ form {
 .wrapper_body_div_content_paragraph {
   text-align: justify;
   text-indent: 50px;
-  color: black;
+  color: #ede6f2;
 }
 
 .wrapper_body_div_content_paragraph_header {
-  color: black;
+  color: #8acdea;
 }
 
 .landing_wrapper_body_div_content_paragraph {
   overflow: hidden;
   text-align: justify;
   text-indent: 50px;
-  color: black;
+  color: #ede6f2;
 }
 
 .left_image,
@@ -170,22 +170,32 @@ a:link {
 }
 
 .contact_form_div_footer img {
-  padding: 5px;
+  margin: 10px;
+  border-radius: 5px;
 }
 
 .register_form_div_header {
   text-align: center;
+  color: #ede6f2;
 }
 
 .registration-form-error-div {
   margin: 0 auto;
+  color: #8acdea;
 }
 .registration-form-error-div ul {
   margin: 0 auto;
   list-style-type: none;
+  color: #ede6f2;
 }
 .registration-form-error-div p {
   font-weight: bold;
+}
+.no-account-p-link a {
+  color: #8acdea;
+}
+.loading-message {
+  color: #8acdea;
 }
 /*
 media query for responsiveness; adjusts the nav links 

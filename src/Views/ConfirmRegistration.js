@@ -14,6 +14,11 @@ const ConfirmRegistration = ({ Nav, Footer }) => {
   const [pageLoading, setPageLoading] = useState(false);
   const [emailAddress, setEmailAddress] = useState("");
   const [registrationCode, setRegistrationCode] = useState("");
+  const inputStyle = {
+    marginBottom: "10px",
+    border: "solid 1px #ede6f2",
+    borderRadius: "5px"
+  };
   //prompt user to enter the code they receive via email before proceeding
   const confirmRegistration = registrationCode => {
     setPageLoading(true);
@@ -55,27 +60,37 @@ const ConfirmRegistration = ({ Nav, Footer }) => {
           <TextField
             variant="outlined"
             fullWidth
-            style={{ marginBottom: "10px" }}
+            style={inputStyle}
             name="email_address"
             value={emailAddress}
             onChange={text => setEmailAddress(text.target.value)}
-            placeholder="Enter the email address you provided"
+            placeholder="Email address being verified"
+            InputProps={{
+              style: {
+                color: "#ede6f2"
+              }
+            }}
           ></TextField>
           <br />
           <TextField
             variant="outlined"
             fullWidth
-            style={{ marginBottom: "10px" }}
+            style={inputStyle}
             name="registration_code"
             value={registrationCode}
             onChange={text => setRegistrationCode(text.target.value)}
-            placeholder="Enter the confirmation code"
+            placeholder="Confirmation code"
+            InputProps={{
+              style: {
+                color: "#ede6f2"
+              }
+            }}
           ></TextField>
           <br />
           <Button
             onClick={() => confirmRegistration(registrationCode, emailAddress)}
             variant="contained"
-            color="primary"
+            style={{ backgroundColor: "#8acdea" }}
             size="small"
           >
             Verify

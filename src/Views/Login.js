@@ -18,6 +18,11 @@ const Login = ({ loggedInUser, userIsLoggedIn, stateHandler, Nav, Footer }) => {
   const [pageLoading, setPageLoading] = useState(false);
   //useState hook to store errors from form
   const [errors, setErrors] = useState([]);
+  const inputStyle = {
+    marginBottom: "10px",
+    border: "solid 1px #ede6f2",
+    borderRadius: "5px"
+  };
   //authentication handler function
   const authenticate = (email, password) => {
     //page-loading effect should display while request is in progress
@@ -107,8 +112,13 @@ const Login = ({ loggedInUser, userIsLoggedIn, stateHandler, Nav, Footer }) => {
           <TextField
             name="login_email"
             value={email}
-            style={{ marginBottom: "10px" }}
+            style={inputStyle}
             fullWidth
+            InputProps={{
+              style: {
+                color: "#ede6f2"
+              }
+            }}
             variant="outlined"
             onChange={text => setEmail(text.target.value)}
             placeholder="Email"
@@ -118,7 +128,12 @@ const Login = ({ loggedInUser, userIsLoggedIn, stateHandler, Nav, Footer }) => {
           <TextField
             type="password"
             name="login_password"
-            style={{ marginBottom: "10px" }}
+            style={inputStyle}
+            InputProps={{
+              style: {
+                color: "#ede6f2"
+              }
+            }}
             fullWidth
             variant="outlined"
             value={password}
@@ -130,7 +145,7 @@ const Login = ({ loggedInUser, userIsLoggedIn, stateHandler, Nav, Footer }) => {
           <Button
             onClick={() => authenticate(email, password)}
             variant="contained"
-            color="primary"
+            style={{ backgroundColor: "#8acdea" }}
             size="small"
           >
             Login
@@ -148,7 +163,7 @@ const Login = ({ loggedInUser, userIsLoggedIn, stateHandler, Nav, Footer }) => {
             ""
           )}
         </div>
-        <p>
+        <p className="no-account-p-link">
           <a href="/registration">No account? Sign up!</a>
           <input type="hidden" name="action" value="signup" />
         </p>

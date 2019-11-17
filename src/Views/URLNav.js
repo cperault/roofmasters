@@ -36,12 +36,12 @@ const URLNav = ({ userIsLoggedIn }) => {
           label={link.name}
           onClick={() => navRedirectHandler(link.value)}
           style={{
-            backgroundColor: "#C9BE99",
+            backgroundColor: "#9e643c",
             width: "auto",
             height: "auto",
             margin: "5px",
             borderRadius: "10px",
-            color: "black",
+            color: "#ede6f2",
             position: "static"
           }}
         />

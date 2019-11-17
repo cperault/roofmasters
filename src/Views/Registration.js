@@ -27,6 +27,11 @@ const Registration = ({
   //useState hook to manage the "page loading effect"
   const [pageLoading, setPageLoading] = useState(false);
   const [errors, setErrors] = useState([]);
+  const inputStyle = {
+    marginBottom: "10px",
+    border: "solid 1px #ede6f2",
+    borderRadius: "5px"
+  };
   //submit email address and password from registration for account to be created
   //note: data will be sanitized server-side but protected by HTTPS client side
   const registerUser = (
@@ -92,21 +97,31 @@ const Registration = ({
           <TextField
             variant="outlined"
             fullWidth
-            style={{ marginBottom: "10px" }}
+            style={inputStyle}
             name="signup_first_name"
             value={firstName}
             onChange={text => setFirstName(text.target.value)}
             placeholder="First Name"
+            InputProps={{
+              style: {
+                color: "#ede6f2"
+              }
+            }}
           />
           <br />
           <TextField
             variant="outlined"
             fullWidth
-            style={{ marginBottom: "10px" }}
+            style={inputStyle}
             name="signup_last_name"
             value={lastName}
             onChange={text => setLastName(text.target.value)}
             placeholder="Last Name"
+            InputProps={{
+              style: {
+                color: "#ede6f2"
+              }
+            }}
           />
           <br />
           <NumberFormat
@@ -117,41 +132,61 @@ const Registration = ({
             name="signup_phone"
             onChange={text => setPhone(text.target.value)}
             placeholder="Phone Number (no dashes)"
-            style={{ marginBottom: "10px" }}
+            style={inputStyle}
             format="###-###-####"
             mask="_"
+            InputProps={{
+              style: {
+                color: "#ede6f2"
+              }
+            }}
           />
           <br />
           <TextField
             variant="outlined"
             fullWidth
-            style={{ marginBottom: "10px" }}
+            style={inputStyle}
             name="signup_email"
             value={email}
             onChange={text => setEmail(text.target.value)}
             placeholder="Email"
+            InputProps={{
+              style: {
+                color: "#ede6f2"
+              }
+            }}
           />
           <br />
           <TextField
             type="password"
             variant="outlined"
             fullWidth
-            style={{ marginBottom: "10px" }}
+            style={inputStyle}
             name="signup_password"
             value={password}
             onChange={text => setPassword(text.target.value)}
             placeholder="Password"
+            InputProps={{
+              style: {
+                color: "#ede6f2"
+              }
+            }}
           />
           <br />
           <br />
           <TextField
             variant="outlined"
             fullWidth
-            style={{ marginBottom: "10px" }}
+            style={inputStyle}
             name="invite_code"
             value={inviteCode}
             onChange={text => setInviteCode(text.target.value)}
             placeholder="Please enter your invite code"
+            InputProps={{
+              style: {
+                color: "#ede6f2"
+              }
+            }}
           />
           <br />
           <Button
@@ -166,8 +201,8 @@ const Registration = ({
               )
             }
             variant="contained"
-            color="primary"
             size="small"
+            style={{ backgroundColor: "#8acdea" }}
           >
             Register
           </Button>

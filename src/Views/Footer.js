@@ -52,6 +52,7 @@ const Footer = ({ userIsLoggedIn }) => {
             alt="Facebook icon"
             src={require("../Media/facebook.png")}
             height="30"
+            style={{ backgroundColor: "white" }}
             width="30"
           />
         </a>
