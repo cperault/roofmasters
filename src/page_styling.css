@@ -219,7 +219,7 @@ a:link {
     background-color: #6c6061;
     color: white;
     height: 100%;
-    transition: 0.9s;
+    /* transition: 0.9s; */
   }
 
   .sidebar a {
@@ -230,7 +230,7 @@ a:link {
     font-size: 25px;
     color: white;
     display: block;
-    transition: 0.9s;
+    /* transition: 0.9s; */
   }
   .sidebar .closebtn {
     float: right;
@@ -251,7 +251,7 @@ a:link {
   }
 
   #main {
-    transition: margin-left 0.9s;
+    /* transition: margin-left 0.9s; */
     padding: 16px;
   }
 }
