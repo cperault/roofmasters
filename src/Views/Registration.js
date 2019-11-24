@@ -29,7 +29,7 @@ const Registration = ({
   const [errors, setErrors] = useState([]);
   const inputStyle = {
     marginBottom: "10px",
-    border: "solid 1px #ede6f2",
+    border: "solid 1px #838e83",
     borderRadius: "5px"
   };
   //submit email address and password from registration for account to be created
@@ -83,150 +83,153 @@ const Registration = ({
   };
 
   return (
-    <div className="wrapper_div">
-      <h1 className="wrapper_header">Let's Get You Registered</h1>
-      <nav>
+    <React.Fragment>
+      <div className="topnav">
         <Nav userIsLoggedIn={userIsLoggedIn} />
-      </nav>
-      <div className="registrationg_wrapper_body_div">
-        <div className="registration_form_div">
-          <p className="register_form_div_header">
-            Please enter your information and create a unique, secure password.
-          </p>
-          <br />
-          <TextField
-            variant="outlined"
-            fullWidth
-            style={inputStyle}
-            name="signup_first_name"
-            value={firstName}
-            onChange={text => setFirstName(text.target.value)}
-            placeholder="First Name"
-            InputProps={{
-              style: {
-                color: "#ede6f2"
-              }
-            }}
-          />
-          <br />
-          <TextField
-            variant="outlined"
-            fullWidth
-            style={inputStyle}
-            name="signup_last_name"
-            value={lastName}
-            onChange={text => setLastName(text.target.value)}
-            placeholder="Last Name"
-            InputProps={{
-              style: {
-                color: "#ede6f2"
-              }
-            }}
-          />
-          <br />
-          <NumberFormat
-            customInput={TextField}
-            variant="outlined"
-            fullWidth
-            value={phone}
-            name="signup_phone"
-            onChange={text => setPhone(text.target.value)}
-            placeholder="Phone Number (no dashes)"
-            style={inputStyle}
-            format="###-###-####"
-            mask="_"
-            InputProps={{
-              style: {
-                color: "#ede6f2"
-              }
-            }}
-          />
-          <br />
-          <TextField
-            variant="outlined"
-            fullWidth
-            style={inputStyle}
-            name="signup_email"
-            value={email}
-            onChange={text => setEmail(text.target.value)}
-            placeholder="Email"
-            InputProps={{
-              style: {
-                color: "#ede6f2"
-              }
-            }}
-          />
-          <br />
-          <TextField
-            type="password"
-            variant="outlined"
-            fullWidth
-            style={inputStyle}
-            name="signup_password"
-            value={password}
-            onChange={text => setPassword(text.target.value)}
-            placeholder="Password"
-            InputProps={{
-              style: {
-                color: "#ede6f2"
-              }
-            }}
-          />
-          <br />
-          <br />
-          <TextField
-            variant="outlined"
-            fullWidth
-            style={inputStyle}
-            name="invite_code"
-            value={inviteCode}
-            onChange={text => setInviteCode(text.target.value)}
-            placeholder="Please enter your invite code"
-            InputProps={{
-              style: {
-                color: "#ede6f2"
-              }
-            }}
-          />
-          <br />
-          <Button
-            onClick={() =>
-              registerUser(
-                firstName,
-                lastName,
-                phone,
-                email,
-                password,
-                inviteCode
-              )
-            }
-            variant="contained"
-            size="small"
-            style={{ backgroundColor: "#8acdea" }}
-          >
-            Register
-          </Button>
-          {errors.length > 0 ? (
-            <div className="registration-form-error-div">
-              <h2>Please correct the following:</h2>
-              <ul>
-                {errors.map(e => {
-                  return <li>-{e}</li>;
-                })}
-              </ul>
-            </div>
-          ) : (
-            ""
-          )}
-        </div>
       </div>
-      <p className="loading-message">
-        {pageLoading ? "Authentication request in progress..." : ""}
-      </p>
-      <footer>
-        <Footer userIsLoggedIn={userIsLoggedIn} loggedInUser={loggedInUser} />
-      </footer>
-    </div>
+      <div className="wrapper_div">
+        <h1 className="wrapper_header">Let's Get You Registered</h1>
+        <div className="registrationg_wrapper_body_div">
+          <div className="registration_form_div">
+            <p className="register_form_div_header">
+              Please enter your information and create a unique, secure
+              password.
+            </p>
+            <br />
+            <TextField
+              variant="outlined"
+              fullWidth
+              style={inputStyle}
+              name="signup_first_name"
+              value={firstName}
+              onChange={text => setFirstName(text.target.value)}
+              placeholder="First Name"
+              InputProps={{
+                style: {
+                  color: "#64403e"
+                }
+              }}
+            />
+            <br />
+            <TextField
+              variant="outlined"
+              fullWidth
+              style={inputStyle}
+              name="signup_last_name"
+              value={lastName}
+              onChange={text => setLastName(text.target.value)}
+              placeholder="Last Name"
+              InputProps={{
+                style: {
+                  color: "#64403e"
+                }
+              }}
+            />
+            <br />
+            <NumberFormat
+              customInput={TextField}
+              variant="outlined"
+              fullWidth
+              value={phone}
+              name="signup_phone"
+              onChange={text => setPhone(text.target.value)}
+              placeholder="Phone Number (no dashes)"
+              style={inputStyle}
+              format="###-###-####"
+              mask="_"
+              InputProps={{
+                style: {
+                  color: "#64403e"
+                }
+              }}
+            />
+            <br />
+            <TextField
+              variant="outlined"
+              fullWidth
+              style={inputStyle}
+              name="signup_email"
+              value={email}
+              onChange={text => setEmail(text.target.value)}
+              placeholder="Email"
+              InputProps={{
+                style: {
+                  color: "#64403e"
+                }
+              }}
+            />
+            <br />
+            <TextField
+              type="password"
+              variant="outlined"
+              fullWidth
+              style={inputStyle}
+              name="signup_password"
+              value={password}
+              onChange={text => setPassword(text.target.value)}
+              placeholder="Password"
+              InputProps={{
+                style: {
+                  color: "#64403e"
+                }
+              }}
+            />
+            <br />
+            <br />
+            <TextField
+              variant="outlined"
+              fullWidth
+              style={inputStyle}
+              name="invite_code"
+              value={inviteCode}
+              onChange={text => setInviteCode(text.target.value)}
+              placeholder="Please enter your invite code"
+              InputProps={{
+                style: {
+                  color: "#64403e"
+                }
+              }}
+            />
+            <br />
+            <Button
+              onClick={() =>
+                registerUser(
+                  firstName,
+                  lastName,
+                  phone,
+                  email,
+                  password,
+                  inviteCode
+                )
+              }
+              variant="contained"
+              size="small"
+              style={{ backgroundColor: "#64403e", color: "#c9cebd" }}
+            >
+              Register
+            </Button>
+            {errors.length > 0 ? (
+              <div className="registration-form-error-div">
+                <h2>Please correct the following:</h2>
+                <ul>
+                  {errors.map(e => {
+                    return <li>-{e}</li>;
+                  })}
+                </ul>
+              </div>
+            ) : (
+              ""
+            )}
+          </div>
+        </div>
+        <p className="loading-message">
+          {pageLoading ? "Authentication request in progress..." : ""}
+        </p>
+        <footer>
+          <Footer userIsLoggedIn={userIsLoggedIn} loggedInUser={loggedInUser} />
+        </footer>
+      </div>
+    </React.Fragment>
   );
 };
 

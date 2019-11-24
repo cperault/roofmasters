@@ -127,7 +127,13 @@ const App = () => {
       />
       <Route
         path={"/confirm_registration"}
-        render={() => <ConfirmRegistration Nav={Nav} Footer={Footer} />}
+        render={() => (
+          <ConfirmRegistration
+            Nav={Nav}
+            Footer={Footer}
+            userIsLoggedIn={userIsLoggedIn}
+          />
+        )}
       />
       <Route
         path={"/profile"}

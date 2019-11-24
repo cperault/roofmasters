@@ -26,27 +26,31 @@ const Services = ({ loggedInUser, userIsLoggedIn, Nav, Footer }) => {
     }
   ];
   return (
-    <div className="wrapper_div">
-      <h1 className="wrapper_header">Services We Provide</h1>
-      <nav>
+    <React.Fragment>
+      <div className="topnav">
         <Nav userIsLoggedIn={userIsLoggedIn} />
-      </nav>
-      <div className="wrapper_body_div">
-        {servicesArray.map(service => {
-          return (
-            <div className="wrapper_body_content_div">
-              <h2 className="wrapper_body_div_content_paragraph_header">{service.name}</h2>
-              <p className="wrapper_body_div_content_paragraph">
-                {service.description}
-              </p>
-            </div>
-          );
-        })}
       </div>
-      <footer>
-        <Footer userIsLoggedIn={userIsLoggedIn} loggedInUser={loggedInUser} />
-      </footer>
-    </div>
+      <div className="wrapper_div">
+        <h1 className="wrapper_header">Services We Provide</h1>
+        <div className="wrapper_body_div">
+          {servicesArray.map(service => {
+            return (
+              <div className="wrapper_body_content_div">
+                <h2 className="wrapper_body_div_content_paragraph_header">
+                  {service.name}
+                </h2>
+                <p className="wrapper_body_div_content_paragraph">
+                  {service.description}
+                </p>
+              </div>
+            );
+          })}
+        </div>
+        <footer>
+          <Footer userIsLoggedIn={userIsLoggedIn} loggedInUser={loggedInUser} />
+        </footer>
+      </div>
+    </React.Fragment>
   );
 };
 

@@ -20,7 +20,7 @@ const Login = ({ loggedInUser, userIsLoggedIn, stateHandler, Nav, Footer }) => {
   const [errors, setErrors] = useState([]);
   const inputStyle = {
     marginBottom: "10px",
-    border: "solid 1px #ede6f2",
+    border: "solid 1px #838e83",
     borderRadius: "5px"
   };
   //authentication handler function
@@ -29,7 +29,8 @@ const Login = ({ loggedInUser, userIsLoggedIn, stateHandler, Nav, Footer }) => {
     setPageLoading(true);
     axios
       .post(
-        "https://roofmasters-backend.herokuapp.com/index.php/authenticate",
+        // "https://roofmasters-backend.herokuapp.com/index.php/authenticate",
+        "http://localhost:3001/index.php/authenticate",
         {
           email: email,
           password: password
@@ -37,10 +38,9 @@ const Login = ({ loggedInUser, userIsLoggedIn, stateHandler, Nav, Footer }) => {
       )
       .then(response => {
         if (response.data.verification === "Failed") {
-          let errors = JSON.stringify(response.data.reasoning);
-          setErrors(JSON.parse(errors));
-        } else if (response.data.verification === "Verification needed") {
-          alert(response.data.reasoning);
+          let error = JSON.stringify(response.data.reasoning);
+          setErrors(JSON.parse(error));
+        } else if (response.data.verification === "Inactive") {
           window.location.assign("/confirm_registration");
         } else if (response.data.verification === "Password does not match.") {
           alert("Incorrect credentials, please try again.");
@@ -101,80 +101,83 @@ const Login = ({ loggedInUser, userIsLoggedIn, stateHandler, Nav, Footer }) => {
   };
 
   return (
-    <div className="wrapper_div">
-      <h1 className="wrapper_header">Let's Get You Signed In</h1>
-      <nav>
+    <React.Fragment>
+      <div className="topnav">
         <Nav userIsLoggedIn={userIsLoggedIn} />
-      </nav>
-      <div className="login_wrapper_body_div">
-        <div className="login_form_div">
-          <br />
-          <TextField
-            name="login_email"
-            value={email}
-            style={inputStyle}
-            fullWidth
-            InputProps={{
-              style: {
-                color: "#ede6f2"
-              }
-            }}
-            variant="outlined"
-            onChange={text => setEmail(text.target.value)}
-            placeholder="Email"
-            onKeyUp={e => returnKeyPressedHandler(e.keyCode, email, password)}
-          />
-          <br />
-          <TextField
-            type="password"
-            name="login_password"
-            style={inputStyle}
-            InputProps={{
-              style: {
-                color: "#ede6f2"
-              }
-            }}
-            fullWidth
-            variant="outlined"
-            value={password}
-            onChange={text => setPassword(text.target.value)}
-            placeholder="Password"
-            onKeyUp={e => returnKeyPressedHandler(e.keyCode, email, password)}
-          />
-          <br />
-          <Button
-            onClick={() => authenticate(email, password)}
-            variant="contained"
-            style={{ backgroundColor: "#8acdea" }}
-            size="small"
-          >
-            Login
-          </Button>
-          {errors.length > 0 ? (
-            <div className="registration-form-error-div">
-              <h2>Please correct the following:</h2>
-              <ul>
-                {errors.map(e => {
-                  return <li>-{e}</li>;
-                })}
-              </ul>
-            </div>
-          ) : (
-            ""
-          )}
-        </div>
-        <p className="no-account-p-link">
-          <a href="/registration">No account? Sign up!</a>
-          <input type="hidden" name="action" value="signup" />
-        </p>
       </div>
-      <p className="loading-message">
-        {pageLoading ? "Authentication request in progress..." : ""}
-      </p>
-      <footer>
-        <Footer userIsLoggedIn={userIsLoggedIn} loggedInUser={loggedInUser} />
-      </footer>
-    </div>
+      <div className="wrapper_div">
+        <h1 className="wrapper_header">Let's Get You Signed In</h1>
+        <nav></nav>
+        <div className="login_wrapper_body_div">
+          <div className="login_form_div">
+            <br />
+            <TextField
+              name="login_email"
+              value={email}
+              style={inputStyle}
+              fullWidth
+              InputProps={{
+                style: {
+                  color: "#64403e"
+                }
+              }}
+              variant="outlined"
+              onChange={text => setEmail(text.target.value)}
+              placeholder="Email"
+              onKeyUp={e => returnKeyPressedHandler(e.keyCode, email, password)}
+            />
+            <br />
+            <TextField
+              type="password"
+              name="login_password"
+              style={inputStyle}
+              InputProps={{
+                style: {
+                  color: "#64403e"
+                }
+              }}
+              fullWidth
+              variant="outlined"
+              value={password}
+              onChange={text => setPassword(text.target.value)}
+              placeholder="Password"
+              onKeyUp={e => returnKeyPressedHandler(e.keyCode, email, password)}
+            />
+            <br />
+            <Button
+              onClick={() => authenticate(email, password)}
+              variant="contained"
+              style={{ backgroundColor: "#64403e", color: "#c9cebd" }}
+              size="small"
+            >
+              Login
+            </Button>
+            {errors.length > 0 ? (
+              <div className="registration-form-error-div">
+                <h2>Please correct the following:</h2>
+                <ul>
+                  {errors.map(e => {
+                    return <li>-{e}</li>;
+                  })}
+                </ul>
+              </div>
+            ) : (
+              ""
+            )}
+          </div>
+          <p className="no-account-p-link">
+            <a href="/registration">No account? Sign up!</a>
+            <input type="hidden" name="action" value="signup" />
+          </p>
+        </div>
+        <p className="loading-message">
+          {pageLoading ? "Authentication request in progress..." : ""}
+        </p>
+        <footer>
+          <Footer userIsLoggedIn={userIsLoggedIn} loggedInUser={loggedInUser} />
+        </footer>
+      </div>
+    </React.Fragment>
   );
 };
 

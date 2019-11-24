@@ -3,47 +3,40 @@
 }
 
 body {
-  background-color: #746d75;
+  background-color: #838e83;
+  margin: 0;
 }
 
-.wrapper_div {
+.tab-nav {
+  text-align: center;
+}
+.wrapper_div,
+.wrapper_div_landing {
   margin: 0 auto;
   min-width: 300px;
   max-width: 960px;
-  border: solid #ede6f2 1px;
+  background-color: #b2bcaa;
+  border: solid #c9cebd 1px;
   border-radius: 15px;
   text-align: center;
-  background-color: #8c4843;
 }
 
 .wrapper_header {
   display: inline-block;
   padding: 10px;
-  color: #8acdea;
+  color: #64403e;
 }
 
 .wrapper_body_div_profile,
 .contact_wrapper_body_div {
-  margin: 10px;
   overflow: hidden;
 }
 
 .contact_wrapper_body_div,
 .login_wrapper_body_div,
-.registration_form_div {
-  margin: 10px;
+.registration_form_div,
+.contact_form_div {
   display: inline-block;
-}
-
-/*
-the wrapper_nav_li and form styling combination below
-represents the nav links and consists of the li and form 
-encasing each li so that PHP can process each li link action
-*/
-.wrapper_nav_li,
-form {
-  display: inline;
-  margin: 2px;
 }
 
 .wrapper_body_content_div {
@@ -54,22 +47,22 @@ form {
 .wrapper_body_div_content_paragraph {
   text-align: justify;
   text-indent: 50px;
-  color: #ede6f2;
+  color: #64403e;
 }
 
 .wrapper_body_div_content_paragraph_header {
-  color: #8acdea;
+  color: #64403e;
 }
 
 .landing_wrapper_body_div_content_paragraph {
   overflow: hidden;
   text-align: justify;
   text-indent: 50px;
-  color: #ede6f2;
+  color: #64403e;
 }
 
 .landing_wrapper_body_div_content_paragraph img {
-  border: solid 1px #ede6f2;
+  border: solid 1px #c9cebd;
 }
 
 .left_image,
@@ -88,28 +81,20 @@ form {
   margin-left: 15px;
 }
 
-.contact_form_div {
-  padding: 10px;
-  display: inline-block;
-  width: 300px;
-  text-align: right;
-}
-
-.contact_form_div input {
-  width: 300px;
-}
-
 .contact_form_button {
   width: 100px;
 }
 
 .login_form_div,
-.registration_form_div {
+.registration_form_div,
+.contact_form_div {
   width: 300px;
-  margin: 0 auto;
   overflow: hidden;
   padding: 15px;
   text-align: right;
+  background-color: #c9cebd;
+  border: solid 1px #838e83;
+  border-radius: 15px;
 }
 
 .login_form_div button {
@@ -180,40 +165,98 @@ a:link {
 
 .register_form_div_header {
   text-align: center;
-  color: #ede6f2;
+  color: #64403e;
 }
 
 .registration-form-error-div {
   margin: 0 auto;
-  color: #8acdea;
+  color: #64403e;
 }
 .registration-form-error-div ul {
   margin: 0 auto;
   list-style-type: none;
-  color: #ede6f2;
+  color: #64403e;
 }
 .registration-form-error-div p {
   font-weight: bold;
 }
 .no-account-p-link a {
-  color: #8acdea;
+  color: #64403e;
 }
 .loading-message {
-  color: #8acdea;
+  color: #64403e;
 }
-/*
-media query for responsiveness; adjusts the nav links 
-to be stacked horizontally when screen size is smaller
-*/
-@media only screen and (max-width: 600px) {
-  .landing_wrapper_body_div_content_paragraph {
-    padding: 15px;
-    margin: 15px;
-    overflow: hidden;
-    text-align: justify;
-    text-indent: 50px;
+
+@media only screen and (min-width: 851px) {
+  .sidebar,
+  #main {
+    display: none;
+  }
+}
+@media only screen and (max-width: 850px) {
+  /* hide the Tab components inside the .tab-nav div*/
+  .tab-nav {
+    display: none;
+  }
+  .topnav {
+    background-color: #b2bcaa;
+    border: none;
+    height: 30px;
+  }
+  .wrapper_div,
+  .wrapper_div_landing,
+  .contact_wrapper_body_div {
+    border-radius: 0px;
+    border-top: none;
+  }
+  .sidebar {
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    overflow-x: hidden;
+    background-color: #6c6061;
+    color: white;
+    height: 100%;
+    transition: 0.9s;
   }
 
+  .sidebar a {
+    padding: 20px;
+    margin-top: 30px;
+    text-decoration: none;
+    text-align: left;
+    font-size: 25px;
+    color: white;
+    display: block;
+    transition: 0.9s;
+  }
+  .sidebar .closebtn {
+    float: right;
+    color: white;
+    font-size: 36px;
+    margin-right: 15px;
+    margin-top: 5px;
+  }
+
+  .openbtn {
+    position: sticky !important;
+    top: 0;
+    left: 0;
+    font-size: 20px;
+    background-color: inherit;
+    color: #64403e;
+    border: none;
+  }
+
+  #main {
+    transition: margin-left 0.9s;
+    padding: 16px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
   .contact_form_div,
   .login_form_div,
   .registration_form_div {
@@ -239,6 +282,14 @@ to be stacked horizontally when screen size is smaller
   }
   .item_summary_profile {
     font-size: smaller;
+  }
+  .contact_form_div_footer img {
+    margin-top: 0;
+  }
+
+  .landing_wrapper_body_div_content_paragraph {
+    text-align: justify;
+    font-size: 12px;
   }
 }
 

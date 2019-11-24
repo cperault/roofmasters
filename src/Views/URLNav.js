@@ -6,8 +6,9 @@
  *Purpose: This component is responsible for storing and setting up nav links.                                     *
 \******************************************************************************************************************/
 
-import React from "react";
+import React, { useState } from "react";
 import { Tab } from "@material-ui/core";
+
 const URLNav = ({ userIsLoggedIn }) => {
   const navArray = [
     { name: "Home", value: "/landing" },
@@ -23,32 +24,66 @@ const URLNav = ({ userIsLoggedIn }) => {
       value: userIsLoggedIn === "false" ? "" : "/profile"
     }
   ];
+  const [width, setWidth] = useState("");
+  const [marginLeft, setMarginLeft] = useState("");
+
+  const openNav = () => {
+    //open the sidenav menu
+    setWidth("250px");
+    setMarginLeft("250px");
+  };
+
+  const closeNav = () => {
+    //close
+    setWidth("0px");
+    setMarginLeft("0px");
+  };
 
   const navRedirectHandler = link => {
     window.location.assign(link);
   };
 
-  return navArray
-    .filter(link => link.name !== "")
-    .map(link => {
-      return (
-        <Tab
-          label={link.name}
-          onClick={() => navRedirectHandler(link.value)}
-          style={{
-            backgroundColor: "#9e643c",
-            border: "solid 1px #ede6f2",
-            opacity: "1",
-            width: "auto",
-            height: "auto",
-            margin: "5px",
-            borderRadius: "10px",
-            color: "#ede6f2",
-            position: "static"
-          }}
-        />
-      );
-    });
+  return (
+    <React.Fragment>
+      <div className="tab-nav">
+        {navArray
+          .filter(link => link.name !== "")
+          .map(link => {
+            return (
+              <Tab
+                label={link.name}
+                onClick={() => navRedirectHandler(link.value)}
+                style={{
+                  backgroundColor: "#6c6061",
+                  border: "solid 1px #c9cebd",
+                  width: "auto",
+                  height: "auto",
+                  margin: "5px",
+                  borderRadius: "10px",
+                  color: "white",
+                  position: "static"
+                }}
+              />
+            );
+          })}
+      </div>
+      <div id="mySidebar" className="sidebar" style={{ width: width }}>
+        <p className="closebtn" onClick={closeNav}>
+          x
+        </p>
+        {navArray
+          .filter(link => link.name !== "")
+          .map(link => {
+            return <a href={link.value}>{link.name}</a>;
+          })}
+      </div>
+      <div id="main" style={{ marginLeft: marginLeft }}>
+        <button className="openbtn" onClick={openNav}>
+          ☰
+        </button>
+      </div>
+    </React.Fragment>
+  );
 };
 
 export default URLNav;

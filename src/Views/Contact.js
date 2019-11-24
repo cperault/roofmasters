@@ -27,7 +27,7 @@ const Contact = ({
 
   const inputStyle = {
     marginBottom: "10px",
-    border: "solid 1px #ede6f2",
+    border: "solid 1px #838e83",
     borderRadius: "5px"
   };
   //set up the request to PHP backend for contact form processing
@@ -65,91 +65,92 @@ const Contact = ({
       });
   };
   return (
-    <div className="wrapper_div">
-      <h1 className="wrapper_header">Need to Get Ahold of Us?</h1>
-      <nav>
+    <React.Fragment>
+      <div className="topnav">
         <Nav userIsLoggedIn={userIsLoggedIn} />
-      </nav>
-      <div className="contact_wrapper_body_div">
-        <div className="contact_form_div">
-          <br />
-          <TextField
-            variant="outlined"
-            fullWidth
-            style={inputStyle}
-            name="contact_name"
-            value={userIsLoggedIn === "false" ? contactName : userName}
-            placeholder="Your Name"
-            onChange={text => setContactName(text.target.value)}
-            InputProps={{
-              style: {
-                color: "#ede6f2"
-              }
-            }}
-          />
-          <br />
-          <TextField
-            variant="outlined"
-            fullWidth
-            style={inputStyle}
-            name="contact_mail"
-            value={userIsLoggedIn === "false" ? contactEmail : userEmail}
-            placeholder="Your Email Address"
-            onChange={text => setContactEmail(text.target.value)}
-            InputProps={{
-              style: {
-                color: "#ede6f2"
-              }
-            }}
-          />
-          <br />
-          <TextField
-            style={inputStyle}
-            multiline
-            fullWidth
-            variant="outlined"
-            rows="1"
-            rowsMax="8"
-            placeholder="Let us know how we can help..."
-            value={contactDescriptionText}
-            onChange={text => setContactDescriptionText(text.target.value)}
-            InputProps={{
-              style: {
-                color: "#ede6f2"
-              }
-            }}
-          />
-          <br />
-          <TextField
-            variant="outlined"
-            style={inputStyle}
-            name="invite_code"
-            fullWidth
-            value={inviteCode}
-            onChange={text => setInviteCode(text.target.value)}
-            required
-            placeholder="Please enter your invite code"
-            InputProps={{
-              style: {
-                color: "#ede6f2",
-                outlineColor: "red"
-              }
-            }}
-          />
-          <Button
-            onClick={processContactForm}
-            variant="contained"
-            style={{ backgroundColor: "#8acdea" }}
-            size="small"
-          >
-            Send
-          </Button>
-        </div>
       </div>
-      <footer className="footer">
-        <Footer userIsLoggedIn={userIsLoggedIn} />
-      </footer>
-    </div>
+      <div className="wrapper_div">
+        <h1 className="wrapper_header">Need to Get Ahold of Us?</h1>
+        <div className="contact_wrapper_body_div">
+          <div className="contact_form_div">
+            <br />
+            <TextField
+              variant="outlined"
+              fullWidth
+              style={inputStyle}
+              name="contact_name"
+              value={userIsLoggedIn === "false" ? contactName : userName}
+              placeholder="Your Name"
+              onChange={text => setContactName(text.target.value)}
+              InputProps={{
+                style: {
+                  color: "#64403e"
+                }
+              }}
+            />
+            <br />
+            <TextField
+              variant="outlined"
+              fullWidth
+              style={inputStyle}
+              name="contact_mail"
+              value={userIsLoggedIn === "false" ? contactEmail : userEmail}
+              placeholder="Your Email Address"
+              onChange={text => setContactEmail(text.target.value)}
+              InputProps={{
+                style: {
+                  color: "#64403e"
+                }
+              }}
+            />
+            <br />
+            <TextField
+              style={inputStyle}
+              multiline
+              fullWidth
+              variant="outlined"
+              rows="1"
+              rowsMax="8"
+              placeholder="Let us know how we can help..."
+              value={contactDescriptionText}
+              onChange={text => setContactDescriptionText(text.target.value)}
+              InputProps={{
+                style: {
+                  color: "#64403e"
+                }
+              }}
+            />
+            <br />
+            <TextField
+              variant="outlined"
+              style={inputStyle}
+              name="invite_code"
+              fullWidth
+              value={inviteCode}
+              onChange={text => setInviteCode(text.target.value)}
+              required
+              placeholder="Please enter your invite code"
+              InputProps={{
+                style: {
+                  color: "#64403e"
+                }
+              }}
+            />
+            <Button
+              onClick={processContactForm}
+              variant="contained"
+              style={{ backgroundColor: "#64403e", color: "#c9cebd" }}
+              size="small"
+            >
+              Send
+            </Button>
+          </div>
+        </div>
+        <footer className="footer">
+          <Footer userIsLoggedIn={userIsLoggedIn} />
+        </footer>
+      </div>
+    </React.Fragment>
   );
 };
 

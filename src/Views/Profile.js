@@ -114,27 +114,29 @@ const Profile = ({ userIsLoggedIn, loggedInUser, Nav, Footer }) => {
   };
 
   return (
-    <div className="wrapper_div">
-      <h1 className="wrapper_header">Hello, {userFirstName}.</h1>
-      <nav>
+    <React.Fragment>
+      <div className="topnav">
         <Nav userIsLoggedIn={userIsLoggedIn} />
-      </nav>
-      <div className="wrapper_body_div_profile">
-        <div className="wrapper_body_div_profile_inner">
-          <div className="wrapper_body_div_column_profile_left">
-            {/*Tasks items from profileItems will be inserted here.*/}
-            {fillContentArea("tasks")}
-          </div>
-          <div className="wrapper_body_div_column_profile_right">
-            {/*Account items from profileItems will be inserted here.*/}
-            {fillContentArea("account")}
+      </div>
+      <div className="wrapper_div">
+        <h1 className="wrapper_header">Hello, {userFirstName}.</h1>
+        <div className="wrapper_body_div_profile">
+          <div className="wrapper_body_div_profile_inner">
+            <div className="wrapper_body_div_column_profile_left">
+              {/*Tasks items from profileItems will be inserted here.*/}
+              {fillContentArea("tasks")}
+            </div>
+            <div className="wrapper_body_div_column_profile_right">
+              {/*Account items from profileItems will be inserted here.*/}
+              {fillContentArea("account")}
+            </div>
           </div>
         </div>
+        <footer>
+          <Footer userIsLoggedIn={userIsLoggedIn} loggedInUser={loggedInUser} />
+        </footer>
       </div>
-      <footer>
-        <Footer userIsLoggedIn={userIsLoggedIn} loggedInUser={loggedInUser} />
-      </footer>
-    </div>
+    </React.Fragment>
   );
 };
 
