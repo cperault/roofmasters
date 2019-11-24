@@ -29,8 +29,7 @@ const Login = ({ loggedInUser, userIsLoggedIn, stateHandler, Nav, Footer }) => {
     setPageLoading(true);
     axios
       .post(
-        // "https://roofmasters-backend.herokuapp.com/index.php/authenticate",
-        "http://localhost:3001/index.php/authenticate",
+        "https://roofmasters-backend.herokuapp.com/index.php/authenticate",
         {
           email: email,
           password: password
