@@ -18,7 +18,7 @@ const Jobs = ({ jobType, loggedInUser }) => {
       case "new":
         return <NewJob loggedInUser={loggedInUser} />;
       case "open":
-        return <OpenJobs />;
+        return <OpenJobs loggedInUser={loggedInUser} />;
       case "completed":
         return <CompletedJobs />;
     }

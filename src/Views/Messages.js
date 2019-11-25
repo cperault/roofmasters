@@ -16,7 +16,7 @@ const Messages = ({ loggedInUser }) => {
   const getMessages = () => {
     //set up the axios request to fetch all messages for associatedID (loggedInUsers ID)
     axios
-      .post("https://roofmasters-backend.herokuapp.com/index.php/messages", {
+      .post(process.env.REACT_APP_ENDPOINT + "/messages", {
         myID: "1",
         messageAction: "fetch"
       })

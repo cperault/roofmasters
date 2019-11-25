@@ -88,7 +88,7 @@ const Profile = ({ userIsLoggedIn, loggedInUser, Nav, Footer }) => {
       .filter(item => item.side === side)
       .map(item => {
         return (
-          <Card style={{ margin: "5px", backgroundColor: "transparent" }}>
+          <Card style={{ margin: "5px", backgroundColor: "transparent", border: "solid 1px #c9cebd"}}>
             <ExpansionPanel
               style={{ margin: "10px", backgroundColor: "#C9BE99" }}
             >

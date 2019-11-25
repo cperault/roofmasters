@@ -28,13 +28,10 @@ const Login = ({ loggedInUser, userIsLoggedIn, stateHandler, Nav, Footer }) => {
     //page-loading effect should display while request is in progress
     setPageLoading(true);
     axios
-      .post(
-        "https://roofmasters-backend.herokuapp.com/index.php/authenticate",
-        {
-          email: email,
-          password: password
-        }
-      )
+      .post(process.env.REACT_APP_ENDPOINT + "/authenticate", {
+        email: email,
+        password: password
+      })
       .then(response => {
         if (response.data.verification === "Failed") {
           let error = JSON.stringify(response.data.reasoning);

@@ -45,7 +45,7 @@ const Contact = ({
     }
     //the contact form is valid; submit the backend request
     axios
-      .post("https://roofmasters-backend.herokuapp.com/index.php/contact", {
+      .post(process.env.REACT_APP_ENDPOINT + "/contact", {
         contactName: formData[0],
         contactEmail: formData[1],
         contactDescriptionText: formData[2],

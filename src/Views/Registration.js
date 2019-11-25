@@ -46,7 +46,7 @@ const Registration = ({
     setPageLoading(true);
     //send axios POST request
     axios
-      .post("https://roofmasters-backend.herokuapp.com/index.php/register", {
+      .post(process.env.REACT_APP_ENDPOINT + "/register", {
         firstName: firstName,
         lastName: lastName,
         phone: phone,

@@ -24,13 +24,10 @@ const ConfirmRegistration = ({ Nav, Footer, userIsLoggedIn }) => {
     setPageLoading(true);
     //send request back to confirm user registration code
     axios
-      .post(
-        "https://roofmasters-backend.herokuapp.com/index.php/confirm_registration",
-        {
-          registrationCode: registrationCode,
-          emailAddress: emailAddress
-        }
-      )
+      .post(process.env.REACT_APP_ENDPOINT + "/confirm_registration", {
+        registrationCode: registrationCode,
+        emailAddress: emailAddress
+      })
       .then(response => {
         if (response.data.registration_verification === "Failed") {
           setRegistrationCode("Invalid registration code.");
