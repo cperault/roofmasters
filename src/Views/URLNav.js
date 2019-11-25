@@ -78,7 +78,7 @@ const URLNav = ({ userIsLoggedIn }) => {
       </div>
       <div id="main">
         <button className="openbtn" onClick={openNav}>
-          ☰
+          &#9776;
         </button>
       </div>
     </React.Fragment>
