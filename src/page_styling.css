@@ -47,7 +47,7 @@ body {
 .wrapper_body_div_content_paragraph {
   text-align: justify;
   text-indent: 50px;
-  color: black;
+  color: #362c2b;
 }
 
 .wrapper_body_div_content_paragraph_header {
@@ -58,7 +58,7 @@ body {
   overflow: hidden;
   text-align: justify;
   text-indent: 50px;
-  color: black;
+  color: #362c2b;
 }
 
 .landing_wrapper_body_div_content_paragraph img {
@@ -181,10 +181,10 @@ a:link {
   font-weight: bold;
 }
 .no-account-p-link a {
-  color: black;
+  color: #523937;
 }
 .loading-message {
-  color: black;
+  color: #523937;
 }
 
 @media only screen and (min-width: 851px) {
