@@ -64,12 +64,13 @@ const Footer = ({ userIsLoggedIn }) => {
         style={
           userIsLoggedIn === "true"
             ? {
-                backgroundColor: "#C9BE99",
+                backgroundColor: "#6c6061",
                 width: "auto",
                 height: "auto",
                 margin: "5px",
+                border: "solid 1px #c9cebd",
                 borderRadius: "10px",
-                color: "black",
+                color: "white",
                 position: "static"
               }
             : { display: "none" }

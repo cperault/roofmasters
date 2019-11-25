@@ -30,7 +30,6 @@ const URLNav = ({ userIsLoggedIn }) => {
   const openNav = () => {
     //open the sidenav menu
     setWidth("250px");
-    setMarginLeft("250px");
   };
 
   const closeNav = () => {
@@ -69,7 +68,7 @@ const URLNav = ({ userIsLoggedIn }) => {
       </div>
       <div id="mySidebar" className="sidebar" style={{ width: width }}>
         <p className="closebtn" onClick={closeNav}>
-          x
+          &times;
         </p>
         {navArray
           .filter(link => link.name !== "")
@@ -77,7 +76,7 @@ const URLNav = ({ userIsLoggedIn }) => {
             return <a href={link.value}>{link.name}</a>;
           })}
       </div>
-      <div id="main" style={{ marginLeft: marginLeft }}>
+      <div id="main">
         <button className="openbtn" onClick={openNav}>
           ☰
         </button>
