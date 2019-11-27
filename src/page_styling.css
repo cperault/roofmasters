@@ -168,16 +168,22 @@ a:link {
   color: #64403e;
 }
 
-.registration-form-error-div {
+.registration-form-error-div,
+.login-form-error-div,
+.new-job-form-error-div {
   margin: 0 auto;
   color: #64403e;
 }
-.registration-form-error-div ul {
+.registration-form-error-div ul,
+.login-form-error-div ul,
+.new-job-form-error-div ul {
   margin: 0 auto;
   list-style-type: none;
   color: #64403e;
 }
-.registration-form-error-div p {
+.registration-form-error-div p,
+.login-form-error-div p,
+.new-job-form-error-div p {
   font-weight: bold;
 }
 .no-account-p-link a {
@@ -187,7 +193,8 @@ a:link {
   color: #523937;
 }
 
-.open_job_li {
+.open_job_li,
+.completed_job_li {
   list-style-type: circle;
   text-align: left;
 }

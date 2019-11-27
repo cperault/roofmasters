@@ -24,11 +24,13 @@ const NewJob = ({ loggedInUser }) => {
   const [buttonIcon, setButtonIcon] = useState(<SaveIcon />);
   const name = loggedInUser[0].firstName + " " + loggedInUser[0].lastName;
   const [jobDescription, setJobDescription] = useState("");
-  const [jobType, setJobType] = useState([
+  const [errors, setErrors] = useState([]);
+  const initialJobTypes = [
     { name: "Roofing", checked: true },
     { name: "Gutters", checked: false },
     { name: "Siding", checked: false }
-  ]);
+  ];
+  const [jobType, setJobType] = useState(initialJobTypes);
   const submitJob = (description, jobType) => {
     //jobTitle will be a truncated version of the description based on half its length
     let length = description.length;
@@ -47,7 +49,6 @@ const NewJob = ({ loggedInUser }) => {
     for (let c of checked) {
       jobTypeArray.push(c["name"]);
     }
-    console.log(jobTypeArray);
     //send request to backend to save job request
     axios
       .post(process.env.REACT_APP_ENDPOINT + "/save_job", {
@@ -58,21 +59,19 @@ const NewJob = ({ loggedInUser }) => {
         jobType: jobTypeArray
       })
       .then(response => {
-        alert(response.data);
-        // if (response.data.validation === "Failed") {
-        //   //something wrong; form failed validation
-        //   let error = JSON.stringify(response.data);
-        //   alert("Uh oh. \n" + JSON.parse(error));
-        // } else if (response.data.job !== "Received") {
-        //   let error = JSON.stringify(response.data.reasoning);
-        //   alert("Sorry. " + JSON.parse(error));
-        // } else {
-        //   //success
-        //   //update the form button text
-        //   setButtonStatus("Submitted");
-        //   //update the form button icon
-        //   setButtonIcon(<Check />);
-        // }
+        if (response.data.validation === "Failed") {
+          //something wrong; form failed validation
+          let error = JSON.stringify(response.data.reasoning);
+          setErrors(JSON.parse(error));
+        } else {
+          //success; clear the form
+          setJobDescription("");
+          setJobType(initialJobTypes);
+          //update the form button text
+          setButtonStatus("Submitted");
+          //update the form button icon
+          setButtonIcon(<Check />);
+        }
       });
   };
   const todayFull =
@@ -129,6 +128,18 @@ const NewJob = ({ loggedInUser }) => {
       >
         {buttonStatus}
       </Button>
+      {errors.length > 0 ? (
+        <div className="new-job-form-error-div">
+          <h2>Please correct the following:</h2>
+          <ul>
+            {errors.map(e => {
+              return <li>-{e}</li>;
+            })}
+          </ul>
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 };

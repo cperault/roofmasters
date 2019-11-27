@@ -149,7 +149,7 @@ const Login = ({ loggedInUser, userIsLoggedIn, stateHandler, Nav, Footer }) => {
               Login
             </Button>
             {errors.length > 0 ? (
-              <div className="registration-form-error-div">
+              <div className="login-form-error-div">
                 <h2>Please correct the following:</h2>
                 <ul>
                   {errors.map(e => {

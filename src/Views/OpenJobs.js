@@ -2,7 +2,7 @@
  *File:    OpenJobs.js                                                                                             *
  *Author:  Christopher Perault                                                                                     *
  *Project: Roofmasters CMS (Customer Management System)                                                            *
- *Date:    October 26th, 2019                                                                                      *
+ *Date:    November 26th, 2019                                                                                      *
  *Purpose: This component will show open jobs                                                                      *
 \******************************************************************************************************************/
 
@@ -12,7 +12,6 @@ import Button from "@material-ui/core/Button";
 
 const OpenJobs = ({ loggedInUser }) => {
   const user = loggedInUser[0].userID;
-  let jobsArray = [];
   const [openJobs, setOpenJobs] = useState([]);
   //get open jobs from DB and store in array
   const getOpenJobs = () => {

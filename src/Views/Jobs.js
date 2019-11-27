@@ -20,7 +20,7 @@ const Jobs = ({ jobType, loggedInUser }) => {
       case "open":
         return <OpenJobs loggedInUser={loggedInUser} />;
       case "completed":
-        return <CompletedJobs />;
+        return <CompletedJobs loggedInUser={loggedInUser} />;
     }
   };
   return <div>{form()}</div>;
