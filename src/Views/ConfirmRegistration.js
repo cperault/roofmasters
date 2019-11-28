@@ -98,7 +98,7 @@ const ConfirmRegistration = ({ Nav, Footer, userIsLoggedIn }) => {
           </div>
         </div>
         <p className="loading-message">
-          {pageLoading ? "Authentication request in progress..." : ""}
+          {pageLoading ? "Verifying your request..." : ""}
         </p>
         <footer>
           <Footer />

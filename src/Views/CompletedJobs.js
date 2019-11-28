@@ -25,7 +25,16 @@ const CompletedJobs = ({ loggedInUser }) => {
   };
   //iterate through array and display list items to be displayed in div on return
   return (
-    <div>
+    <div className="completed_jobs_div">
+      <ul>
+        {completedJobs.map(job => {
+          return (
+            <li key={job.jobID} className="completed_job_li">
+              {job.jobDescription}
+            </li>
+          );
+        })}
+      </ul>
       <Button
         variant="contained"
         size="small"
@@ -34,11 +43,6 @@ const CompletedJobs = ({ loggedInUser }) => {
       >
         Load all completed jobs
       </Button>
-      <ul>
-        {completedJobs.map(job => {
-          return <li className="completed_job_li">{job.jobDescription}</li>;
-        })}
-      </ul>
     </div>
   );
 };

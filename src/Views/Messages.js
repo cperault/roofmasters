@@ -7,48 +7,49 @@
 \******************************************************************************************************************/
 
 import React, { useState } from "react";
+import Button from "@material-ui/core/Button";
 import axios from "axios";
 
 const Messages = ({ loggedInUser }) => {
-  //array to store messages retreived from the /message_fetch endpoint
-  const messageList = [];
-
+  const userID = loggedInUser[0].userID;
+  //hook to store messages received from backend
+  const [messages, setMessages] = useState([]);
   const getMessages = () => {
     //set up the axios request to fetch all messages for associatedID (loggedInUsers ID)
     axios
       .post(process.env.REACT_APP_ENDPOINT + "/messages", {
-        myID: "1",
-        messageAction: "fetch"
+        userID: userID
       })
       .then(response => {
-        alert(JSON.stringify(response.data));
-        // const message_data = JSON.stringify(response.data.messages);
-        // const message_object = JSON.parse(message_data);
-        // console.log(JSON.stringify(message_object[0].messageContent));
-      })
-      .catch(error => {
-        console.log("Error: " + error);
+        setMessages(response.data.all_messages);
       });
   };
 
   //create the message form
   const messageForm = () => {};
 
-  //set up the message object
-  const message = () => {
-    //return messageList.map(msg => {
-    return (
-      <p className="account_message_preview">
-        <p onClick={getMessages}>Messages!</p>
-        {/* <span className="account_message_header">{msg.from}</span>
-          <br />
-          <a href=".">{msg.body}</a> */}
-      </p>
-    );
-    //});
-  };
-
-  return <div className="messages_container">{message()}</div>;
+  return (
+    <div className="messages_container">
+      <ul>
+        {messages.map(message => {
+          return (
+            <li key={message.messageID} className="all_messages_li">
+              {message.messageContent}
+            </li>
+          );
+        })}
+      </ul>
+      <Button
+        variant="contained"
+        size="small"
+        style={{ backgroundColor: "#64403e", color: "#c9cebd" }}
+        onClick={getMessages}
+        fullWidth
+      >
+        Load all messages
+      </Button>
+    </div>
+  );
 };
 
 export default Messages;

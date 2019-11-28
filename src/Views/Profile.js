@@ -17,6 +17,7 @@ import Account from "./Account.js";
 
 const Profile = ({ userIsLoggedIn, loggedInUser, Nav, Footer }) => {
   const userFirstName = loggedInUser[0].firstName;
+  const userRole = loggedInUser[0].userRole;
   //name:    The text display.
   //link:    The page link to that which will be displayed.
   //side:    The section in which the link item will be placed,
@@ -25,6 +26,7 @@ const Profile = ({ userIsLoggedIn, loggedInUser, Nav, Footer }) => {
   //role:    Who will see this.
   const profileItems = [
     {
+      id: 1,
       name: "New Job",
       link: "/new_job",
       side: "tasks",
@@ -33,6 +35,7 @@ const Profile = ({ userIsLoggedIn, loggedInUser, Nav, Footer }) => {
       jobType: "new"
     },
     {
+      id: 2,
       name: "Open Jobs",
       link: "/open_obs",
       side: "tasks",
@@ -41,6 +44,7 @@ const Profile = ({ userIsLoggedIn, loggedInUser, Nav, Footer }) => {
       jobType: "open"
     },
     {
+      id: 3,
       name: "Completed Jobs",
       link: "/completed_jobs",
       side: "tasks",
@@ -49,6 +53,7 @@ const Profile = ({ userIsLoggedIn, loggedInUser, Nav, Footer }) => {
       jobType: "completed"
     },
     {
+      id: 4,
       name: "My Account",
       link: "/my_account",
       side: "account",
@@ -57,6 +62,7 @@ const Profile = ({ userIsLoggedIn, loggedInUser, Nav, Footer }) => {
       accountCriteria: "settings"
     },
     {
+      id: 5,
       name: "Messages",
       link: "/messages",
       side: "account",
@@ -65,6 +71,7 @@ const Profile = ({ userIsLoggedIn, loggedInUser, Nav, Footer }) => {
       accountCriteria: "messages"
     },
     {
+      id: 6,
       name: "Billing",
       link: "/my_billing",
       side: "account",
@@ -73,6 +80,7 @@ const Profile = ({ userIsLoggedIn, loggedInUser, Nav, Footer }) => {
       accountCriteria: "billing"
     },
     {
+      id: 7,
       name: "Customer Billing",
       link: "/customer_billing",
       side: "account",
@@ -83,12 +91,20 @@ const Profile = ({ userIsLoggedIn, loggedInUser, Nav, Footer }) => {
   ];
 
   //Function to receive with which content area items will be concerned (either tasks or account).
-  const fillContentArea = (side = "") => {
+  const fillContentArea = (side = "", role = "") => {
     const content = profileItems
       .filter(item => item.side === side)
+      .filter(item => item.role === role || item.role === "both")
       .map(item => {
         return (
-          <Card style={{ margin: "5px", backgroundColor: "transparent", border: "solid 1px #c9cebd"}}>
+          <Card
+            key={item.id}
+            style={{
+              margin: "5px",
+              backgroundColor: "transparent",
+              border: "solid 1px #c9cebd"
+            }}
+          >
             <ExpansionPanel
               style={{ margin: "10px", backgroundColor: "#C9BE99" }}
             >
@@ -121,14 +137,14 @@ const Profile = ({ userIsLoggedIn, loggedInUser, Nav, Footer }) => {
       <div className="wrapper_div">
         <h1 className="wrapper_header">Hello, {userFirstName}.</h1>
         <div className="wrapper_body_div_profile">
-          <div className="wrapper_body_div_profile_inner">
+          <div className="wrapper_body_div_profile_inner" style={{border: "solid red 1px"}}>
             <div className="wrapper_body_div_column_profile_left">
               {/*Tasks items from profileItems will be inserted here.*/}
-              {fillContentArea("tasks")}
+              {fillContentArea("tasks", userRole)}
             </div>
             <div className="wrapper_body_div_column_profile_right">
               {/*Account items from profileItems will be inserted here.*/}
-              {fillContentArea("account")}
+              {fillContentArea("account", userRole)}
             </div>
           </div>
         </div>

@@ -70,7 +70,7 @@ const Contact = ({
         <Nav userIsLoggedIn={userIsLoggedIn} />
       </div>
       <div className="wrapper_div">
-        <h1 className="wrapper_header">Need to Get Ahold of Us?</h1>
+        <h1 className="wrapper_header">Let's Talk</h1>
         <div className="contact_wrapper_body_div">
           <div className="contact_form_div">
             <br />

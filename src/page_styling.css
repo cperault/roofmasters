@@ -22,7 +22,6 @@ body {
 }
 
 .wrapper_header {
-  display: inline-block;
   padding: 10px;
   color: #64403e;
 }
@@ -132,7 +131,9 @@ a:link {
   text-decoration: none;
 }
 
-.new_job_form {
+.new_job_form,
+.completed_jobs_div,
+.open_jobs_div {
   padding: 10px;
   border: solid #92896f 2px;
   border-radius: 15px;
@@ -194,7 +195,8 @@ a:link {
 }
 
 .open_job_li,
-.completed_job_li {
+.completed_job_li,
+.all_messages_li {
   list-style-type: circle;
   text-align: left;
 }
@@ -271,12 +273,25 @@ a:link {
     padding: 16px;
   }
 }
+.contact_wrapper_body_div {
+  width: 600px;
+}
+.contact_form_div,
+.login_form_div,
+.registration_form_div {
+  width: 500px;
+}
+.wrapper_body_div_profile {
+  display: flex;
+}
+.wrapper_body_div_profile_inner {
+  display: flex;
+  align-items: center;
+}
 
 @media only screen and (max-width: 600px) {
-  .contact_form_div,
-  .login_form_div,
-  .registration_form_div {
-    width: 260px;
+  .wrapper_div {
+    width: 100% !important;
   }
 
   .left_image {
@@ -294,7 +309,7 @@ a:link {
   }
   .wrapper_body_div_column_profile_left,
   .wrapper_body_div_column_profile_right {
-    width: 280px;
+    width: 100%;
   }
   .item_summary_profile {
     font-size: smaller;
@@ -307,22 +322,31 @@ a:link {
     text-align: justify;
     font-size: 12px;
   }
-}
 
-@media only screen and (min-width: 600px) {
-  .contact_wrapper_body_div {
-    width: 600px;
+  .wrapper_body_div_profile_inner {
+    width: 100%;
+    padding: 10px;
   }
+  .wrapper_body_div_profile_inner {
+    flex-direction: column;
+  }
+  .contact_wrapper_body_div,
+  .login_wrapper_body_div {
+    width: 100% !important;
+  }
+
   .contact_form_div,
   .login_form_div,
   .registration_form_div {
-    width: 500px;
+    width: 85% !important;
+    padding: 10px;
+    margin: auto;
   }
-  .wrapper_body_div_profile {
-    display: flex;
+  .topnav {
+    margin-bottom: 20px;
   }
-  .wrapper_body_div_profile_inner {
-    display: flex;
-    align-items: center;
+  .wrapper_header {
+    margin-top: 20px;
+    margin-bottom: 5px;
   }
 }

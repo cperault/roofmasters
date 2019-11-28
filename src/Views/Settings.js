@@ -9,12 +9,16 @@ import React from "react";
 
 const Settings = () => {
   const settings = [
-    { settingName: "This is an account setting..." },
-    { settingName: "This is another account setting..." },
-    { settingName: "And this is anotherrrrrr account setting..." }
+    { id: 1, settingName: "This is an account setting..." },
+    { id: 2, settingName: "This is another account setting..." },
+    { id: 3, settingName: "And this is anotherrrrrr account setting..." }
   ];
   const settingsList = settings.map(setting => {
-    return <p style={{ textAlign: "left" }}>{setting.settingName}</p>;
+    return (
+      <p key={setting.id} style={{ textAlign: "left" }}>
+        {setting.settingName}
+      </p>
+    );
   });
 
   return <div>{settingsList}</div>;

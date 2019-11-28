@@ -16,7 +16,6 @@ import Checkbox from "@material-ui/core/Checkbox";
 import SaveIcon from "@material-ui/icons/Save";
 import Check from "@material-ui/icons/Check";
 import axios from "axios";
-import { template } from "@babel/core";
 
 const NewJob = ({ loggedInUser }) => {
   const today = new Date();
@@ -26,9 +25,9 @@ const NewJob = ({ loggedInUser }) => {
   const [jobDescription, setJobDescription] = useState("");
   const [errors, setErrors] = useState([]);
   const initialJobTypes = [
-    { name: "Roofing", checked: true },
-    { name: "Gutters", checked: false },
-    { name: "Siding", checked: false }
+    { id: 1, name: "Roofing", checked: true },
+    { id: 2, name: "Gutters", checked: false },
+    { id: 3, name: "Siding", checked: false }
   ];
   const [jobType, setJobType] = useState(initialJobTypes);
   const submitJob = (description, jobType) => {
@@ -46,7 +45,7 @@ const NewJob = ({ loggedInUser }) => {
     let userID = loggedInUser[0].userID;
     let checked = jobType.filter(type => type.checked); //returns object
     let jobTypeArray = [];
-    for (let c of checked) {
+    for (var c of checked) {
       jobTypeArray.push(c["name"]);
     }
     //send request to backend to save job request
@@ -112,9 +111,11 @@ const NewJob = ({ loggedInUser }) => {
                   onChange={handleChecked}
                   onClick={() => (type.checked = !type.checked)}
                   value={type.name}
+                  key={type.id}
                 />
               }
               label={type.name}
+              key={type.id}
             />
           );
         })}

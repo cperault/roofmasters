@@ -19,9 +19,7 @@ const Login = ({ loggedInUser, userIsLoggedIn, stateHandler, Nav, Footer }) => {
   //useState hook to store errors from form
   const [errors, setErrors] = useState([]);
   const inputStyle = {
-    marginBottom: "10px",
-    border: "solid 1px #838e83",
-    borderRadius: "5px"
+    marginBottom: "10px"
   };
   //authentication handler function
   const authenticate = (email, password) => {
@@ -53,6 +51,7 @@ const Login = ({ loggedInUser, userIsLoggedIn, stateHandler, Nav, Footer }) => {
             [2] for .lastName
             [3] for .phoneNumber
             [4] for .emailAddress
+            [5] for .userRole
         */
 
           user = [
@@ -61,7 +60,8 @@ const Login = ({ loggedInUser, userIsLoggedIn, stateHandler, Nav, Footer }) => {
               firstName: user_object[1].firstName,
               lastName: user_object[2].lastName,
               phoneNumber: user_object[3].phoneNumber,
-              emailAddress: user_object[4].emailAddress
+              emailAddress: user_object[4].emailAddress,
+              userRole: user_object[5].userRole
             }
           ];
           localStorage.setItem("loggedIn", "true");
@@ -102,12 +102,13 @@ const Login = ({ loggedInUser, userIsLoggedIn, stateHandler, Nav, Footer }) => {
         <Nav userIsLoggedIn={userIsLoggedIn} />
       </div>
       <div className="wrapper_div">
-        <h1 className="wrapper_header">Let's Get You Signed In</h1>
+        <h1 className="wrapper_header">Hello Again</h1>
         <nav></nav>
         <div className="login_wrapper_body_div">
           <div className="login_form_div">
             <br />
             <TextField
+              placeholder="Email Address"
               name="login_email"
               value={email}
               style={inputStyle}
@@ -119,11 +120,11 @@ const Login = ({ loggedInUser, userIsLoggedIn, stateHandler, Nav, Footer }) => {
               }}
               variant="outlined"
               onChange={text => setEmail(text.target.value)}
-              placeholder="Email"
               onKeyUp={e => returnKeyPressedHandler(e.keyCode, email, password)}
             />
             <br />
             <TextField
+              placeholder="Password"
               type="password"
               name="login_password"
               style={inputStyle}
@@ -136,7 +137,6 @@ const Login = ({ loggedInUser, userIsLoggedIn, stateHandler, Nav, Footer }) => {
               variant="outlined"
               value={password}
               onChange={text => setPassword(text.target.value)}
-              placeholder="Password"
               onKeyUp={e => returnKeyPressedHandler(e.keyCode, email, password)}
             />
             <br />
@@ -167,7 +167,7 @@ const Login = ({ loggedInUser, userIsLoggedIn, stateHandler, Nav, Footer }) => {
           </p>
         </div>
         <p className="loading-message">
-          {pageLoading ? "Authentication request in progress..." : ""}
+          {pageLoading ? "Checking your credentials..." : ""}
         </p>
         <footer>
           <Footer userIsLoggedIn={userIsLoggedIn} loggedInUser={loggedInUser} />

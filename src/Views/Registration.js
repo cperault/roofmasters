@@ -28,9 +28,7 @@ const Registration = ({
   const [pageLoading, setPageLoading] = useState(false);
   const [errors, setErrors] = useState([]);
   const inputStyle = {
-    marginBottom: "10px",
-    border: "solid 1px #838e83",
-    borderRadius: "5px"
+    marginBottom: "10px"
   };
   //submit email address and password from registration for account to be created
   //note: data will be sanitized server-side but protected by HTTPS client side
@@ -59,7 +57,7 @@ const Registration = ({
         if (response.data.status === "result") {
           alert(JSON.stringify(response.data.details));
         } else if (response.data.invite_response === "Denied.") {
-          setInviteCode("Invite code is invalid. Please re-enter.");
+          setInviteCode("Invalid invite code.");
         } else if (response.data.verification === "Failed") {
           let errors = JSON.stringify(response.data.reasoning);
           setErrors(JSON.parse(errors));
@@ -88,37 +86,35 @@ const Registration = ({
         <Nav userIsLoggedIn={userIsLoggedIn} />
       </div>
       <div className="wrapper_div">
-        <h1 className="wrapper_header">Let's Get You Registered</h1>
+        <h1 className="wrapper_header">Almost There</h1>
         <div className="registrationg_wrapper_body_div">
           <div className="registration_form_div">
             <p className="register_form_div_header">
-              Please enter your information and create a unique, secure
-              password.
+              Enter your information and we'll get you registered!
             </p>
-            <br />
             <TextField
+              placeholder="First Name"
               variant="outlined"
-              fullWidth
               style={inputStyle}
+              fullWidth
               name="signup_first_name"
               value={firstName}
               onChange={text => setFirstName(text.target.value)}
-              placeholder="First Name"
               InputProps={{
                 style: {
                   color: "#64403e"
                 }
               }}
             />
-            <br />
             <TextField
+              placeholder="Last Name"
+              s
               variant="outlined"
-              fullWidth
               style={inputStyle}
+              fullWidth
               name="signup_last_name"
               value={lastName}
               onChange={text => setLastName(text.target.value)}
-              placeholder="Last Name"
               InputProps={{
                 style: {
                   color: "#64403e"
@@ -127,13 +123,13 @@ const Registration = ({
             />
             <br />
             <NumberFormat
+              placeholder="Phone Number"
               customInput={TextField}
               variant="outlined"
               fullWidth
               value={phone}
               name="signup_phone"
               onChange={text => setPhone(text.target.value)}
-              placeholder="Phone Number (no dashes)"
               style={inputStyle}
               format="###-###-####"
               mask="_"
@@ -145,13 +141,13 @@ const Registration = ({
             />
             <br />
             <TextField
+              placeholder="Email Address"
               variant="outlined"
               fullWidth
               style={inputStyle}
               name="signup_email"
               value={email}
               onChange={text => setEmail(text.target.value)}
-              placeholder="Email"
               InputProps={{
                 style: {
                   color: "#64403e"
@@ -160,6 +156,7 @@ const Registration = ({
             />
             <br />
             <TextField
+              placeholder="Password"
               type="password"
               variant="outlined"
               fullWidth
@@ -167,7 +164,6 @@ const Registration = ({
               name="signup_password"
               value={password}
               onChange={text => setPassword(text.target.value)}
-              placeholder="Password"
               InputProps={{
                 style: {
                   color: "#64403e"
@@ -175,15 +171,14 @@ const Registration = ({
               }}
             />
             <br />
-            <br />
             <TextField
+              placeholder="Please enter your invite code"
               variant="outlined"
               fullWidth
               style={inputStyle}
               name="invite_code"
               value={inviteCode}
               onChange={text => setInviteCode(text.target.value)}
-              placeholder="Please enter your invite code"
               InputProps={{
                 style: {
                   color: "#64403e"
@@ -223,7 +218,7 @@ const Registration = ({
           </div>
         </div>
         <p className="loading-message">
-          {pageLoading ? "Authentication request in progress..." : ""}
+          {pageLoading ? "Getting you registered..." : ""}
         </p>
         <footer>
           <Footer userIsLoggedIn={userIsLoggedIn} loggedInUser={loggedInUser} />

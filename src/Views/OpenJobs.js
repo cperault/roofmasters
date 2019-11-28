@@ -25,20 +25,26 @@ const OpenJobs = ({ loggedInUser }) => {
   };
   //iterate through array and display list items to be displayed in div on return
   return (
-    <div>
-      <Button
-        variant="contained"
-        size="small"
-        style={{ backgroundColor: "#64403e", color: "#c9cebd" }}
-        onClick={getOpenJobs}
-      >
-        Load all open jobs
-      </Button>
-      <ul>
-        {openJobs.map(job => {
-          return <li className="open_job_li">{job.jobDescription}</li>;
-        })}
-      </ul>
+    <div className="open_jobs_div">
+      <div>
+        <ul>
+          {openJobs.map(job => {
+            return (
+              <li key={job.jobID} className="open_job_li">
+                {job.jobDescription}
+              </li>
+            );
+          })}
+        </ul>
+        <Button
+          variant="contained"
+          size="small"
+          style={{ backgroundColor: "#64403e", color: "#c9cebd" }}
+          onClick={getOpenJobs}
+        >
+          Load all open jobs
+        </Button>
+      </div>
     </div>
   );
 };

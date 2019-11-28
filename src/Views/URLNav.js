@@ -11,15 +11,17 @@ import { Tab } from "@material-ui/core";
 
 const URLNav = ({ userIsLoggedIn }) => {
   const navArray = [
-    { name: "Home", value: "/landing" },
-    { name: "Who We Are", value: "/about" },
-    { name: "Services", value: "/services" },
-    { name: "Contact Us", value: "/contact" },
+    { id: 1, name: "Home", value: "/landing" },
+    { id: 2, name: "Who We Are", value: "/about" },
+    { id: 3, name: "Services", value: "/services" },
+    { id: 4, name: "Contact Us", value: "/contact" },
     {
+      id: 5,
       name: userIsLoggedIn === "false" ? "Login" : "",
       value: userIsLoggedIn === "false" ? "/login" : ""
     },
     {
+      id: 6,
       name: userIsLoggedIn === "false" ? "" : "Profile",
       value: userIsLoggedIn === "false" ? "" : "/profile"
     }
@@ -50,6 +52,7 @@ const URLNav = ({ userIsLoggedIn }) => {
           .map(link => {
             return (
               <Tab
+                key={link.id}
                 label={link.name}
                 onClick={() => navRedirectHandler(link.value)}
                 style={{
@@ -66,14 +69,22 @@ const URLNav = ({ userIsLoggedIn }) => {
             );
           })}
       </div>
-      <div id="mySidebar" className="sidebar" style={{ width: width }}>
+      <div
+        id="mySidebar"
+        className="sidebar"
+        style={{ width: width, marginLeft: marginLeft }}
+      >
         <p className="closebtn" onClick={closeNav}>
           &times;
         </p>
         {navArray
           .filter(link => link.name !== "")
           .map(link => {
-            return <a href={link.value}>{link.name}</a>;
+            return (
+              <a key={link.id} href={link.value}>
+                {link.name}
+              </a>
+            );
           })}
       </div>
       <div id="main">
