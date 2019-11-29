@@ -137,7 +137,7 @@ const Profile = ({ userIsLoggedIn, loggedInUser, Nav, Footer }) => {
       <div className="wrapper_div">
         <h1 className="wrapper_header">Hello, {userFirstName}.</h1>
         <div className="wrapper_body_div_profile">
-          <div className="wrapper_body_div_profile_inner" style={{border: "solid red 1px"}}>
+          <div className="wrapper_body_div_profile_inner">
             <div className="wrapper_body_div_column_profile_left">
               {/*Tasks items from profileItems will be inserted here.*/}
               {fillContentArea("tasks", userRole)}
