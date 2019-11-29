@@ -17,12 +17,14 @@ const Account = ({ accountCriteria, loggedInUser }) => {
       case "settings":
         return <Settings />;
       case "messages":
-        return <Messages loggedInUser={loggedInUser}/>;
+        return <Messages loggedInUser={loggedInUser} />;
       //   case "billing":
       //     return <Billing />;
+      default:
+        break;
     }
   };
-  return <div>{form()}</div>;
+  return <div className="account_expansion_details_div">{form()}</div>;
 };
 
 export default Account;

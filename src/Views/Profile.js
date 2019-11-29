@@ -40,7 +40,7 @@ const Profile = ({ userIsLoggedIn, loggedInUser, Nav, Footer }) => {
       link: "/open_obs",
       side: "tasks",
       role: "both",
-      summary: "View currently open jobs",
+      summary: "Open jobs",
       jobType: "open"
     },
     {
@@ -49,7 +49,7 @@ const Profile = ({ userIsLoggedIn, loggedInUser, Nav, Footer }) => {
       link: "/completed_jobs",
       side: "tasks",
       role: "both",
-      summary: "View completed jobs",
+      summary: "Completed jobs",
       jobType: "completed"
     },
     {
@@ -76,7 +76,7 @@ const Profile = ({ userIsLoggedIn, loggedInUser, Nav, Footer }) => {
       link: "/my_billing",
       side: "account",
       role: "customer",
-      summary: "View your billing",
+      summary: "Your billing",
       accountCriteria: "billing"
     },
     {
@@ -89,7 +89,6 @@ const Profile = ({ userIsLoggedIn, loggedInUser, Nav, Footer }) => {
       accountCriteria: "billing"
     }
   ];
-
   //Function to receive with which content area items will be concerned (either tasks or account).
   const fillContentArea = (side = "", role = "") => {
     const content = profileItems
@@ -108,18 +107,23 @@ const Profile = ({ userIsLoggedIn, loggedInUser, Nav, Footer }) => {
             <ExpansionPanel
               style={{ margin: "10px", backgroundColor: "#C9BE99" }}
             >
-              <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+              <ExpansionPanelSummary
+                key={item.id}
+                expandIcon={<ExpandMoreIcon />}
+              >
                 <span className="item_summary_profile">{item.summary}</span>
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
-                {item.side === "tasks" ? (
-                  <Jobs jobType={item.jobType} loggedInUser={loggedInUser} />
-                ) : (
-                  <Account
-                    accountCriteria={item.accountCriteria}
-                    loggedInUser={loggedInUser}
-                  />
-                )}
+                <div className="profile_expansion_panel_details_div">
+                  {item.side === "tasks" ? (
+                    <Jobs jobType={item.jobType} loggedInUser={loggedInUser} />
+                  ) : (
+                    <Account
+                      accountCriteria={item.accountCriteria}
+                      loggedInUser={loggedInUser}
+                    />
+                  )}
+                </div>
               </ExpansionPanelDetails>
             </ExpansionPanel>
           </Card>

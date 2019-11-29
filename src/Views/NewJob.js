@@ -32,14 +32,14 @@ const NewJob = ({ loggedInUser }) => {
   const [jobType, setJobType] = useState(initialJobTypes);
   const submitJob = (description, jobType) => {
     //jobTitle will be a truncated version of the description based on half its length
-    let length = description.length;
-    let jobTitle = "";
-    if (length > 40) {
-      length = length / 2;
-      jobTitle = description.substring(0, length).trim() + "...";
-    } else {
-      jobTitle = description.substring(0, length).trim();
-    }
+    //let length = description.length;
+    // let jobTitle = "";
+    // if (length > 40) {
+    //   length = length / 2;
+    //   jobTitle = description.substring(0, length).trim() + "...";
+    // } else {
+    //   jobTitle = description.substring(0, length).trim();
+    // }
 
     //gather user data for request
     let userID = loggedInUser[0].userID;
@@ -52,7 +52,6 @@ const NewJob = ({ loggedInUser }) => {
     axios
       .post(process.env.REACT_APP_ENDPOINT + "/save_job", {
         userID: userID,
-        jobTitle: jobTitle,
         jobDescription: description,
         jobDateSubmitted: todayFull,
         jobType: jobTypeArray

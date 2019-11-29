@@ -6,14 +6,18 @@
  *Purpose: This component will be where all messages are displayed and handled                                     *
 \******************************************************************************************************************/
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "@material-ui/core/Button";
 import axios from "axios";
+import AutorenewIcon from "@material-ui/icons/Autorenew";
+import moment from "moment";
 
 const Messages = ({ loggedInUser }) => {
   const userID = loggedInUser[0].userID;
   //hook to store messages received from backend
   const [messages, setMessages] = useState([]);
+  const [messagesLoaded, setMessagesLoaded] = useState(false);
+  //get all messages from DB for logged in user and store in array
   const getMessages = () => {
     //set up the axios request to fetch all messages for associatedID (loggedInUsers ID)
     axios
@@ -22,31 +26,59 @@ const Messages = ({ loggedInUser }) => {
       })
       .then(response => {
         setMessages(response.data.all_messages);
+        setMessagesLoaded(true);
       });
   };
 
+  //when the component is loaded, it will call the `getMessages()` method once; user can refresh if they want, manually
+  useEffect(() => {
+    getMessages();
+  }, [messagesLoaded]);
   //create the message form
   const messageForm = () => {};
 
+  //method to form message date/time
+  const formatDateFromDB = dateReceived => {
+    let timestamp = dateReceived;
+    let timestampFormatted = moment(timestamp).format("MMM Do [at] hh:ssa");
+    return timestampFormatted;
+  };
+
   return (
-    <div className="messages_container">
-      <ul>
-        {messages.map(message => {
-          return (
-            <li key={message.messageID} className="all_messages_li">
-              {message.messageContent}
-            </li>
-          );
-        })}
-      </ul>
+    <div className="messages_div">
+      <table className="messages_table">
+        <tbody className="messages_table_row">
+          <tr>
+            <th className="messages_table_header">From</th>
+            <th className="messages_table_header">Message</th>
+            <th className="messages_table_header">Date</th>
+          </tr>
+          {messages.map(message => {
+            return (
+              <tr key={message.messageID}>
+                <td className="messages_table_detail_from">
+                  {message.senderName}
+                </td>
+                <td className="messages_table_detail_content">
+                  {message.messageContent}
+                </td>
+                <td className="messages_table_detail_time">
+                  {formatDateFromDB(message.messageTimeStamp)}
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+
       <Button
         variant="contained"
         size="small"
         style={{ backgroundColor: "#64403e", color: "#c9cebd" }}
         onClick={getMessages}
-        fullWidth
+        startIcon={<AutorenewIcon />}
       >
-        Load all messages
+        Refresh List
       </Button>
     </div>
   );

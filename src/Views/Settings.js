@@ -9,7 +9,7 @@ import React from "react";
 
 const Settings = () => {
   const settings = [
-    { id: 1, settingName: "This is an account setting..." },
+    { id: 1, settingName: "Edit my information" },
     { id: 2, settingName: "This is another account setting..." },
     { id: 3, settingName: "And this is anotherrrrrr account setting..." }
   ];

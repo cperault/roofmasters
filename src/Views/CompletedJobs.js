@@ -6,13 +6,16 @@
  *Purpose: This component will show completed jobs                                                                 *
 \******************************************************************************************************************/
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Button from "@material-ui/core/Button";
+import AutorenewIcon from "@material-ui/icons/Autorenew";
 
-const CompletedJobs = ({ loggedInUser }) => {
+const CompletedJobs = ({ loggedInUser, formatDateFromDB }) => {
   const user = loggedInUser[0].userID;
   const [completedJobs, setCompletedJobs] = useState([]);
+  const [jobsLoaded, setJobsLoaded] = useState(false);
+
   //get completed jobs from DB and store in array
   const getCompletedJobs = () => {
     axios
@@ -21,27 +24,54 @@ const CompletedJobs = ({ loggedInUser }) => {
       })
       .then(response => {
         setCompletedJobs(response.data.completed_jobs);
+        setJobsLoaded(true);
       });
   };
+
+  //when the component is loaded, it will call the `getCompletedJobs()` method once; user can refresh if they want, manually
+  useEffect(() => {
+    getCompletedJobs();
+  }, [jobsLoaded]);
+
   //iterate through array and display list items to be displayed in div on return
   return (
     <div className="completed_jobs_div">
-      <ul>
-        {completedJobs.map(job => {
-          return (
-            <li key={job.jobID} className="completed_job_li">
-              {job.jobDescription}
-            </li>
-          );
-        })}
-      </ul>
+      <table className="completed_jobs_table">
+        <tbody>
+          <tr>
+            <th className="completed_jobs_table_header">Job Type</th>
+            <th className="completed_jobs_table_header">Details</th>
+            <th className="completed_jobs_table_header">Created</th>
+          </tr>
+          {completedJobs.map(job => {
+            return (
+              <tr key={job.jobID}>
+                <td className="completed_jobs_table_detail_title">
+                  {job.jobTitle}
+                </td>
+                <td className="completed_jobs_table_detail_description">
+                  <a href={job.jobID} style={{ textDecoration: "underline" }}>
+                    {job.jobDescription
+                      .substring(0, job.jobDescription.length / 2)
+                      .trim() + "..."}
+                  </a>
+                </td>
+                <td className="completed_jobs_table_detail_date">
+                  {formatDateFromDB(job.jobDateSubmitted)}
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
       <Button
         variant="contained"
         size="small"
         style={{ backgroundColor: "#64403e", color: "#c9cebd" }}
         onClick={getCompletedJobs}
+        startIcon={<AutorenewIcon />}
       >
-        Load all completed jobs
+        Refresh List
       </Button>
     </div>
   );
