@@ -15,6 +15,16 @@ body {
 .wrapper_div_landing {
   margin: 0 auto;
   min-width: 300px;
+  max-width: 960px;
+  /* background-color: #b2bcaa;
+  border: solid #c9cebd 1px;
+  border-radius: 15px; */
+  text-align: center;
+}
+
+.wrapper_div_profile {
+  margin: 0 auto;
+  min-width: 300px;
   max-width: 1250px;
   /* background-color: #b2bcaa;
   border: solid #c9cebd 1px;

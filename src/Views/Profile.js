@@ -138,7 +138,7 @@ const Profile = ({ userIsLoggedIn, loggedInUser, Nav, Footer }) => {
       <div className="topnav">
         <Nav userIsLoggedIn={userIsLoggedIn} />
       </div>
-      <div className="wrapper_div">
+      <div className="wrapper_div_profile">
         <h1 className="wrapper_header">Hello, {userFirstName}.</h1>
         <div className="wrapper_body_div_profile">
           <div className="wrapper_body_div_profile_inner">
