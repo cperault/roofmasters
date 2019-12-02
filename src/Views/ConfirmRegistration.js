@@ -30,8 +30,13 @@ const ConfirmRegistration = ({ Nav, Footer, userIsLoggedIn }) => {
       })
       .then(response => {
         if (response.data.registration_verification === "Failed") {
-          setRegistrationCode("Invalid registration code.");
+          setRegistrationCode("");
           alert(response.data.reasoning);
+        } else if (
+          response.data.registration_verified_already === "Already done"
+        ) {
+          alert(response.data.reasoning);
+          window.location.assign("/login");
         } else if (response.data.registration_verification === "Passed") {
           setPageLoading(false);
           alert(
