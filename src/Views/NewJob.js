@@ -17,7 +17,7 @@ import SaveIcon from "@material-ui/icons/Save";
 import Check from "@material-ui/icons/Check";
 import axios from "axios";
 
-const NewJob = ({ loggedInUser }) => {
+const NewJob = ({ loggedInUser}) => {
   const today = new Date();
   const [buttonStatus, setButtonStatus] = useState("Save");
   const [buttonIcon, setButtonIcon] = useState(<SaveIcon />);

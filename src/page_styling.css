@@ -450,3 +450,20 @@ a:link {
     padding: 5px;
   }
 }
+
+.modal-container {
+  margin: 300px auto;
+  width: 400px;
+  padding: 10px 20px 40px 20px;
+  background-color: white;
+  border-radius: 5px;
+  outline: none;
+}
+
+.modal-container-body {
+  text-align: left;
+}
+
+.modal-container-header {
+  font-size: 18px;
+}

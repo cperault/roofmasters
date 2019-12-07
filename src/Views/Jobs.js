@@ -11,7 +11,7 @@ import NewJob from "./NewJob.js";
 import OpenJobs from "./OpenJobs.js";
 import CompletedJobs from "./CompletedJobs.js";
 
-const Jobs = ({ jobType, loggedInUser }) => {
+const Jobs = ({ jobType, loggedInUser, handleModal }) => {
   const formatDateFromDB = dateReceived => {
     //convert from yyyy-mm-dd to mm-dd-yyyy
     let date = new Date(dateReceived);
@@ -29,6 +29,7 @@ const Jobs = ({ jobType, loggedInUser }) => {
           <OpenJobs
             loggedInUser={loggedInUser}
             formatDateFromDB={formatDateFromDB}
+            handleModal={handleModal}
           />
         );
       case "completed":
@@ -36,6 +37,7 @@ const Jobs = ({ jobType, loggedInUser }) => {
           <CompletedJobs
             loggedInUser={loggedInUser}
             formatDateFromDB={formatDateFromDB}
+            handleModal={handleModal}
           />
         );
       default:

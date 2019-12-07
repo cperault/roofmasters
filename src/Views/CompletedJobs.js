@@ -11,7 +11,7 @@ import axios from "axios";
 import Button from "@material-ui/core/Button";
 import AutorenewIcon from "@material-ui/icons/Autorenew";
 
-const CompletedJobs = ({ loggedInUser, formatDateFromDB }) => {
+const CompletedJobs = ({ loggedInUser, formatDateFromDB, handleModal }) => {
   const user = loggedInUser[0].userID;
   const [completedJobs, setCompletedJobs] = useState([]);
   const [jobsLoaded, setJobsLoaded] = useState(false);
@@ -50,11 +50,15 @@ const CompletedJobs = ({ loggedInUser, formatDateFromDB }) => {
                   {job.jobTitle}
                 </td>
                 <td className="completed_jobs_table_detail_description">
-                  <a href={job.jobID} style={{ textDecoration: "underline" }}>
+                  <span
+                    key={job.jobID}
+                    style={{ textDecoration: "underline" }}
+                    onClick={() => handleModal("open", job, "Completed Jobs")}
+                  >
                     {job.jobDescription
                       .substring(0, job.jobDescription.length / 2)
                       .trim() + "..."}
-                  </a>
+                  </span>
                 </td>
                 <td className="completed_jobs_table_detail_date">
                   {formatDateFromDB(job.jobDateSubmitted)}

@@ -7,21 +7,26 @@
 \******************************************************************************************************************/
 import React from "react";
 
-const Settings = () => {
+const Settings = ({ handleModal }) => {
   const settings = [
-    { id: 1, settingName: "Edit my information" },
-    { id: 2, settingName: "This is another account setting..." },
-    { id: 3, settingName: "And this is anotherrrrrr account setting..." }
+    { id: 1, name: "Edit my information" },
+    { id: 2, name: "Reset my password" }
   ];
-  const settingsList = settings.map(setting => {
-    return (
-      <p key={setting.id} style={{ textAlign: "left" }}>
-        {setting.settingName}
-      </p>
-    );
-  });
 
-  return <div>{settingsList}</div>;
+  return (
+    <ul>
+      {settings.map(setting => {
+        return (
+          <li
+            key={setting.id}
+            onClick={() => handleModal("open", setting, "Account Settings")}
+          >
+            {setting.name}
+          </li>
+        );
+      })}
+    </ul>
+  );
 };
 
 export default Settings;

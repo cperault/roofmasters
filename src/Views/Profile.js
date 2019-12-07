@@ -6,7 +6,7 @@
  *Purpose: This is the profile page view.                                                                          *
 \******************************************************************************************************************/
 
-import React from "react";
+import React, { useState } from "react";
 import { Card } from "@material-ui/core";
 import { ExpansionPanel } from "@material-ui/core";
 import { ExpansionPanelSummary } from "@material-ui/core";
@@ -14,10 +14,15 @@ import { ExpansionPanelDetails } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Jobs from "./Jobs.js";
 import Account from "./Account.js";
+import ProfileModal from "./ProfileModal.js";
 
 const Profile = ({ userIsLoggedIn, loggedInUser, Nav, Footer }) => {
   const userFirstName = loggedInUser[0].firstName;
   const userRole = loggedInUser[0].userRole;
+  const [openModal, setOpenModal] = useState(false);
+  const [panel, setPanel] = useState({});
+
+  const [panelItemName, setPanelItemName] = useState();
   //name:    The text display.
   //link:    The page link to that which will be displayed.
   //side:    The section in which the link item will be placed,
@@ -89,6 +94,17 @@ const Profile = ({ userIsLoggedIn, loggedInUser, Nav, Footer }) => {
       accountCriteria: "billing"
     }
   ];
+  //modal to be activated on specific click events to handle expansion for individual profile panels
+  const handleModal = (action, panel, panelName) => {
+    if (action === "open") {
+      //console.log("panel received: " + JSON.stringify(panel));
+    }
+    setPanelItemName(panelName);
+    //pass which panel is being sent to the modal for expansion
+    setPanel(panel);
+    //toggle open/close of model
+    setOpenModal(!openModal);
+  };
   //Function to receive with which content area items will be concerned (either tasks or account).
   const fillContentArea = (side = "", role = "") => {
     const content = profileItems
@@ -116,11 +132,16 @@ const Profile = ({ userIsLoggedIn, loggedInUser, Nav, Footer }) => {
               <ExpansionPanelDetails>
                 <div className="profile_expansion_panel_details_div">
                   {item.side === "tasks" ? (
-                    <Jobs jobType={item.jobType} loggedInUser={loggedInUser} />
+                    <Jobs
+                      jobType={item.jobType}
+                      loggedInUser={loggedInUser}
+                      handleModal={handleModal}
+                    />
                   ) : (
                     <Account
                       accountCriteria={item.accountCriteria}
                       loggedInUser={loggedInUser}
+                      handleModal={handleModal}
                     />
                   )}
                 </div>
@@ -151,6 +172,12 @@ const Profile = ({ userIsLoggedIn, loggedInUser, Nav, Footer }) => {
               {fillContentArea("account", userRole)}
             </div>
           </div>
+          <ProfileModal
+            handleModal={handleModal}
+            openModal={openModal}
+            panel={panel}
+            panelItemName={panelItemName}
+          />
         </div>
         <footer>
           <Footer userIsLoggedIn={userIsLoggedIn} loggedInUser={loggedInUser} />
