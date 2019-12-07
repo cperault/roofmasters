@@ -15,9 +15,11 @@ const Account = ({ accountCriteria, loggedInUser, handleModal }) => {
     //set up cases to check which component to load based on accountCriteria prop
     switch (accountCriteria) {
       case "settings":
-        return <Settings handleModal={handleModal}/>;
+        return <Settings handleModal={handleModal} />;
       case "messages":
-        return <Messages loggedInUser={loggedInUser} />;
+        return (
+          <Messages loggedInUser={loggedInUser} handleModal={handleModal} />
+        );
       //   case "billing":
       //     return <Billing />;
       default:

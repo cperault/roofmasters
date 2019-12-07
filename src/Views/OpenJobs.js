@@ -50,6 +50,7 @@ const OpenJobs = ({ loggedInUser, formatDateFromDB, handleModal }) => {
                 <td className="open_jobs_table_detail_description">
                   <span
                     key={job.jobID}
+                    className="open_jobs_table_detail_description_item"
                     onClick={() => handleModal("open", job, "Open Jobs")}
                   >
                     {job.jobDescription

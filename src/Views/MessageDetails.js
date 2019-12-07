@@ -1,9 +1,9 @@
 /******************************************************************************************************************\
- *File:    OpenJobDetails.js                                                                                       *
+ *File:    MessageDetails.js                                                                                       *
  *Author:  Christopher Perault                                                                                     *
  *Project: Roofmasters CMS (Customer Management System)                                                            *
- *Date:    December 6th, 2019                                                                                      *
- *Purpose: This component represents the view into which a selected open job is expanded for details/actions       *
+ *Date:    December 7th, 2019                                                                                      *
+ *Purpose: This component represents the view into which a selected message is expanded for details/actions        *
 \******************************************************************************************************************/
 
 import React from "react";
@@ -13,40 +13,40 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
+import moment from "moment";
 
-const OpenJobDetails = ({ panel }) => {
+const MessageDetails = ({ panel }) => {
+  //method to form message date/time
   const formatDateFromDB = dateReceived => {
-    //convert from yyyy-mm-dd to mm-dd-yyyy
-    let date = new Date(dateReceived);
-    return (
-      date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear()
-    );
+    let timestamp = dateReceived;
+    let timestampFormatted = moment(timestamp).format("MMM Do [at] hh:ssa");
+    return timestampFormatted;
   };
   return (
-    <div className="open_job_details_expanded_container">
-      <div className="open_job_details_expanded_body">
-        <Card raised style={{ padding: "10px", backgroundColor: "#C9BE99" }}>
+    <div className="message_details_expanded_container">
+      <div className="message_details_expanded_body">
+        <Card raised style={{ backgroundColor: "#C9BE99", padding: "10px" }}>
           <CardContent>
             <TextField
-              label="Criteria"
-              value={panel.jobTitle}
+              label="From"
               InputProps={{ readOnly: true }}
               fullWidth
+              value={panel.senderName}
             />
             <TextField
-              label="Date job was submitted"
-              value={formatDateFromDB(panel.jobDateSubmitted)}
+              label="Date of message"
               fullWidth
+              value={formatDateFromDB(panel.messageTimeStamp)}
             />
             <TextField
-              label="Job request description"
+              label="They said"
               multiline
               rows="4"
               rowsMax="10"
               margin="normal"
               variant="outlined"
               fullWidth
-              value={panel.jobDescription}
+              value={panel.messageContent}
             />
             <Button
               variant="contained"
@@ -81,4 +81,4 @@ const OpenJobDetails = ({ panel }) => {
   );
 };
 
-export default OpenJobDetails;
+export default MessageDetails;

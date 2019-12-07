@@ -210,11 +210,15 @@ a:link {
 }
 
 .open_jobs_table_header,
-.completed_jobs_table_header,
 .messages_table_header {
   text-align: left;
   padding: 5px;
   width: 33.33%;
+}
+.completed_jobs_table_header {
+  text-align: left;
+  padding: 5px;
+  width: 25%;
 }
 
 .open_jobs_table_row,
@@ -242,11 +246,21 @@ a:link {
   padding: 5px;
 }
 
-.open_jobs_table_detail_description,
-.completed_jobs_table_detail_description,
-.messages_table_detail_content {
-  text-decoration: underline;
-  width: 50%;
+.open_jobs_table_detail_description_item:hover,
+.completed_jobs_table_detail_description_item:hover,
+.messages_table_detail_content:hover,
+.settings_item:hover {
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.settings-ul {
+  margin: 0 auto;
+  padding: 5px;
+}
+.settings_item {
+  list-style: none;
+  text-align: left;
 }
 
 @media only screen and (min-width: 851px) {
@@ -453,7 +467,8 @@ a:link {
 
 .modal-container {
   margin: 300px auto;
-  width: 400px;
+  min-width: 320px;
+  max-width: 800px;
   padding: 10px 20px 40px 20px;
   background-color: white;
   border-radius: 5px;
@@ -466,4 +481,9 @@ a:link {
 
 .modal-container-header {
   font-size: 18px;
+  color: #64403e;
+}
+
+.open_job_details_expanded_body {
+  padding: 20px;
 }

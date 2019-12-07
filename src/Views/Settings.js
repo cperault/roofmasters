@@ -9,16 +9,18 @@ import React from "react";
 
 const Settings = ({ handleModal }) => {
   const settings = [
-    { id: 1, name: "Edit my information" },
-    { id: 2, name: "Reset my password" }
+    { id: 1, name: "Edit my account information" },
+    { id: 2, name: "Reset my access password" },
+    { id: 3, name: "Delete my account" }
   ];
 
   return (
-    <ul>
+    <ul className="settings-ul">
       {settings.map(setting => {
         return (
           <li
             key={setting.id}
+            className="settings_item"
             onClick={() => handleModal("open", setting, "Account Settings")}
           >
             {setting.name}

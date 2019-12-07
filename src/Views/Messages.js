@@ -12,7 +12,7 @@ import axios from "axios";
 import AutorenewIcon from "@material-ui/icons/Autorenew";
 import moment from "moment";
 
-const Messages = ({ loggedInUser }) => {
+const Messages = ({ loggedInUser, handleModal }) => {
   const userID = loggedInUser[0].userID;
   //hook to store messages received from backend
   const [messages, setMessages] = useState([]);
@@ -34,8 +34,6 @@ const Messages = ({ loggedInUser }) => {
   useEffect(() => {
     getMessages();
   }, [messagesLoaded]);
-  //create the message form
-  const messageForm = () => {};
 
   //method to form message date/time
   const formatDateFromDB = dateReceived => {
@@ -60,7 +58,15 @@ const Messages = ({ loggedInUser }) => {
                   {message.senderName}
                 </td>
                 <td className="messages_table_detail_content">
-                  {message.messageContent}
+                  <span
+                    key={message.messageID}
+                    className="messages_table_detail_content_item"
+                    onClick={() => handleModal("open", message, "Messages")}
+                  >
+                    {message.messageContent
+                      .substring(0, message.messageContent.length / 2)
+                      .trim() + "..."}
+                  </span>
                 </td>
                 <td className="messages_table_detail_time">
                   {formatDateFromDB(message.messageTimeStamp)}
