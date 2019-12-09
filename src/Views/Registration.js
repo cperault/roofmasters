@@ -190,15 +190,13 @@ const Registration = ({
               }}
               inputProps={{ maxLength: 2 }}
             />
-            <NumberFormat
+            <TextField
               placeholder="Zip Code"
-              customInput={TextField}
               variant="outlined"
               style={{ width: "30%", marginBottom: "10px" }}
               name="signup_address_zip"
               value={addressZip}
               onChange={text => setAddressZip(text.target.value)}
-              format="#####"
               InputProps={{
                 style: {
                   color: "#64403e"
