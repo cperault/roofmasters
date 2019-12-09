@@ -199,13 +199,12 @@ const Registration = ({
               value={addressZip}
               onChange={text => setAddressZip(text.target.value)}
               format="#####"
-              mask="_"
               InputProps={{
                 style: {
                   color: "#64403e"
                 }
               }}
-              inputProps={{ maxLength: 12 }}
+              inputProps={{ maxLength: 5 }}
             />
             <br />
             <NumberFormat
