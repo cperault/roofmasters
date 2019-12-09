@@ -12,26 +12,35 @@ import Button from "@material-ui/core/Button";
 import AutorenewIcon from "@material-ui/icons/Autorenew";
 
 const OpenJobs = ({ loggedInUser, formatDateFromDB, handleModal }) => {
-  const user = loggedInUser[0].userID;
   const [openJobs, setOpenJobs] = useState([]);
-  const [jobsLoaded, setJobsLoaded] = useState(false);
 
-  //get open jobs from DB and store in array
-  const getOpenJobs = () => {
+  //function to refresh list manually
+  const refreshList = () => {
+    const user = loggedInUser[0].userID;
     axios
       .post(process.env.REACT_APP_ENDPOINT + "/get_open_jobs", {
         userID: user
       })
       .then(response => {
         setOpenJobs(response.data.open_jobs);
-        setJobsLoaded(true);
       });
   };
-
   //when the component is loaded, it will call the `getOpenJobs()` method once; user can refresh if they want, manually
   useEffect(() => {
-    getOpenJobs();
-  }, [jobsLoaded]);
+    const user = loggedInUser[0].userID;
+    //get open jobs from DB and store in array
+    const loadAllOpenJobs = () => {
+      axios
+        .post(process.env.REACT_APP_ENDPOINT + "/get_open_jobs", {
+          userID: user
+        })
+        .then(response => {
+          setOpenJobs(response.data.open_jobs);
+        });
+    };
+
+    loadAllOpenJobs();
+  }, [loggedInUser]);
 
   //iterate through array and display list items to be displayed in div on return
   return (
@@ -70,7 +79,7 @@ const OpenJobs = ({ loggedInUser, formatDateFromDB, handleModal }) => {
         variant="contained"
         size="small"
         style={{ backgroundColor: "#64403e", color: "#c9cebd" }}
-        onClick={getOpenJobs}
+        onClick={refreshList}
         startIcon={<AutorenewIcon />}
       >
         Refresh List

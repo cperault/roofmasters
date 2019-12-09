@@ -5,106 +5,77 @@
  *Date:    November 10th, 2019                                                                                     *
  *Purpose: This view will display the form for registration confirmation                                           *
 \******************************************************************************************************************/
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { TextField, Button } from "@material-ui/core";
 
 const ConfirmRegistration = ({ Nav, Footer, userIsLoggedIn }) => {
   //useState hook to manage the "page loading effect"
   const [pageLoading, setPageLoading] = useState(false);
   const [emailAddress, setEmailAddress] = useState("");
   const [registrationCode, setRegistrationCode] = useState("");
+
+  useEffect(() => {
+    //get code from URL which is created on the activation email
+    let code = window.location.search.replace("?code=", "");
+    let parts = code.split("?email=");
+    let activationCode = parts[0];
+    let email = parts[1];
+    //hydrate the hooks
+    setEmailAddress(email);
+    setRegistrationCode(activationCode);
+    setPageLoading(true);
+    //function to activate user account
+    const confirmRegistration = () => {
+      //send request back to confirm user registration code
+      axios
+        .post(process.env.REACT_APP_ENDPOINT + "/confirm_registration", {
+          registrationCode: registrationCode,
+          emailAddress: emailAddress
+        })
+        .then(response => {
+          if (response.data.registration_verification === "Failed") {
+            setRegistrationCode("");
+            alert(response.data.reasoning);
+          } else if (
+            response.data.registration_verified_already === "Already done"
+          ) {
+            alert(response.data.reasoning);
+            window.location.assign("/login");
+          } else if (response.data.registration_verification === "Passed") {
+            setPageLoading(false);
+            alert(
+              "Thank you confirming your email address! You will now be redirected to the login page."
+            );
+            window.location.assign("/login");
+          }
+        });
+    };
+
+    if (email !== "" && activationCode !== "") {
+      //call the confirmRegistration method immediately and then redirect to login
+      confirmRegistration();
+    }
+  }, [emailAddress, registrationCode]);
+
   const inputStyle = {
     marginBottom: "10px",
     border: "solid 1px #838e83",
     borderRadius: "5px"
   };
-  //prompt user to enter the code they receive via email before proceeding
-  const confirmRegistration = registrationCode => {
-    setPageLoading(true);
-    //send request back to confirm user registration code
-    axios
-      .post(process.env.REACT_APP_ENDPOINT + "/confirm_registration", {
-        registrationCode: registrationCode,
-        emailAddress: emailAddress
-      })
-      .then(response => {
-        if (response.data.registration_verification === "Failed") {
-          setRegistrationCode("");
-          alert(response.data.reasoning);
-        } else if (
-          response.data.registration_verified_already === "Already done"
-        ) {
-          alert(response.data.reasoning);
-          window.location.assign("/login");
-        } else if (response.data.registration_verification === "Passed") {
-          setPageLoading(false);
-          alert(
-            "Thank you confirming your email address! You will now be redirected to the login page."
-          );
-          window.location.assign("/login");
-        }
-      });
-  };
-
   return (
     <React.Fragment>
       <div className="topnav">
         <Nav userIsLoggedIn={userIsLoggedIn} />
       </div>
-      <div className="wrapper_div">
+      <div className="wrapper_divs">
         <h1 className="wrapper_header">Email Address Confirmation</h1>
-        <div className="registrationg_wrapper_body_div">
-          <div className="registration_form_div">
-            <p className="register_form_div_header">
-              Please enter the confirmation code sent to the email address you
-              provided.
+        <div className="registration_confirmation_wrapper_body_div">
+          <div className="registration_confirmation_form_div">
+            <p className="loading-message">
+              {pageLoading ? "Verifying your request..." : ""}
             </p>
-            <TextField
-              variant="outlined"
-              fullWidth
-              style={inputStyle}
-              name="email_address"
-              value={emailAddress}
-              onChange={text => setEmailAddress(text.target.value)}
-              placeholder="Email address being verified"
-              InputProps={{
-                style: {
-                  color: "#64403e"
-                }
-              }}
-            ></TextField>
-            <br />
-            <TextField
-              variant="outlined"
-              fullWidth
-              style={inputStyle}
-              name="registration_code"
-              value={registrationCode}
-              onChange={text => setRegistrationCode(text.target.value)}
-              placeholder="Confirmation code"
-              InputProps={{
-                style: {
-                  color: "#64403e"
-                }
-              }}
-            ></TextField>
-            <br />
-            <Button
-              onClick={() =>
-                confirmRegistration(registrationCode, emailAddress)
-              }
-              variant="contained"
-              style={{ backgroundColor: "#64403e", color: "#c9cebd" }}
-              size="small"
-            >
-              Verify
-            </Button>
           </div>
         </div>
-        <p className="loading-message">
-          {pageLoading ? "Verifying your request..." : ""}
-        </p>
         <footer>
           <Footer />
         </footer>

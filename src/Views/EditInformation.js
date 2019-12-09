@@ -7,12 +7,16 @@
 \******************************************************************************************************************/
 
 import React from "react";
+import TextField from "@material-ui/core/TextField";
 
 const EditInformation = () => {
   return (
-    <div>
-      <div>
-        <p>This is the account information edit form!</p>
+    <div className="edit_information_container">
+      <div className="edit_information_body">
+        <TextField
+          id="current_address_name"
+          label="Current Address"
+        ></TextField>
       </div>
     </div>
   );

@@ -22,23 +22,25 @@ const OpenJobDetails = ({ panel }) => {
       date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear()
     );
   };
+  const handleEditButtonClick = text => {
+    //handle user wanting to edit form
+  };
+  const handleDeleteButtonClick = () => {
+    //handle the user deleting their job request
+  };
   return (
     <div className="open_job_details_expanded_container">
       <div className="open_job_details_expanded_body">
         <Card raised style={{ padding: "10px", backgroundColor: "#C9BE99" }}>
           <CardContent>
-            <TextField
-              label="Criteria"
-              value={panel.jobTitle}
-              InputProps={{ readOnly: true }}
-              fullWidth
-            />
+            <TextField label="Criteria" value={panel.jobTitle} fullWidth />
             <TextField
               label="Date job was submitted"
               value={formatDateFromDB(panel.jobDateSubmitted)}
               fullWidth
             />
             <TextField
+              id="job_description"
               label="Job request description"
               multiline
               rows="4"
@@ -47,6 +49,7 @@ const OpenJobDetails = ({ panel }) => {
               variant="outlined"
               fullWidth
               value={panel.jobDescription}
+              onChange={text => handleEditButtonClick(text.target.value)}
             />
             <Button
               variant="contained"
@@ -58,6 +61,7 @@ const OpenJobDetails = ({ panel }) => {
                 float: "right",
                 margin: "2px"
               }}
+              onClick={handleEditButtonClick}
             >
               Edit
             </Button>
@@ -71,6 +75,7 @@ const OpenJobDetails = ({ panel }) => {
                 float: "right",
                 margin: "2px"
               }}
+              onClick={handleDeleteButtonClick}
             >
               Delete
             </Button>

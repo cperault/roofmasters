@@ -95,9 +95,7 @@ const Profile = ({ userIsLoggedIn, loggedInUser, Nav, Footer }) => {
     }
   ];
   //modal to be activated on specific click events to handle expansion for individual profile panels
-  const handleModal = (action, panel, panelName) => {
-    if (action === "open") {
-    }
+  const handleModal = (action = "", panel, panelName) => {
     setPanelItemName(panelName);
     //pass which panel is being sent to the modal for expansion
     setPanel(panel);
@@ -175,7 +173,9 @@ const Profile = ({ userIsLoggedIn, loggedInUser, Nav, Footer }) => {
             handleModal={handleModal}
             openModal={openModal}
             panel={panel}
+            setPanel={setPanel}
             panelItemName={panelItemName}
+            loggedInUser={loggedInUser}
           />
         </div>
         <footer>

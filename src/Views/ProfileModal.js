@@ -16,7 +16,13 @@ import PasswordReset from "./PasswordReset.js";
 import RemoveAccount from "./RemoveAccount.js";
 import MessageDetails from "./MessageDetails.js";
 
-const ProfileModal = ({ handleModal, openModal, panel, panelItemName }) => {
+const ProfileModal = ({
+  handleModal,
+  openModal,
+  panel,
+  panelItemName,
+  loggedInUser
+}) => {
   const setModalContent = () => {
     if (openModal) {
       switch (panelItemName) {
@@ -29,7 +35,7 @@ const ProfileModal = ({ handleModal, openModal, panel, panelItemName }) => {
             case 1:
               return <EditInformation />;
             case 2:
-              return <PasswordReset />;
+              return <PasswordReset loggedInUser={loggedInUser} />;
             case 3:
               return <RemoveAccount />;
             default:
@@ -46,7 +52,7 @@ const ProfileModal = ({ handleModal, openModal, panel, panelItemName }) => {
     <Modal open={openModal}>
       <div
         className="modal-container"
-        style={{ backgroundColor: "#838e83", border: "solid 1px #c9cebd" }}
+        style={{ backgroundColor: "#c9cebd", border: "solid 1px #838e83" }}
       >
         <div className="modal-containe-body" style={{ padding: "10px" }}>
           <h1 className="modal-container-header">{panelItemName}</h1>

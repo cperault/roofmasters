@@ -42,7 +42,6 @@ const Login = ({ loggedInUser, userIsLoggedIn, stateHandler, Nav, Footer }) => {
         } else if (response.data.verification === "Password verified.") {
           const user_data = JSON.stringify(response.data.user);
           const user_object = JSON.parse(user_data);
-
           /*
         User Object from back end will return as:
         user_object[index].value
@@ -52,6 +51,7 @@ const Login = ({ loggedInUser, userIsLoggedIn, stateHandler, Nav, Footer }) => {
             [3] for .phoneNumber
             [4] for .emailAddress
             [5] for .userRole
+            [6] for .userAddress (array) => [addressName, addressCity, addressState, addressZip]
         */
 
           user = [
@@ -61,7 +61,8 @@ const Login = ({ loggedInUser, userIsLoggedIn, stateHandler, Nav, Footer }) => {
               lastName: user_object[2].lastName,
               phoneNumber: user_object[3].phoneNumber,
               emailAddress: user_object[4].emailAddress,
-              userRole: user_object[5].userRole
+              userRole: user_object[5].userRole,
+              userAddress: user_object[6]
             }
           ];
           localStorage.setItem("loggedIn", "true");

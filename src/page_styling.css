@@ -101,7 +101,8 @@ body {
 
 .login_form_div,
 .registration_form_div,
-.contact_form_div {
+.contact_form_div,
+.registration_confirmation_wrapper_body_div {
   width: 300px;
   overflow: hidden;
   padding: 15px;
@@ -168,14 +169,16 @@ a:link {
 
 .registration-form-error-div,
 .login-form-error-div,
-.new-job-form-error-div {
+.new-job-form-error-div,
+.password-reset-error-div {
   margin: 0 auto;
   color: #64403e;
 }
 
 .registration-form-error-div ul,
 .login-form-error-div ul,
-.new-job-form-error-div ul {
+.new-job-form-error-div ul,
+.password-reset-error-div ul {
   margin: 0 auto;
   list-style-type: none;
   color: #64403e;
@@ -183,7 +186,8 @@ a:link {
 
 .registration-form-error-div p,
 .login-form-error-div p,
-.new-job-form-error-div p {
+.new-job-form-error-div p,
+.password-reset-error-div p {
   font-weight: bold;
 }
 
@@ -350,7 +354,12 @@ a:link {
   width: 500px;
 }
 
-.wrapper_body_div_profile {
+.registration_confirmation_wrapper_body_div {
+  width: 100%;
+  text-align: center;
+}
+
+.registration_form_div .wrapper_body_div_profile {
   display: flex;
 }
 
@@ -412,7 +421,8 @@ a:link {
 
   .contact_form_div,
   .login_form_div,
-  .registration_form_div {
+  .registration_form_div,
+  .registration_confirmation_wrapper_body_div {
     width: 85% !important;
     padding: 10px;
     margin: auto;
@@ -470,8 +480,7 @@ a:link {
   min-width: 320px;
   max-width: 800px;
   padding: 10px 20px 40px 20px;
-  background-color: white;
-  border-radius: 5px;
+  border-radius: 15px;
   outline: none;
 }
 
@@ -484,6 +493,21 @@ a:link {
   color: #64403e;
 }
 
-.open_job_details_expanded_body {
+.open_job_details_expanded_body,
+.password_reset_body {
   padding: 20px;
+}
+
+.password_reset_container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+  padding-bottom: 40px;
+}
+
+.password_reset_div_header {
+  color: #64403e;
+  padding: 5px;
+  font-size: 20px;
+  text-align: center;
 }

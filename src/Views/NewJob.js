@@ -15,9 +15,15 @@ import FormGroup from "@material-ui/core/FormGroup";
 import Checkbox from "@material-ui/core/Checkbox";
 import SaveIcon from "@material-ui/icons/Save";
 import Check from "@material-ui/icons/Check";
+// import Select from "@material-ui/core/Select";
+// import InputLabel from "@material-ui/core/InputLabel";
+// import MenuItem from "@material-ui/core/MenuItem";
 import axios from "axios";
 
-const NewJob = ({ loggedInUser}) => {
+const NewJob = ({ loggedInUser }) => {
+  loggedInUser[0].userAddress.map(address => {
+    return console.log(address.addressName);
+  });
   const today = new Date();
   const [buttonStatus, setButtonStatus] = useState("Save");
   const [buttonIcon, setButtonIcon] = useState(<SaveIcon />);
@@ -78,6 +84,13 @@ const NewJob = ({ loggedInUser}) => {
   const handleChecked = () => {
     setJobType([...jobType]);
   };
+
+  //get number of addresses belonging to customer so that we can store that in a hook for a select menu
+  let addresses = [];
+  loggedInUser[0].userAddress.map(address => {
+    return addresses.push(address);
+  });
+
   return (
     <div className="new_job_form">
       <TextField
