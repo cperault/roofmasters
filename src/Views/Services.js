@@ -46,9 +46,6 @@ const Services = ({ loggedInUser, userIsLoggedIn, Nav, Footer }) => {
             );
           })}
         </div>
-        <footer>
-          <Footer userIsLoggedIn={userIsLoggedIn} loggedInUser={loggedInUser} />
-        </footer>
       </div>
     </React.Fragment>
   );

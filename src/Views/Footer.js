@@ -57,7 +57,6 @@ const Footer = ({ userIsLoggedIn }) => {
           />
         </a>
       </p>
-
       <Tab
         label="Logout"
         onClick={logoutHandler}

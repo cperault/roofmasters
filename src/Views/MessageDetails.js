@@ -19,27 +19,27 @@ const MessageDetails = ({ panel }) => {
   //method to form message date/time
   const formatDateFromDB = dateReceived => {
     let timestamp = dateReceived;
-    let timestampFormatted = moment(timestamp).format("MMM Do [at] hh:ssa");
+    let timestampFormatted = moment(timestamp).format(
+      "MM[/]DD[/]YYYY hh:ssa"
+    );
     return timestampFormatted;
   };
   return (
     <div className="message_details_expanded_container">
       <div className="message_details_expanded_body">
-        <Card raised style={{ backgroundColor: "#C9BE99", padding: "10px" }}>
+        <Card raised style={{ padding: "10px", backgroundColor: "#C9BE99" }}>
           <CardContent>
+            <TextField label="From" value={panel.senderName} fullWidth />
             <TextField
-              label="From"
-              InputProps={{ readOnly: true }}
-              fullWidth
-              value={panel.senderName}
-            />
-            <TextField
-              label="Date of message"
-              fullWidth
+              label="Sent"
               value={formatDateFromDB(panel.messageTimeStamp)}
+              fullWidth
             />
+            <TextField label="Subject" value={panel.messageSubject} fullWidth />
+            <br />
             <TextField
-              label="They said"
+              id="message_description"
+              label="Message"
               multiline
               rows="4"
               rowsMax="10"
@@ -48,32 +48,6 @@ const MessageDetails = ({ panel }) => {
               fullWidth
               value={panel.messageContent}
             />
-            <Button
-              variant="contained"
-              startIcon={<EditIcon />}
-              size="small"
-              style={{
-                backgroundColor: "#64403e",
-                color: "#c9cebd",
-                float: "right",
-                margin: "2px"
-              }}
-            >
-              Edit
-            </Button>
-            <Button
-              variant="contained"
-              startIcon={<DeleteIcon />}
-              size="small"
-              style={{
-                backgroundColor: "#64403e",
-                color: "#c9cebd",
-                float: "right",
-                margin: "2px"
-              }}
-            >
-              Delete
-            </Button>
           </CardContent>
         </Card>
       </div>

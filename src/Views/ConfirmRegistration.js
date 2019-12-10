@@ -57,17 +57,12 @@ const ConfirmRegistration = ({ Nav, Footer, userIsLoggedIn }) => {
     }
   }, [emailAddress, registrationCode]);
 
-  const inputStyle = {
-    marginBottom: "10px",
-    border: "solid 1px #838e83",
-    borderRadius: "5px"
-  };
   return (
     <React.Fragment>
       <div className="topnav">
         <Nav userIsLoggedIn={userIsLoggedIn} />
       </div>
-      <div className="wrapper_divs">
+      <div className="wrapper_div">
         <h1 className="wrapper_header">Email Address Confirmation</h1>
         <div className="registration_confirmation_wrapper_body_div">
           <div className="registration_confirmation_form_div">
@@ -76,9 +71,6 @@ const ConfirmRegistration = ({ Nav, Footer, userIsLoggedIn }) => {
             </p>
           </div>
         </div>
-        <footer>
-          <Footer />
-        </footer>
       </div>
     </React.Fragment>
   );

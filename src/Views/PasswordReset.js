@@ -68,7 +68,8 @@ const PasswordReset = ({ loggedInUser }) => {
           InputProps={{
             style: {
               color: "#64403e",
-              marginBottom: "10px"
+              marginBottom: "10px",
+              fontSize: "14px"
             }
           }}
           variant="outlined"
@@ -81,7 +82,8 @@ const PasswordReset = ({ loggedInUser }) => {
           fullWidth
           InputProps={{
             style: {
-              color: "#64403e"
+              color: "#64403e",
+              fontSize: "14px"
             }
           }}
           variant="outlined"

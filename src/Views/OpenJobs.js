@@ -48,14 +48,12 @@ const OpenJobs = ({ loggedInUser, formatDateFromDB, handleModal }) => {
       <table className="open_jobs_table">
         <tbody>
           <tr>
-            <th className="open_jobs_table_header">Job Type</th>
             <th className="open_jobs_table_header">Details</th>
             <th className="open_jobs_table_header">Created</th>
           </tr>
           {openJobs.map(job => {
             return (
               <tr key={job.jobID}>
-                <td className="open_jobs_table_detail_title">{job.jobTitle}</td>
                 <td className="open_jobs_table_detail_description">
                   <span
                     key={job.jobID}
@@ -63,7 +61,7 @@ const OpenJobs = ({ loggedInUser, formatDateFromDB, handleModal }) => {
                     onClick={() => handleModal("open", job, "Open Jobs")}
                   >
                     {job.jobDescription
-                      .substring(0, job.jobDescription.length / 2)
+                      .substring(0, job.jobDescription.length / 0.5)
                       .trim() + "..."}
                   </span>
                 </td>

@@ -48,7 +48,6 @@ const CompletedJobs = ({ loggedInUser, formatDateFromDB, handleModal }) => {
       <table className="completed_jobs_table">
         <tbody>
           <tr>
-            <th className="completed_jobs_table_header">Job Type</th>
             <th className="completed_jobs_table_header">Details</th>
             <th className="completed_jobs_table_header">Created</th>
             <th className="completed_jobs_table_header">Completed</th>
@@ -56,9 +55,6 @@ const CompletedJobs = ({ loggedInUser, formatDateFromDB, handleModal }) => {
           {completedJobs.map(job => {
             return (
               <tr key={job.jobID}>
-                <td className="completed_jobs_table_detail_title">
-                  {job.jobTitle}
-                </td>
                 <td className="completed_jobs_table_detail_description">
                   <span
                     key={job.jobID}
@@ -66,7 +62,7 @@ const CompletedJobs = ({ loggedInUser, formatDateFromDB, handleModal }) => {
                     onClick={() => handleModal("open", job, "Completed Jobs")}
                   >
                     {job.jobDescription
-                      .substring(0, job.jobDescription.length / 2)
+                      .substring(0, job.jobDescription.length / 0.5)
                       .trim() + "..."}
                   </span>
                 </td>

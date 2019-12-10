@@ -116,10 +116,10 @@ const Registration = ({
         <div className="registrationg_wrapper_body_div">
           <div className="registration_form_div">
             <p className="register_form_div_header">
-              Enter your information and we'll get you registered!
+              Let's get you registered!
             </p>
             <TextField
-              placeholder="First Name"
+              placeholder="First name"
               variant="outlined"
               style={inputStyleOne}
               name="signup_first_name"
@@ -128,12 +128,13 @@ const Registration = ({
               InputProps={{
                 style: {
                   color: "#64403e",
-                  marginRight: "5px"
+                  marginRight: "5px",
+                  fontSize: "14px"
                 }
               }}
             />
             <TextField
-              placeholder="Last Name"
+              placeholder="Last name"
               variant="outlined"
               style={inputStyleOne}
               name="signup_last_name"
@@ -142,7 +143,8 @@ const Registration = ({
               InputProps={{
                 style: {
                   color: "#64403e",
-                  marginLeft: "5px"
+                  marginLeft: "5px",
+                  fontSize: "14px"
                 }
               }}
             />
@@ -156,7 +158,8 @@ const Registration = ({
               onChange={text => setAddressName(text.target.value)}
               InputProps={{
                 style: {
-                  color: "#64403e"
+                  color: "#64403e",
+                  fontSize: "14px"
                 }
               }}
             />
@@ -164,20 +167,21 @@ const Registration = ({
             <TextField
               placeholder="City"
               variant="outlined"
-              style={{ width: "50%", marginBottom: "10px" }}
+              style={{ width: "40%", marginBottom: "10px" }}
               name="signup_address_city"
               value={addressCity}
               onChange={text => setAddressCity(text.target.value)}
               InputProps={{
                 style: {
-                  color: "#64403e"
+                  color: "#64403e",
+                  fontSize: "14px"
                 }
               }}
             />
             <TextField
               placeholder="State"
               variant="outlined"
-              style={{ width: "20%", marginBottom: "10px" }}
+              style={{ width: "30%", marginBottom: "10px" }}
               name="signup_address_state"
               value={addressState}
               onChange={text => setAddressState(text.target.value)}
@@ -185,13 +189,14 @@ const Registration = ({
                 style: {
                   color: "#64403e",
                   marginLeft: "10px",
-                  marginRight: "10px"
+                  marginRight: "10px",
+                  fontSize: "14px"
                 }
               }}
               inputProps={{ maxLength: 2 }}
             />
             <TextField
-              placeholder="Zip Code"
+              placeholder="Zip code"
               variant="outlined"
               style={{ width: "30%", marginBottom: "10px" }}
               name="signup_address_zip"
@@ -199,14 +204,15 @@ const Registration = ({
               onChange={text => setAddressZip(text.target.value)}
               InputProps={{
                 style: {
-                  color: "#64403e"
+                  color: "#64403e",
+                  fontSize: "14px"
                 }
               }}
               inputProps={{ maxLength: 5 }}
             />
             <br />
             <NumberFormat
-              placeholder="Phone Number"
+              placeholder="Phone number"
               customInput={TextField}
               variant="outlined"
               value={phone}
@@ -217,13 +223,14 @@ const Registration = ({
               mask="_"
               InputProps={{
                 style: {
-                  color: "#64403e"
+                  color: "#64403e",
+                  fontSize: "14px"
                 }
               }}
             />
             <br />
             <TextField
-              placeholder="Email Address"
+              placeholder="Email address"
               variant="outlined"
               style={inputStyleTwo}
               name="signup_email"
@@ -231,7 +238,8 @@ const Registration = ({
               onChange={text => setEmail(text.target.value)}
               InputProps={{
                 style: {
-                  color: "#64403e"
+                  color: "#64403e",
+                  fontSize: "14px"
                 }
               }}
             />
@@ -246,7 +254,8 @@ const Registration = ({
               onChange={text => setPassword(text.target.value)}
               InputProps={{
                 style: {
-                  color: "#64403e"
+                  color: "#64403e",
+                  fontSize: "14px"
                 }
               }}
             />
@@ -260,7 +269,8 @@ const Registration = ({
               onChange={text => setInviteCode(text.target.value)}
               InputProps={{
                 style: {
-                  color: "#64403e"
+                  color: "#64403e",
+                  fontSize: "14px"
                 }
               }}
             />
@@ -303,9 +313,6 @@ const Registration = ({
         <p className="loading-message">
           {pageLoading ? "Getting you registered..." : ""}
         </p>
-        <footer>
-          <Footer userIsLoggedIn={userIsLoggedIn} loggedInUser={loggedInUser} />
-        </footer>
       </div>
     </React.Fragment>
   );

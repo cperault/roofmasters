@@ -54,21 +54,21 @@ const ProfileModal = ({
         className="modal-container"
         style={{ backgroundColor: "#c9cebd", border: "solid 1px #838e83" }}
       >
-        <div className="modal-containe-body" style={{ padding: "10px" }}>
+        <div className="modal-container-body" style={{ padding: "10px" }}>
           <h1 className="modal-container-header">{panelItemName}</h1>
           {setModalContent()}
           <Button
+            className="modal-container-close"
             variant="contained"
             size="small"
             style={{
               float: "right",
               backgroundColor: "#64403e",
-              color: "#c9cebd",
-              marginTop: "10px"
+              color: "#c9cebd"
             }}
             onClick={() => handleModal("close", null)}
           >
-            Close
+            <span style={{ fontSize: "14px" }}>Close</span>
           </Button>
         </div>
       </div>

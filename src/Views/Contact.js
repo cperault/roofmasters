@@ -10,54 +10,47 @@ import axios from "axios";
 import { TextField, Button } from "@material-ui/core";
 
 const Contact = ({
-  userIsLoggedIn,
-  loggedInUser,
   Nav,
   Footer,
   inviteCode,
-  setInviteCode
+  setInviteCode,
+  userIsLoggedIn
 }) => {
   //hook to store entered text in contact form
-  let [contactName, setContactName] = useState("");
+  let [contactFirstName, setContactFirstName] = useState("");
+  let [contactLastName, setContactLastName] = useState("");
   let [contactEmail, setContactEmail] = useState("");
   let [contactDescriptionText, setContactDescriptionText] = useState("");
-  let user = loggedInUser;
-  let userName = user[0].firstName + " " + user[0].lastName;
-  let userEmail = user[0].emailAddress;
 
   const inputStyle = {
     marginBottom: "10px",
-    border: "solid 1px #838e83",
-    borderRadius: "5px"
+    borderRadius: "15px"
   };
   //set up the request to PHP backend for contact form processing
   const processContactForm = () => {
     let formData = [];
-    if (userIsLoggedIn) {
-      formData = [userName, userEmail, contactDescriptionText, inviteCode];
-    } else {
-      formData = [
-        contactName,
-        contactEmail,
-        contactDescriptionText,
-        inviteCode
-      ];
-    }
+    formData = [
+      contactFirstName,
+      contactLastName,
+      contactEmail,
+      contactDescriptionText,
+      inviteCode
+    ];
     //the contact form is valid; submit the backend request
     axios
       .post(process.env.REACT_APP_ENDPOINT + "/contact", {
-        contactName: formData[0],
-        contactEmail: formData[1],
-        contactDescriptionText: formData[2],
-        inviteCode: formData[3]
+        contactFirstName: formData[0],
+        contactLastName: formData[1],
+        contactEmail: formData[2],
+        contactDescriptionText: formData[3],
+        inviteCode: formData[4]
       })
       .then(response => {
         if (response.data.invite_response === "Denied.") {
           setInviteCode("Invite code is invalid.");
         } else if (response.data) {
           alert(
-            "Your message was submitted! We will be in touch with you as soon possible.\n" +
-              response.data
+            "Your message was sent. We will contact you as soon as possible."
           );
           //refresh page after the alert
           window.location.reload();
@@ -73,18 +66,41 @@ const Contact = ({
         <h1 className="wrapper_header">Let's Talk</h1>
         <div className="contact_wrapper_body_div">
           <div className="contact_form_div">
-            <br />
             <TextField
               variant="outlined"
-              fullWidth
-              style={inputStyle}
-              name="contact_name"
-              value={userIsLoggedIn === "false" ? contactName : userName}
-              placeholder="Your Name"
-              onChange={text => setContactName(text.target.value)}
+              style={{
+                width: "50%",
+                marginBottom: "10px",
+                borderRadius: "15px"
+              }}
+              name="contact_first_name"
+              value={contactFirstName}
+              placeholder="First name"
+              onChange={text => setContactFirstName(text.target.value)}
               InputProps={{
                 style: {
-                  color: "#64403e"
+                  color: "#64403e",
+                  fontSize: "14px",
+                  marginRight: "5px"
+                }
+              }}
+            />
+            <TextField
+              variant="outlined"
+              style={{
+                width: "50%",
+                marginBottom: "10px",
+                borderRadius: "15px"
+              }}
+              name="contact_last_name"
+              value={contactLastName}
+              placeholder="Last name"
+              onChange={text => setContactLastName(text.target.value)}
+              InputProps={{
+                style: {
+                  color: "#64403e",
+                  fontSize: "14px",
+                  marginLeft: "5px"
                 }
               }}
             />
@@ -94,12 +110,13 @@ const Contact = ({
               fullWidth
               style={inputStyle}
               name="contact_mail"
-              value={userIsLoggedIn === "false" ? contactEmail : userEmail}
-              placeholder="Your Email Address"
+              value={contactEmail}
+              placeholder="Email address"
               onChange={text => setContactEmail(text.target.value)}
               InputProps={{
                 style: {
-                  color: "#64403e"
+                  color: "#64403e",
+                  fontSize: "14px"
                 }
               }}
             />
@@ -109,14 +126,15 @@ const Contact = ({
               multiline
               fullWidth
               variant="outlined"
-              rows="1"
+              rows="5"
               rowsMax="8"
-              placeholder="Let us know how we can help..."
+              placeholder="What can we do to help?"
               value={contactDescriptionText}
               onChange={text => setContactDescriptionText(text.target.value)}
               InputProps={{
                 style: {
-                  color: "#64403e"
+                  color: "#64403e",
+                  fontSize: "14px"
                 }
               }}
             />
@@ -132,7 +150,8 @@ const Contact = ({
               placeholder="Please enter your invite code"
               InputProps={{
                 style: {
-                  color: "#64403e"
+                  color: "#64403e",
+                  fontSize: "14px"
                 }
               }}
             />
@@ -147,7 +166,7 @@ const Contact = ({
           </div>
         </div>
         <footer className="footer">
-          <Footer userIsLoggedIn={userIsLoggedIn} />
+          <Footer />
         </footer>
       </div>
     </React.Fragment>

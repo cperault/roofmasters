@@ -15,7 +15,7 @@ const Landing = ({ userIsLoggedIn, loggedInUser, Nav, Footer }) => {
         <Nav userIsLoggedIn={userIsLoggedIn} />
       </div>
       <div className="wrapper_div">
-        <h1 className="wrapper_header">Welcome to Roof Masters</h1>
+        <h1 className="wrapper_header">Roofmasters Roofing-Siding-Gutters</h1>
         <div className="wrapper_body_content_div">
           <p className="landing_wrapper_body_div_content_paragraph">
             <img
@@ -102,7 +102,6 @@ const Landing = ({ userIsLoggedIn, loggedInUser, Nav, Footer }) => {
             tellus id interdum velit.
           </p>
         </div>
-        <Footer userIsLoggedIn={userIsLoggedIn} loggedInUser={loggedInUser} />
       </div>
     </React.Fragment>
   );

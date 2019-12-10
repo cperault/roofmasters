@@ -14,7 +14,11 @@ const URLNav = ({ userIsLoggedIn }) => {
     { id: 1, name: "Home", value: "/landing" },
     { id: 2, name: "Who We Are", value: "/about" },
     { id: 3, name: "Services", value: "/services" },
-    { id: 4, name: "Contact Us", value: "/contact" },
+    {
+      id: 4,
+      name: userIsLoggedIn === "false" ? "Contact Us" : "",
+      value: userIsLoggedIn === "false" ? "/contact" : ""
+    },
     {
       id: 5,
       name: userIsLoggedIn === "false" ? "Login" : "",

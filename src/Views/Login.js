@@ -103,20 +103,21 @@ const Login = ({ loggedInUser, userIsLoggedIn, stateHandler, Nav, Footer }) => {
         <Nav userIsLoggedIn={userIsLoggedIn} />
       </div>
       <div className="wrapper_div">
-        <h1 className="wrapper_header">Hello Again</h1>
+        <h1 className="wrapper_header">Welcome</h1>
         <nav></nav>
         <div className="login_wrapper_body_div">
           <div className="login_form_div">
             <br />
             <TextField
-              placeholder="Email Address"
+              placeholder="Email address"
               name="login_email"
               value={email}
               style={inputStyle}
               fullWidth
               InputProps={{
                 style: {
-                  color: "#64403e"
+                  color: "#64403e",
+                  fontSize: "14px"
                 }
               }}
               variant="outlined"
@@ -131,7 +132,8 @@ const Login = ({ loggedInUser, userIsLoggedIn, stateHandler, Nav, Footer }) => {
               style={inputStyle}
               InputProps={{
                 style: {
-                  color: "#64403e"
+                  color: "#64403e",
+                  fontSize: "14px"
                 }
               }}
               fullWidth
@@ -170,9 +172,6 @@ const Login = ({ loggedInUser, userIsLoggedIn, stateHandler, Nav, Footer }) => {
         <p className="loading-message">
           {pageLoading ? "Checking your credentials..." : ""}
         </p>
-        <footer>
-          <Footer userIsLoggedIn={userIsLoggedIn} loggedInUser={loggedInUser} />
-        </footer>
       </div>
     </React.Fragment>
   );

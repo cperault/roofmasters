@@ -90,16 +90,25 @@ const App = () => {
       />
       <Route
         path={"/contact"}
-        render={() => (
-          <Contact
-            userIsLoggedIn={userIsLoggedIn}
-            loggedInUser={loggedInUser}
-            Nav={Nav}
-            Footer={Footer}
-            inviteCode={inviteCode}
-            setInviteCode={setInviteCode}
-          />
-        )}
+        render={() =>
+          userIsLoggedIn === "false" ? (
+            <Contact
+              userIsLoggedIn={userIsLoggedIn}
+              loggedInUser={loggedInUser}
+              Nav={Nav}
+              Footer={Footer}
+              inviteCode={inviteCode}
+              setInviteCode={setInviteCode}
+            />
+          ) : (
+            <Profile
+              userIsLoggedIn={userIsLoggedIn}
+              loggedInUser={loggedInUser}
+              Nav={Nav}
+              Footer={Footer}
+            />
+          )
+        }
       />
       <Route
         path={"/login"}

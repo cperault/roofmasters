@@ -72,9 +72,6 @@ const About = ({ userIsLoggedIn, loggedInUser, Nav, Footer }) => {
             </p>
           </div>
         </div>
-        <footer>
-          <Footer userIsLoggedIn={userIsLoggedIn} loggedInUser={loggedInUser} />
-        </footer>
       </div>
     </React.Fragment>
   );
