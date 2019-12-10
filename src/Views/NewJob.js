@@ -18,7 +18,6 @@ import Check from "@material-ui/icons/Check";
 import Select from "@material-ui/core/Select";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
-import Divider from "@material-ui/core/Divider";
 import axios from "axios";
 
 const NewJob = ({ loggedInUser }) => {

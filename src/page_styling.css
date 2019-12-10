@@ -377,7 +377,6 @@ a:link {
     margin-right: 5px !important;
     margin-top: 15% !important;
     margin-bottom: 15% !important;
-    border: solid 1px red !important;
     padding-left: 0 !important;
     padding-right: 0 !important;
   }
@@ -529,7 +528,8 @@ a:link {
 .open_job_details_expanded_body,
 .completed_job_details_expanded_body,
 .message_details_expanded_body,
-.password_reset_body {
+.password_reset_body,
+.new_message_container {
   padding: 20px;
 }
 

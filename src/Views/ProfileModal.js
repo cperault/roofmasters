@@ -15,13 +15,15 @@ import CompletedJobDetails from "./CompletedJobDetails.js";
 import PasswordReset from "./PasswordReset.js";
 import RemoveAccount from "./RemoveAccount.js";
 import MessageDetails from "./MessageDetails.js";
+import NewMessage from "./NewMessage.js";
 
 const ProfileModal = ({
   handleModal,
   openModal,
   panel,
   panelItemName,
-  loggedInUser
+  loggedInUser,
+  messageType
 }) => {
   const setModalContent = () => {
     if (openModal) {
@@ -42,7 +44,16 @@ const ProfileModal = ({
           }
           break;
         case "Messages":
-          return <MessageDetails panel={panel} />;
+          return (
+            <MessageDetails
+              loggedInUser={loggedInUser}
+              panel={panel}
+              handleModal={handleModal}
+              messageType={messageType}
+            />
+          );
+        case "New Message":
+          return <NewMessage panel={panel} handleModal={handleModal} />;
         default:
       }
     }

@@ -21,6 +21,7 @@ const Profile = ({ userIsLoggedIn, loggedInUser, Nav, Footer }) => {
   const userRole = loggedInUser[0].userRole;
   const [openModal, setOpenModal] = useState(false);
   const [panel, setPanel] = useState({});
+  const [messageType, setMessageType] = useState("received");
 
   const [panelItemName, setPanelItemName] = useState();
   //name:    The text display.
@@ -95,12 +96,14 @@ const Profile = ({ userIsLoggedIn, loggedInUser, Nav, Footer }) => {
     }
   ];
   //modal to be activated on specific click events to handle expansion for individual profile panels
-  const handleModal = (action = "", panel, panelName) => {
+  const handleModal = (action = "", panel, panelName, messageType) => {
     setPanelItemName(panelName);
     //pass which panel is being sent to the modal for expansion
     setPanel(panel);
     //toggle open/close of model
     setOpenModal(!openModal);
+    //set message type "received or sent"
+    setMessageType(messageType);
   };
   //Function to receive with which content area items will be concerned (either tasks or account).
   const fillContentArea = (side = "", role = "") => {
@@ -176,6 +179,7 @@ const Profile = ({ userIsLoggedIn, loggedInUser, Nav, Footer }) => {
             setPanel={setPanel}
             panelItemName={panelItemName}
             loggedInUser={loggedInUser}
+            messageType={messageType}
           />
         </div>
         <footer>

@@ -48,7 +48,7 @@ const Contact = ({
       .then(response => {
         if (response.data.invite_response === "Denied.") {
           setInviteCode("Invite code is invalid.");
-        } else if (response.data) {
+        } else {
           alert(
             "Your message was sent. We will contact you as soon as possible."
           );

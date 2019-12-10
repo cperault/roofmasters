@@ -9,7 +9,6 @@ import React, { useState } from "react";
 import axios from "axios";
 import { TextField, Button } from "@material-ui/core";
 import NumberFormat from "react-number-format";
-import Avatar from "react-avatar";
 
 const Registration = ({
   loggedInUser,
