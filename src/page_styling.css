@@ -220,7 +220,8 @@ a:link {
 
 .open_jobs_table,
 .completed_jobs_table,
-.messages_table {
+.messages_table,
+.all_customers_table {
   margin-bottom: 20px;
   width: 100%;
 }

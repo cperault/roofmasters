@@ -58,8 +58,6 @@ const EditInformation = ({ loggedInUser }) => {
 
   //method to handle updating the address
   const updateAddress = (name, city, state, zip, addressNumber) => {
-    //array to store the address being updated/added
-    let newAddress = [];
     let addressToUpdate = "";
     //check which address is being added/updated
     switch (addressNumber) {
@@ -79,6 +77,7 @@ const EditInformation = ({ loggedInUser }) => {
       case "four":
         addressToUpdate = "addressFourID";
         break;
+      default:
     }
     //create the request
     axios
@@ -110,6 +109,7 @@ const EditInformation = ({ loggedInUser }) => {
             case "four":
               setErrorsFour(JSON.parse(error));
               break;
+            default:
           }
         } else {
           switch (addressNumber) {
@@ -130,9 +130,10 @@ const EditInformation = ({ loggedInUser }) => {
               break;
             case "four":
               //change icon/label
-              setSaveIconThree(<CheckIcon />);
-              setSaveLabelThree("Updated");
+              setSaveIconFour(<CheckIcon />);
+              setSaveLabelFour("Updated");
               break;
+            default:
           }
         }
       });

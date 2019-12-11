@@ -16,8 +16,6 @@ import Jobs from "./Jobs.js";
 import Account from "./Account.js";
 import Admin from "./Admin.js";
 import ProfileModal from "./ProfileModal.js";
-import AllJobs from "./AllJobs.js";
-import AllCustomers from "./AllCustomers.js";
 
 const Profile = ({ userIsLoggedIn, loggedInUser, Nav, Footer }) => {
   const userFirstName = loggedInUser[0].firstName;
@@ -96,25 +94,25 @@ const Profile = ({ userIsLoggedIn, loggedInUser, Nav, Footer }) => {
       role: "both",
       summary: "Message inbox",
       accountCriteria: "messages"
-    },
-    {
-      id: 8,
-      name: "Billing",
-      link: "/my_billing",
-      side: "account",
-      role: "customer",
-      summary: "Your billing",
-      accountCriteria: "billing"
-    },
-    {
-      id: 9,
-      name: "Customer Billing",
-      link: "/customer_billing",
-      side: "account",
-      role: "admin",
-      summary: "View all customer billing",
-      accountCriteria: "billing"
     }
+    // {
+    //   id: 8,
+    //   name: "Billing",
+    //   link: "/my_billing",
+    //   side: "account",
+    //   role: "customer",
+    //   summary: "Your billing",
+    //   accountCriteria: "billing"
+    // },
+    // {
+    //   id: 9,
+    //   name: "Customer Billing",
+    //   link: "/customer_billing",
+    //   side: "account",
+    //   role: "admin",
+    //   summary: "View all customer billing",
+    //   accountCriteria: "billing"
+    // }
   ];
   //modal to be activated on specific click events to handle expansion for individual profile panels
   const handleModal = (action = "", panel, panelName, messageType) => {

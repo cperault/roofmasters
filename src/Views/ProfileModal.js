@@ -56,7 +56,13 @@ const ProfileModal = ({
             />
           );
         case "New Message":
-          return <NewMessage panel={panel} handleModal={handleModal} />;
+          return (
+            <NewMessage
+              panel={panel}
+              handleModal={handleModal}
+              loggedInUser={loggedInUser}
+            />
+          );
         default:
       }
     }
@@ -68,9 +74,10 @@ const ProfileModal = ({
         id="modal-address-updates"
         className="modal-container"
         style={{
-          height: "500px",
+          maxHeight: "100%",
           backgroundColor: "#c9cebd",
-          border: "solid 1px #838e83"
+          border: "solid 1px #838e83",
+          overflowY: "auto"
         }}
       >
         <div className="modal-container-body" style={{ padding: "10px" }}>
