@@ -172,7 +172,8 @@ a:link {
 .registration-form-error-div,
 .login-form-error-div,
 .new-job-form-error-div,
-.password-reset-error-div {
+.password-reset-error-div,
+.new-address-form-error-div {
   margin: 0 auto;
   color: #64403e;
 }
@@ -180,7 +181,8 @@ a:link {
 .registration-form-error-div ul,
 .login-form-error-div ul,
 .new-job-form-error-div ul,
-.password-reset-error-div ul {
+.password-reset-error-div ul,
+.new-address-form-error-div ul {
   margin: 0 auto;
   list-style-type: none;
   color: #64403e;
@@ -189,7 +191,8 @@ a:link {
 .registration-form-error-div p,
 .login-form-error-div p,
 .new-job-form-error-div p,
-.password-reset-error-div p {
+.password-reset-error-div p,
+.new-address-form-error-div p {
   font-weight: bold;
 }
 
@@ -556,4 +559,25 @@ a:link {
   padding: 5px;
   font-size: 20px;
   text-align: center;
+}
+
+#modal-address-update {
+  overflow-y: scroll;
+}
+
+#modal-address-update::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 15px;
+  background-color: #f5f5f5;
+}
+
+#modal-address-update::-webkit-scrollbar {
+  width: 12px;
+  background-color: #f5f5f5;
+}
+
+#modal-address-update::-webkit-scrollbar-thumb {
+  border-radius: 15px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #555;
 }

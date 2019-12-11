@@ -38,7 +38,7 @@ const ProfileModal = ({
         case "Account Settings":
           switch (panel.id) {
             case 1:
-              return <EditInformation />;
+              return <EditInformation loggedInUser={loggedInUser} />;
             case 2:
               return <PasswordReset loggedInUser={loggedInUser} />;
             case 3:
@@ -65,8 +65,14 @@ const ProfileModal = ({
   return (
     <Modal open={openModal}>
       <div
+        id="modal-address-updates"
         className="modal-container"
-        style={{ backgroundColor: "#c9cebd", border: "solid 1px #838e83" }}
+        style={{
+          height: "800px",
+          backgroundColor: "#c9cebd",
+          border: "solid 1px #838e83",
+          overflowY: "scroll"
+        }}
       >
         <div className="modal-container-body" style={{ padding: "10px" }}>
           <h1 className="modal-container-header">{panelItemName}</h1>

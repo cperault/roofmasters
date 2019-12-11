@@ -154,7 +154,7 @@ const Messages = ({ loggedInUser, handleModal }) => {
                     }
                   />
                 </ListItem>
-                <Divider variant="inset" component="li" />
+                <Divider variant="inset" />
               </React.Fragment>
             );
           })}

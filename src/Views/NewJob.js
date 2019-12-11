@@ -108,7 +108,7 @@ const NewJob = ({ loggedInUser }) => {
       <TextField
         label="Name"
         value={name}
-        InputProps={{ readOnly: true }}
+        readOnly
         fullWidth
       />
       <TextField label="Date of Request" value={todayFull} fullWidth />

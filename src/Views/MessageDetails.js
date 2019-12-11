@@ -115,7 +115,7 @@ const MessageDetails = ({ loggedInUser, panel, messageType }) => {
                   label="Subject"
                   value={"Re:" + panel.messageSubject}
                   fullWidth
-                  InputProps={{ readOnly: "true" }}
+                  readOnly
                 />
                 <br />
                 <TextField

@@ -35,6 +35,7 @@ const NewMessage = ({ panel }) => {
         messageContent: content
       })
       .then(response => {
+        console.log(JSON.stringify(response.data));
         //take user back
         setSendIcon(<CheckIcon />);
         setSendLabel("Sent");
@@ -49,13 +50,13 @@ const NewMessage = ({ panel }) => {
               label="To"
               value="Emily Morris (Roofmasters)"
               fullWidth
-              InputProps={{ readOnly: "true" }}
+              readOnly
             />
             <TextField
               label="From"
               value={panel[0].firstName + " " + panel[0].lastName}
               fullWidth
-              InputProps={{ readOnly: "true" }}
+              readOnly
             />
             <TextField
               id="message_subject"
