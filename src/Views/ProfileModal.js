@@ -42,7 +42,7 @@ const ProfileModal = ({
             case 2:
               return <PasswordReset loggedInUser={loggedInUser} />;
             case 3:
-              return <RemoveAccount />;
+              return <RemoveAccount loggedInUser={loggedInUser} />;
             default:
           }
           break;
@@ -68,10 +68,9 @@ const ProfileModal = ({
         id="modal-address-updates"
         className="modal-container"
         style={{
-          height: "800px",
+          height: "500px",
           backgroundColor: "#c9cebd",
-          border: "solid 1px #838e83",
-          overflowY: "scroll"
+          border: "solid 1px #838e83"
         }}
       >
         <div className="modal-container-body" style={{ padding: "10px" }}>
