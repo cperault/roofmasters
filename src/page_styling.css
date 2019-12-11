@@ -129,7 +129,8 @@ body {
 }
 
 .wrapper_body_div_column_profile_left,
-.wrapper_body_div_column_profile_right {
+.wrapper_body_div_column_profile_right,
+.admin_wrapper_body_div_column_profile_right {
   padding: 15px;
   margin: 10px;
   display: inline-block;
@@ -139,7 +140,8 @@ body {
   width: 100%;
 }
 
-.wrapper_body_div_column_profile_right {
+.wrapper_body_div_column_profile_right,
+.admin_wrapper_body_div_column_profile_right {
   width: 100%;
 }
 
@@ -205,6 +207,12 @@ a:link {
   border-radius: 15px;
   padding: 5px;
 }
+.admin_profile_expansion_panel_details_div {
+  width: 100%;
+  border: solid #92896f 1px;
+  border-radius: 15px;
+  padding: 5px;
+}
 
 .open_jobs_table,
 .completed_jobs_table,
@@ -231,11 +239,11 @@ a:link {
 }
 
 .open_jobs_table_detail_title,
-.open_jobs_table_detail_description,
 .open_jobs_table_detail_date,
 .completed_jobs_table_detail_title,
-.completed_jobs_table_detail_description,
-.completed_jobs_table_detail_date {
+.completed_jobs_table_detail_date,
+.messages_table_detail_from,
+.messages_table_detail_time {
   text-align: left;
   font-size: 14px;
   padding: 5px;
@@ -252,7 +260,8 @@ a:link {
 .open_jobs_table_detail_description_item:hover,
 .completed_jobs_table_detail_description_item:hover,
 .messages_table_detail_content:hover,
-.settings_item:hover {
+.settings_item:hover,
+.all_jobs_table_detail_description:hover {
   cursor: pointer;
   font-weight: bold;
 }
@@ -411,7 +420,8 @@ a:link {
   }
 
   .wrapper_body_div_column_profile_left,
-  .wrapper_body_div_column_profile_right {
+  .wrapper_body_div_column_profile_right,
+  .admin_wrapper_body_div_column_profile_right {
     width: 100%;
   }
 
@@ -529,7 +539,8 @@ a:link {
 .completed_job_details_expanded_body,
 .message_details_expanded_body,
 .password_reset_body,
-.new_message_container {
+.new_message_container,
+.all_job_details_expanded_body {
   padding: 20px;
 }
 

@@ -16,6 +16,7 @@ import PasswordReset from "./PasswordReset.js";
 import RemoveAccount from "./RemoveAccount.js";
 import MessageDetails from "./MessageDetails.js";
 import NewMessage from "./NewMessage.js";
+import AllJobsDetails from "./AllJobsDetails.js";
 
 const ProfileModal = ({
   handleModal,
@@ -30,6 +31,8 @@ const ProfileModal = ({
       switch (panelItemName) {
         case "Open Jobs":
           return <OpenJobDetails panel={panel} />;
+        case "All Jobs":
+          return <AllJobsDetails panel={panel} />;
         case "Completed Jobs":
           return <CompletedJobDetails panel={panel} />;
         case "Account Settings":

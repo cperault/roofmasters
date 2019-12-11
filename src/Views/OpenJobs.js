@@ -2,7 +2,7 @@
  *File:    OpenJobs.js                                                                                             *
  *Author:  Christopher Perault                                                                                     *
  *Project: Roofmasters CMS (Customer Management System)                                                            *
- *Date:    November 26th, 2019                                                                                      *
+ *Date:    November 26th, 2019                                                                                     *
  *Purpose: This component will show open jobs                                                                      *
 \******************************************************************************************************************/
 

@@ -14,7 +14,10 @@ import { ExpansionPanelDetails } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Jobs from "./Jobs.js";
 import Account from "./Account.js";
+import Admin from "./Admin.js";
 import ProfileModal from "./ProfileModal.js";
+import AllJobs from "./AllJobs.js";
+import AllCustomers from "./AllCustomers.js";
 
 const Profile = ({ userIsLoggedIn, loggedInUser, Nav, Footer }) => {
   const userFirstName = loggedInUser[0].firstName;
@@ -36,30 +39,48 @@ const Profile = ({ userIsLoggedIn, loggedInUser, Nav, Footer }) => {
       name: "New Job",
       link: "/new_job",
       side: "tasks",
-      role: "both",
+      role: "customer",
       summary: "Create a new job",
       jobType: "new"
     },
     {
       id: 2,
       name: "Open Jobs",
-      link: "/open_obs",
+      link: "/open_jobs",
       side: "tasks",
-      role: "both",
+      role: "customer",
       summary: "Open jobs",
       jobType: "open"
     },
     {
       id: 3,
+      name: "View All Jobs",
+      link: "/view_all_jobs",
+      side: "account",
+      role: "admin",
+      summary: "View all jobs",
+      accountCriteria: "All Jobs"
+    },
+    {
+      id: 4,
+      name: "View All Customers",
+      link: "/view_all_customers",
+      side: "account",
+      role: "admin",
+      summary: "View all customers",
+      accountCriteria: "All Customers"
+    },
+    {
+      id: 5,
       name: "Completed Jobs",
       link: "/completed_jobs",
       side: "tasks",
-      role: "both",
+      role: "customer",
       summary: "Completed jobs",
       jobType: "completed"
     },
     {
-      id: 4,
+      id: 6,
       name: "My Account",
       link: "/my_account",
       side: "account",
@@ -68,7 +89,7 @@ const Profile = ({ userIsLoggedIn, loggedInUser, Nav, Footer }) => {
       accountCriteria: "settings"
     },
     {
-      id: 5,
+      id: 7,
       name: "Messages",
       link: "/messages",
       side: "account",
@@ -77,7 +98,7 @@ const Profile = ({ userIsLoggedIn, loggedInUser, Nav, Footer }) => {
       accountCriteria: "messages"
     },
     {
-      id: 6,
+      id: 8,
       name: "Billing",
       link: "/my_billing",
       side: "account",
@@ -86,7 +107,7 @@ const Profile = ({ userIsLoggedIn, loggedInUser, Nav, Footer }) => {
       accountCriteria: "billing"
     },
     {
-      id: 7,
+      id: 9,
       name: "Customer Billing",
       link: "/customer_billing",
       side: "account",
@@ -104,6 +125,49 @@ const Profile = ({ userIsLoggedIn, loggedInUser, Nav, Footer }) => {
     setOpenModal(!openModal);
     //set message type "received or sent"
     setMessageType(messageType);
+  };
+
+  //Function to receive with which content area items will be concerned (tasks or account) for admin roles logged in
+  const fillContentAreaAdmin = (side = "", role = "") => {
+    const content = profileItems
+      .filter(item => item.side === side)
+      .filter(item => item.role === "admin" || item.role === "both")
+      .map(item => {
+        return (
+          <Card
+            key={item.id}
+            style={{
+              margin: "5px",
+              backgroundColor: "transparent",
+              border: "solid 1px #c9cebd"
+            }}
+          >
+            <ExpansionPanel
+              style={{ margin: "10px", backgroundColor: "#C9BE99" }}
+            >
+              <ExpansionPanelSummary
+                key={item.id}
+                expandIcon={<ExpandMoreIcon />}
+              >
+                <span className="admin_item_summary_profile">
+                  {item.summary}
+                </span>
+              </ExpansionPanelSummary>
+              <ExpansionPanelDetails>
+                <div className="admin_profile_expansion_panel_details_div">
+                  <Admin
+                    accountCriteria={item.accountCriteria}
+                    loggedInUser={loggedInUser}
+                    handleModal={handleModal}
+                  />
+                </div>
+              </ExpansionPanelDetails>
+            </ExpansionPanel>
+          </Card>
+        );
+      });
+
+    return content;
   };
   //Function to receive with which content area items will be concerned (either tasks or account).
   const fillContentArea = (side = "", role = "") => {
@@ -163,24 +227,33 @@ const Profile = ({ userIsLoggedIn, loggedInUser, Nav, Footer }) => {
         <h1 className="wrapper_header">Hello, {userFirstName}.</h1>
         <div className="wrapper_body_div_profile">
           <div className="wrapper_body_div_profile_inner">
-            <div className="wrapper_body_div_column_profile_left">
-              {/*Tasks items from profileItems will be inserted here.*/}
-              {fillContentArea("tasks", userRole)}
-            </div>
-            <div className="wrapper_body_div_column_profile_right">
-              {/*Account items from profileItems will be inserted here.*/}
-              {fillContentArea("account", userRole)}
-            </div>
+            {/*Tasks items from profileItems will be inserted here.*/}
+            {userRole === "customer" && (
+              <div className="wrapper_body_div_column_profile_left">
+                {fillContentArea("tasks", userRole)}
+              </div>
+            )}
+            {/*Account items from profileItems will be inserted here.*/}
+            {userRole === "customer" && (
+              <div className="wrapper_body_div_column_profile_right">
+                {fillContentArea("account", userRole)}
+              </div>
+            )}
+            {userRole === "admin" && (
+              <div className="admin_wrapper_body_div_column_profile_right">
+                {fillContentAreaAdmin("account", userRole)}
+              </div>
+            )}
+            <ProfileModal
+              handleModal={handleModal}
+              openModal={openModal}
+              panel={panel}
+              setPanel={setPanel}
+              panelItemName={panelItemName}
+              loggedInUser={loggedInUser}
+              messageType={messageType}
+            />
           </div>
-          <ProfileModal
-            handleModal={handleModal}
-            openModal={openModal}
-            panel={panel}
-            setPanel={setPanel}
-            panelItemName={panelItemName}
-            loggedInUser={loggedInUser}
-            messageType={messageType}
-          />
         </div>
         <footer>
           <Footer userIsLoggedIn={userIsLoggedIn} loggedInUser={loggedInUser} />
