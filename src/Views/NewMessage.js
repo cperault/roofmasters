@@ -16,6 +16,7 @@ import CheckIcon from "@material-ui/icons/Check";
 import axios from "axios";
 
 const NewMessage = ({ panel }) => {
+  console.log(panel[0].userID);
   //hooks to manage state of new message
   const [messageSubject, setMessageSubject] = useState("");
   const [messageContent, setMessageContent] = useState("");
@@ -31,7 +32,6 @@ const NewMessage = ({ panel }) => {
         userID: panel[0].userID,
         senderFirstName: panel[0].firstName,
         senderLastName: panel[0].lastName,
-        senderEmailAddress: panel[0].senderEmail,
         messageSubject: subject,
         messageContent: content
       })
