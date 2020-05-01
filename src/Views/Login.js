@@ -20,7 +20,8 @@ const Login = ({ loggedInUser, userIsLoggedIn, stateHandler, Nav, Footer }) => {
   //useState hook to store errors from form
   const [errors, setErrors] = useState([]);
   const inputStyle = {
-    marginBottom: "10px"
+    marginBottom: "10px",
+    zIndex: "0"
   };
 
   const StyledTextField = makeStyles({
@@ -141,7 +142,8 @@ const Login = ({ loggedInUser, userIsLoggedIn, stateHandler, Nav, Footer }) => {
               InputProps={{
                 style: {
                   color: "#253237",
-                  fontSize: "14px"
+                  fontSize: "14px",
+                  zIndex: "0"
                 }
               }}
               variant="outlined"

@@ -35,11 +35,13 @@ const Registration = ({
 
   const inputStyleOne = {
     marginBottom: "10px",
-    width: "50%"
+    width: "50%",
+    zIndex: "0"
   };
   const inputStyleTwo = {
     marginBottom: "10px",
-    width: "100%"
+    width: "100%",
+    zIndex: "0"
   };
 
   const StyledTextField = makeStyles({
@@ -193,7 +195,7 @@ const Registration = ({
               className={classes.root}
               label="City"
               variant="outlined"
-              style={{ width: "40%", marginBottom: "10px" }}
+              style={{ width: "40%", marginBottom: "10px", zIndex: "0" }}
               name="signup_address_city"
               value={addressCity}
               onChange={text => setAddressCity(text.target.value)}
@@ -209,7 +211,7 @@ const Registration = ({
               className={classes.root}
               label="State"
               variant="outlined"
-              style={{ width: "30%", marginBottom: "10px" }}
+              style={{ width: "30%", marginBottom: "10px", zIndex: "0" }}
               name="signup_address_state"
               value={addressState}
               onChange={text => setAddressState(text.target.value)}
@@ -227,7 +229,7 @@ const Registration = ({
               label="Zip code"
               customInput={TextField}
               variant="outlined"
-              style={{ width: "30%", marginBottom: "10px" }}
+              style={{ width: "30%", marginBottom: "10px", zIndex: "0" }}
               name="signup_address_zip"
               value={addressZip}
               onChange={text => setAddressZip(text.target.value)}

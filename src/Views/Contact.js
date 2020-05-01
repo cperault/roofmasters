@@ -26,7 +26,8 @@ const Contact = ({
   const [errors, setErrors] = useState([]);
   const inputStyle = {
     marginBottom: "10px",
-    borderRadius: "15px"
+    borderRadius: "15px",
+    zIndex: "0"
   };
 
   const StyledTextField = makeStyles({
@@ -102,7 +103,8 @@ const Contact = ({
               style={{
                 width: "50%",
                 marginBottom: "10px",
-                borderRadius: "15px"
+                borderRadius: "15px",
+                zIndex: "0"
               }}
               name="contact_first_name"
               value={contactFirstName}
@@ -122,7 +124,8 @@ const Contact = ({
               style={{
                 width: "50%",
                 marginBottom: "10px",
-                borderRadius: "15px"
+                borderRadius: "15px",
+                zIndex: "0"
               }}
               name="contact_last_name"
               value={contactLastName}
