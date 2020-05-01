@@ -183,7 +183,6 @@ const Contact = ({
               fullWidth
               value={inviteCode}
               onChange={text => setInviteCode(text.target.value)}
-              required
               label="Please enter your invite code"
               InputProps={{
                 style: {
