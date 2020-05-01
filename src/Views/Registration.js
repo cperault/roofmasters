@@ -9,6 +9,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { TextField, Button } from "@material-ui/core";
 import NumberFormat from "react-number-format";
+import { makeStyles } from "@material-ui/core/styles";
 
 const Registration = ({
   loggedInUser,
@@ -31,6 +32,7 @@ const Registration = ({
   //useState hook to manage the "page loading effect"
   const [pageLoading, setPageLoading] = useState(false);
   const [errors, setErrors] = useState([]);
+
   const inputStyleOne = {
     marginBottom: "10px",
     width: "50%"
@@ -39,6 +41,29 @@ const Registration = ({
     marginBottom: "10px",
     width: "100%"
   };
+
+  const StyledTextField = makeStyles({
+    root: {
+      '& label.Mui-focused': {
+        color: '#253237',
+      },
+      '& .MuiInput-underline:after': {
+        borderBottomColor: '#253237',
+      },
+      '& .MuiOutlinedInput-root': {
+        '& fieldset': {
+          borderColor: '#253237',
+        },
+        '&:hover fieldset': {
+          borderColor: '#253237',
+        },
+        '&.Mui-focused fieldset': {
+          borderColor: '#253237',
+        },
+      },
+    },
+  });
+  const classes = StyledTextField();
 
   //submit email address and password from registration for account to be created
   //note: data will be sanitized server-side but protected by HTTPS client side
@@ -91,6 +116,8 @@ const Registration = ({
           alert(
             "Thank you for registering! Please check your email and click the activation link."
           );
+          //take the user to the login page
+          window.location.assign("/login");
         }
       })
       .catch(error => {
@@ -111,14 +138,12 @@ const Registration = ({
         <Nav userIsLoggedIn={userIsLoggedIn} />
       </div>
       <div className="wrapper_div">
-        <h1 className="wrapper_header">Almost There</h1>
+        <h1 className="wrapper_header">Create Your Account</h1>
         <div className="registrationg_wrapper_body_div">
           <div className="registration_form_div">
-            <p className="register_form_div_header">
-              Let's get you registered!
-            </p>
             <TextField
-              placeholder="First name"
+              className={classes.root}
+              label="First name"
               variant="outlined"
               style={inputStyleOne}
               name="signup_first_name"
@@ -126,14 +151,15 @@ const Registration = ({
               onChange={text => setFirstName(text.target.value)}
               InputProps={{
                 style: {
-                  color: "#64403e",
+                  color: "#253237",
                   marginRight: "5px",
                   fontSize: "14px"
                 }
               }}
             />
             <TextField
-              placeholder="Last name"
+              className={classes.root}
+              label="Last name"
               variant="outlined"
               style={inputStyleOne}
               name="signup_last_name"
@@ -141,15 +167,15 @@ const Registration = ({
               onChange={text => setLastName(text.target.value)}
               InputProps={{
                 style: {
-                  color: "#64403e",
-                  marginLeft: "5px",
+                  color: "#253237",
                   fontSize: "14px"
                 }
               }}
             />
             <br />
             <TextField
-              placeholder="Address"
+              className={classes.root}
+              label="Address"
               variant="outlined"
               style={inputStyleTwo}
               name="signup_address_name"
@@ -157,14 +183,15 @@ const Registration = ({
               onChange={text => setAddressName(text.target.value)}
               InputProps={{
                 style: {
-                  color: "#64403e",
+                  color: "#253237",
                   fontSize: "14px"
                 }
               }}
             />
             <br />
             <TextField
-              placeholder="City"
+              className={classes.root}
+              label="City"
               variant="outlined"
               style={{ width: "40%", marginBottom: "10px" }}
               name="signup_address_city"
@@ -172,13 +199,15 @@ const Registration = ({
               onChange={text => setAddressCity(text.target.value)}
               InputProps={{
                 style: {
-                  color: "#64403e",
-                  fontSize: "14px"
+                  color: "#253237",
+                  fontSize: "14px",
+                  marginRight: "5px"
                 }
               }}
             />
             <TextField
-              placeholder="State"
+              className={classes.root}
+              label="State"
               variant="outlined"
               style={{ width: "30%", marginBottom: "10px" }}
               name="signup_address_state"
@@ -186,16 +215,17 @@ const Registration = ({
               onChange={text => setAddressState(text.target.value)}
               InputProps={{
                 style: {
-                  color: "#64403e",
-                  marginLeft: "10px",
-                  marginRight: "10px",
+                  color: "#253237",
+                  marginRight: "5px",
                   fontSize: "14px"
                 }
               }}
               inputProps={{ maxLength: 2 }}
             />
             <TextField
-              placeholder="Zip code"
+              className={classes.root}
+              label="Zip code"
+              customInput={TextField}
               variant="outlined"
               style={{ width: "30%", marginBottom: "10px" }}
               name="signup_address_zip"
@@ -203,7 +233,7 @@ const Registration = ({
               onChange={text => setAddressZip(text.target.value)}
               InputProps={{
                 style: {
-                  color: "#64403e",
+                  color: "#253237",
                   fontSize: "14px"
                 }
               }}
@@ -211,7 +241,8 @@ const Registration = ({
             />
             <br />
             <NumberFormat
-              placeholder="Phone number"
+              className={classes.root}
+              label="Phone number"
               customInput={TextField}
               variant="outlined"
               value={phone}
@@ -222,14 +253,15 @@ const Registration = ({
               mask="_"
               InputProps={{
                 style: {
-                  color: "#64403e",
+                  color: "#253237",
                   fontSize: "14px"
                 }
               }}
             />
             <br />
             <TextField
-              placeholder="Email address"
+              className={classes.root}
+              label="Email address"
               variant="outlined"
               style={inputStyleTwo}
               name="signup_email"
@@ -237,14 +269,15 @@ const Registration = ({
               onChange={text => setEmail(text.target.value)}
               InputProps={{
                 style: {
-                  color: "#64403e",
+                  color: "#253237",
                   fontSize: "14px"
                 }
               }}
             />
             <br />
             <TextField
-              placeholder="Password"
+              className={classes.root}
+              label="Password"
               type="password"
               variant="outlined"
               style={inputStyleTwo}
@@ -253,14 +286,15 @@ const Registration = ({
               onChange={text => setPassword(text.target.value)}
               InputProps={{
                 style: {
-                  color: "#64403e",
+                  color: "#253237",
                   fontSize: "14px"
                 }
               }}
             />
             <br />
             <TextField
-              placeholder="Please enter your invite code"
+              className={classes.root}
+              label="Please enter your invite code"
               variant="outlined"
               style={inputStyleTwo}
               name="invite_code"
@@ -268,7 +302,7 @@ const Registration = ({
               onChange={text => setInviteCode(text.target.value)}
               InputProps={{
                 style: {
-                  color: "#64403e",
+                  color: "#253237",
                   fontSize: "14px"
                 }
               }}
@@ -291,7 +325,7 @@ const Registration = ({
               }
               variant="contained"
               size="small"
-              style={{ backgroundColor: "#64403e", color: "#c9cebd" }}
+              style={{ backgroundColor: "#9DB4C0", color: "#253237" }}
             >
               Register
             </Button>
@@ -305,8 +339,8 @@ const Registration = ({
                 </ul>
               </div>
             ) : (
-              ""
-            )}
+                ""
+              )}
           </div>
         </div>
         <p className="loading-message">

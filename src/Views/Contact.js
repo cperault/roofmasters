@@ -8,6 +8,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { TextField, Button } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 
 const Contact = ({
   Nav,
@@ -21,11 +22,36 @@ const Contact = ({
   let [contactLastName, setContactLastName] = useState("");
   let [contactEmail, setContactEmail] = useState("");
   let [contactDescriptionText, setContactDescriptionText] = useState("");
-
+  //hook to store errors from submission of form
+  const [errors, setErrors] = useState([]);
   const inputStyle = {
     marginBottom: "10px",
     borderRadius: "15px"
   };
+
+  const StyledTextField = makeStyles({
+    root: {
+      '& label.Mui-focused': {
+        color: '#253237',
+      },
+      '& .MuiInput-underline:after': {
+        borderBottomColor: '#253237',
+      },
+      '& .MuiOutlinedInput-root': {
+        '& fieldset': {
+          borderColor: '#253237',
+        },
+        '&:hover fieldset': {
+          borderColor: '#253237',
+        },
+        '&.Mui-focused fieldset': {
+          borderColor: '#253237',
+        },
+      },
+    },
+  });
+  const classes = StyledTextField();
+
   //set up the request to PHP backend for contact form processing
   const processContactForm = () => {
     let formData = [];
@@ -48,7 +74,11 @@ const Contact = ({
       .then(response => {
         if (response.data.invite_response === "Denied.") {
           setInviteCode("Invite code is invalid.");
-        } else {
+        } else if (response.data.validation_response === "Rejected") {
+          let errors = JSON.stringify(response.data.rejection_reason);
+          setErrors(JSON.parse(errors));
+        }
+        else {
           alert(
             "Your message was sent. We will contact you as soon as possible."
           );
@@ -67,6 +97,7 @@ const Contact = ({
         <div className="contact_wrapper_body_div">
           <div className="contact_form_div">
             <TextField
+              className={classes.root}
               variant="outlined"
               style={{
                 width: "50%",
@@ -75,17 +106,18 @@ const Contact = ({
               }}
               name="contact_first_name"
               value={contactFirstName}
-              placeholder="First name"
+              label="First name"
               onChange={text => setContactFirstName(text.target.value)}
               InputProps={{
                 style: {
-                  color: "#64403e",
+                  color: "#253237",
                   fontSize: "14px",
                   marginRight: "5px"
                 }
               }}
             />
             <TextField
+              className={classes.root}
               variant="outlined"
               style={{
                 width: "50%",
@@ -94,52 +126,54 @@ const Contact = ({
               }}
               name="contact_last_name"
               value={contactLastName}
-              placeholder="Last name"
+              label="Last name"
               onChange={text => setContactLastName(text.target.value)}
               InputProps={{
                 style: {
-                  color: "#64403e",
-                  fontSize: "14px",
-                  marginLeft: "5px"
-                }
-              }}
-            />
-            <br />
-            <TextField
-              variant="outlined"
-              fullWidth
-              style={inputStyle}
-              name="contact_mail"
-              value={contactEmail}
-              placeholder="Email address"
-              onChange={text => setContactEmail(text.target.value)}
-              InputProps={{
-                style: {
-                  color: "#64403e",
+                  color: "#253237",
                   fontSize: "14px"
                 }
               }}
             />
             <br />
             <TextField
+              className={classes.root}
+              variant="outlined"
+              fullWidth
+              style={inputStyle}
+              name="contact_mail"
+              value={contactEmail}
+              label="Email address"
+              onChange={text => setContactEmail(text.target.value)}
+              InputProps={{
+                style: {
+                  color: "#253237",
+                  fontSize: "14px"
+                }
+              }}
+            />
+            <br />
+            <TextField
+              className={classes.root}
               style={inputStyle}
               multiline
               fullWidth
               variant="outlined"
               rows="5"
               rowsMax="8"
-              placeholder="What can we do to help?"
+              label="What can we do to help?"
               value={contactDescriptionText}
               onChange={text => setContactDescriptionText(text.target.value)}
               InputProps={{
                 style: {
-                  color: "#64403e",
+                  color: "#253237",
                   fontSize: "14px"
                 }
               }}
             />
             <br />
             <TextField
+              className={classes.root}
               variant="outlined"
               style={inputStyle}
               name="invite_code"
@@ -147,10 +181,10 @@ const Contact = ({
               value={inviteCode}
               onChange={text => setInviteCode(text.target.value)}
               required
-              placeholder="Please enter your invite code"
+              label="Please enter your invite code"
               InputProps={{
                 style: {
-                  color: "#64403e",
+                  color: "#253237",
                   fontSize: "14px"
                 }
               }}
@@ -158,11 +192,23 @@ const Contact = ({
             <Button
               onClick={processContactForm}
               variant="contained"
-              style={{ backgroundColor: "#64403e", color: "#c9cebd" }}
+              style={{ backgroundColor: "#9DB4C0", color: "#253237" }}
               size="small"
             >
               Send
             </Button>
+            {errors.length > 0 ? (
+              <div className="contact-us-form-error-div">
+                <h2>Please correct the following:</h2>
+                <ul>
+                  {errors.map(e => {
+                    return <li>-{e}</li>;
+                  })}
+                </ul>
+              </div>
+            ) : (
+                ""
+              )}
           </div>
         </div>
         <footer className="footer">

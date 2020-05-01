@@ -5,20 +5,21 @@
  *Date:    August 28th, 2019                                                                                       *
  *Purpose: This component is responsible for storing and setting up nav links.                                     *
 \******************************************************************************************************************/
-
 import React, { useState } from "react";
-import { Tab } from "@material-ui/core";
 
 const URLNav = ({ userIsLoggedIn }) => {
-  const navArray = [
-    { id: 1, name: "Home", value: "/landing" },
-    { id: 2, name: "Who We Are", value: "/about" },
+  const businessLinks = [
+    { id: 1, name: "Roofmasters", value: "/landing" },
+    { id: 2, name: "About", value: "/about" },
     { id: 3, name: "Services", value: "/services" },
     {
       id: 4,
       name: userIsLoggedIn === "false" ? "Contact Us" : "",
       value: userIsLoggedIn === "false" ? "/contact" : ""
-    },
+    }
+  ];
+
+  const userLinks = [
     {
       id: 5,
       name: userIsLoggedIn === "false" ? "Login" : "",
@@ -30,6 +31,9 @@ const URLNav = ({ userIsLoggedIn }) => {
       value: userIsLoggedIn === "false" ? "" : "/profile"
     }
   ];
+
+  const sidebarLinks = businessLinks.concat(userLinks);
+
   const [width, setWidth] = useState("");
   const [marginLeft, setMarginLeft] = useState("");
 
@@ -50,28 +54,24 @@ const URLNav = ({ userIsLoggedIn }) => {
 
   return (
     <React.Fragment>
-      <div className="tab-nav">
-        {navArray
-          .filter(link => link.name !== "")
-          .map(link => {
-            return (
-              <Tab
-                key={link.id}
-                label={link.name}
-                onClick={() => navRedirectHandler(link.value)}
-                style={{
-                  backgroundColor: "#6c6061",
-                  border: "solid 1px #c9cebd",
-                  width: "auto",
-                  height: "auto",
-                  margin: "5px",
-                  borderRadius: "10px",
-                  color: "white",
-                  position: "static"
-                }}
-              />
-            );
-          })}
+      <div className="top-nav">
+        <div className="business-nav">
+          {businessLinks
+            .map(link => {
+              return (
+                <div className="top-nav-link" onClick={() => navRedirectHandler(link.value)}>{link.name}</div>
+              );
+            })}
+        </div>
+        <div className="user-nav">
+          {userLinks
+            .filter(link => link.name !== "")
+            .map(link => {
+              return (
+                <div className="top-nav-link" onClick={() => navRedirectHandler(link.value)}>{link.name}</div>
+              )
+            })}
+        </div>
       </div>
       <div
         id="mySidebar"
@@ -81,7 +81,7 @@ const URLNav = ({ userIsLoggedIn }) => {
         <p className="closebtn" onClick={closeNav}>
           &times;
         </p>
-        {navArray
+        {sidebarLinks
           .filter(link => link.name !== "")
           .map(link => {
             return (
@@ -96,7 +96,7 @@ const URLNav = ({ userIsLoggedIn }) => {
           &#9776;
         </button>
       </div>
-    </React.Fragment>
+    </React.Fragment >
   );
 };
 

@@ -142,7 +142,7 @@ const EditInformation = ({ loggedInUser }) => {
     <div className="edit_information_container">
       <div className="edit_information_body">
         <h4 style={{ textAlign: "center" }}>
-          We show the following {count === 1 ? "addresses" : "address"} on file:
+          We show the following {count === 1 ? "address" : "addresses"} on file:
         </h4>
         <Card raised style={{ padding: "10px", backgroundColor: "#C9BE99" }}>
           {addressArray.map(address => {
@@ -314,8 +314,8 @@ const EditInformation = ({ loggedInUser }) => {
                   </ul>
                 </div>
               ) : (
-                ""
-              )}
+                  ""
+                )}
             </CardContent>
           </Card>
           <h4 style={{ textAlign: "left", padding: "5px" }}>Address #2</h4>
@@ -411,8 +411,8 @@ const EditInformation = ({ loggedInUser }) => {
                   </ul>
                 </div>
               ) : (
-                ""
-              )}
+                  ""
+                )}
             </CardContent>
           </Card>
           <h4 style={{ textAlign: "left", padding: "5px" }}>Address #3</h4>
@@ -508,8 +508,8 @@ const EditInformation = ({ loggedInUser }) => {
                   </ul>
                 </div>
               ) : (
-                ""
-              )}
+                  ""
+                )}
             </CardContent>
           </Card>
           <h4 style={{ textAlign: "left", padding: "5px" }}>Address #4</h4>
@@ -605,8 +605,8 @@ const EditInformation = ({ loggedInUser }) => {
                   </ul>
                 </div>
               ) : (
-                ""
-              )}
+                  ""
+                )}
             </CardContent>
           </Card>
         </div>

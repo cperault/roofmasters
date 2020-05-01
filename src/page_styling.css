@@ -3,16 +3,68 @@
 }
 
 body {
-  background-color: #838e83;
+  background-color: #253237;
   margin: 0;
 }
 
-.tab-nav {
+/* palette
+
+#E0FBFC light baby blue
+#C2DFE3 blue grey
+#9DB4C0 blue silver 
+#5C6B73 silver
+#253237 light charcoal
+
+
+*/
+
+/* .top-nav {
   text-align: center;
+} */
+
+.top-nav {
+  display: flex;
+  top: 0;
+  left: 0;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: solid #253237 3px;
+  margin: 0px auto;
+  align-items: center;
+  width: 100%;
+  color: #253237;
+  background-color: #9DB4C0;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 1;
+  position: sticky;
 }
 
-.wrapper_div,
-.wrapper_div_landing {
+.business-nav {
+  display: flex;
+  align-items: center;
+  width: 50%;
+  justify-content: space-around;
+}
+
+.user-nav {
+  display: flex;
+  align-items: center;
+}
+
+.top-nav-link {
+  padding: 5px;
+}
+
+.top-nav-link:hover {
+  cursor: pointer;
+  margin-left: 0px;
+  margin-right: 0px;
+  border-bottom: solid #E0FBFC 3px;
+  margin-bottom: -3px;
+}
+
+.wrapper_div, .wrapper_div_landing {
   margin: 0 auto;
   min-width: 300px;
   max-width: 960px;
@@ -34,22 +86,18 @@ body {
 
 .wrapper_header {
   padding: 10px;
-  color: #64403e;
+  color: white;
 }
 
 .wrapper_body_div_profile {
   width: 100%;
 }
 
-.wrapper_body_div_profile,
-.contact_wrapper_body_div {
+.wrapper_body_div_profile, .contact_wrapper_body_div {
   overflow: hidden;
 }
 
-.contact_wrapper_body_div,
-.login_wrapper_body_div,
-.registration_form_div,
-.contact_form_div {
+.contact_wrapper_body_div, .login_wrapper_body_div, .registration_form_div, .contact_form_div {
   display: inline-block;
 }
 
@@ -61,26 +109,25 @@ body {
 .wrapper_body_div_content_paragraph {
   text-align: justify;
   text-indent: 50px;
-  color: #362c2b;
+  color: white;
 }
 
 .wrapper_body_div_content_paragraph_header {
-  color: #64403e;
+  color: white;
 }
 
 .landing_wrapper_body_div_content_paragraph {
   overflow: hidden;
   text-align: justify;
   text-indent: 50px;
-  color: #362c2b;
+  color: white;
 }
 
 .landing_wrapper_body_div_content_paragraph img {
-  border: solid 1px #c9cebd;
+  border: solid 1px white;
 }
 
-.left_image,
-.right_image {
+.left_image, .right_image {
   height: 300px;
   border-radius: 15px;
 }
@@ -99,17 +146,18 @@ body {
   width: 100px;
 }
 
-.login_form_div,
-.registration_form_div,
-.contact_form_div,
-.registration_confirmation_wrapper_body_div {
+.login_form_div, .registration_form_div, .contact_form_div, .registration_confirmation_wrapper_body_div {
   width: 300px;
   overflow: hidden;
   padding: 15px;
   text-align: right;
-  background-color: #c9cebd;
-  border: solid 1px #838e83;
+  background-color: white;
+  border: solid 1px black;
   border-radius: 15px;
+}
+
+.focusOutline {
+  border: solid red 1px !important;
 }
 
 .login_form_div button {
@@ -128,9 +176,7 @@ body {
   width: 100%;
 }
 
-.wrapper_body_div_column_profile_left,
-.wrapper_body_div_column_profile_right,
-.admin_wrapper_body_div_column_profile_right {
+.wrapper_body_div_column_profile_left, .wrapper_body_div_column_profile_right, .admin_wrapper_body_div_column_profile_right {
   padding: 15px;
   margin: 10px;
   display: inline-block;
@@ -140,22 +186,16 @@ body {
   width: 100%;
 }
 
-.wrapper_body_div_column_profile_right,
-.admin_wrapper_body_div_column_profile_right {
+.wrapper_body_div_column_profile_right, .admin_wrapper_body_div_column_profile_right {
   width: 100%;
 }
 
-.wrapper_body_div_column_item a:hover,
-a:visited,
-a:link {
-  color: black;
+.wrapper_body_div_column_item a:hover, a:visited, a:link {
+  color: #253237;
   text-decoration: none;
 }
 
-.new_job_form,
-.completed_jobs_div,
-.open_jobs_div,
-.messages_div {
+.new_job_form, .completed_jobs_div, .open_jobs_div, .messages_div {
   padding: 10px;
 }
 
@@ -166,62 +206,47 @@ a:link {
 
 .register_form_div_header {
   text-align: center;
-  color: #64403e;
+  color: #253237;
 }
 
-.registration-form-error-div,
-.login-form-error-div,
-.new-job-form-error-div,
-.password-reset-error-div,
-.new-address-form-error-div,
-.delete-account-error-div {
+.registration-form-error-div, .login-form-error-div, .new-job-form-error-div, .password-reset-error-div, .new-address-form-error-div, .delete-account-error-div, .contact-us-form-error-div {
   margin: 0 auto;
-  color: #64403e;
+  color: #253237;
 }
 
-.registration-form-error-div ul,
-.login-form-error-div ul,
-.new-job-form-error-div ul,
-.password-reset-error-div ul,
-.new-address-form-error-div ul {
+.registration-form-error-div ul, .login-form-error-div ul, .new-job-form-error-div ul, .password-reset-error-div ul, .new-address-form-error-div ul, .delete-account-error-div ul, .contact-us-form-error-div ul {
   margin: 0 auto;
   list-style-type: none;
-  color: #64403e;
+  color: #253237;
 }
 
-.registration-form-error-div p,
-.login-form-error-div p,
-.new-job-form-error-div p,
-.password-reset-error-div p,
-.new-address-form-error-div p {
+.registration-form-error-div p, .login-form-error-div p, .new-job-form-error-div p, .password-reset-error-div p, .new-address-form-error-div p, .contact-us-form-error-div p {
   font-weight: bold;
 }
 
 .no-account-p-link a {
-  color: #523937;
+  color: white;
 }
 
 .loading-message {
-  color: #523937;
+  color: white;
 }
 
 .profile_expansion_panel_details_div {
   width: 100%;
-  border: solid #92896f 1px;
-  border-radius: 15px;
-  padding: 5px;
-}
-.admin_profile_expansion_panel_details_div {
-  width: 100%;
-  border: solid #92896f 1px;
+  border: solid #253237 1px;
   border-radius: 15px;
   padding: 5px;
 }
 
-.open_jobs_table,
-.completed_jobs_table,
-.messages_table,
-.all_customers_table {
+.admin_profile_expansion_panel_details_div {
+  width: 100%;
+  border: solid #253237 1px;
+  border-radius: 15px;
+  padding: 5px;
+}
+
+.open_jobs_table, .completed_jobs_table, .messages_table, .all_customers_table {
   margin-bottom: 20px;
   width: 100%;
 }
@@ -231,42 +256,34 @@ a:link {
   padding: 5px;
   width: 100%;
 }
+
 .completed_jobs_table_header {
   text-align: left;
   padding: 5px;
   width: 100%;
 }
 
-.open_jobs_table_row,
-.completed_jobs_table_row,
-.messages_table_row {
+.open_jobs_table_row, .completed_jobs_table_row, .messages_table_row {
   padding: 5px;
 }
 
-.open_jobs_table_detail_title,
-.open_jobs_table_detail_date,
-.completed_jobs_table_detail_title,
-.completed_jobs_table_detail_date,
-.messages_table_detail_from,
-.messages_table_detail_time {
+.open_jobs_table_detail_title, .open_jobs_table_detail_date, .completed_jobs_table_detail_title, .completed_jobs_table_detail_date, .messages_table_detail_from, .messages_table_detail_time {
   text-align: left;
   font-size: 14px;
   padding: 5px;
 }
 
-.messages_table_detail_from,
-.messages_table_detail_content,
-.messages_table_detail_time {
+.messages_table_detail_from, .messages_table_detail_content, .messages_table_detail_time {
   text-align: left;
   font-size: 14px;
   padding: 5px;
 }
 
-.open_jobs_table_detail_description_item:hover,
-.completed_jobs_table_detail_description_item:hover,
-.messages_table_detail_content:hover,
-.settings_item:hover,
-.all_jobs_table_detail_description:hover {
+.open_jobs_table_detail_description, .completed_jobs_table_detail_description {
+  text-align: left;
+}
+
+.open_jobs_table_detail_description_item:hover, .completed_jobs_table_detail_description_item:hover, .messages_table_detail_content:hover, .settings_item:hover, .all_jobs_table_detail_description:hover {
   cursor: pointer;
   font-weight: bold;
 }
@@ -275,37 +292,32 @@ a:link {
   margin: 0 auto;
   padding: 5px;
 }
+
 .settings_item {
   list-style: none;
   text-align: left;
 }
 
 @media only screen and (min-width: 851px) {
-  .sidebar,
-  #main {
+  .sidebar, #main {
     display: none;
   }
 }
 
 @media only screen and (max-width: 850px) {
-  /* hide the Tab components inside the .tab-nav div*/
-  .tab-nav {
+  /* hide the Tab components inside the .top-nav div*/
+  .top-nav {
     display: none;
   }
-
   .topnav {
-    background-color: #838e83;
+    background-color: #253237;
     border: none;
     height: 30px;
   }
-
-  .wrapper_div,
-  .wrapper_div_landing,
-  .contact_wrapper_body_div {
+  .wrapper_div, .wrapper_div_landing, .contact_wrapper_body_div {
     border-radius: 0px;
     border-top: none;
   }
-
   .sidebar {
     width: 0;
     position: fixed;
@@ -313,44 +325,42 @@ a:link {
     top: 0;
     left: 0;
     overflow-x: hidden;
-    background-color: #6c6061;
-    color: white;
+    background-color: #9DB4C0;
     height: 100%;
     /* transition: 0.9s; */
   }
-
   .sidebar a {
     padding: 20px;
     margin-top: 30px;
     text-decoration: none;
     text-align: left;
     font-size: 25px;
-    color: white;
+    color: #253237;
     display: block;
     /* transition: 0.9s; */
   }
+  .sidebar a:hover {
+    cursor: pointer;
+  }
   .sidebar .closebtn {
     float: right;
-    color: white;
+    color: #253237;
     font-size: 36px;
     margin-right: 15px;
     margin-top: 5px;
   }
-
   .sidebar .closebtn:hover {
     cursor: pointer;
   }
-
   .openbtn {
     position: sticky !important;
     top: 0;
     left: 0;
     font-size: 20px;
     background-color: inherit;
-    color: #64403e;
+    color: #9DB4C0;
     border: none;
   }
-
   #main {
     /* transition: margin-left 0.9s; */
     padding: 16px;
@@ -361,9 +371,7 @@ a:link {
   width: 600px;
 }
 
-.contact_form_div,
-.login_form_div,
-.registration_form_div {
+.contact_form_div, .login_form_div, .registration_form_div {
   width: 500px;
 }
 
@@ -394,89 +402,64 @@ a:link {
     padding-left: 0 !important;
     padding-right: 0 !important;
   }
-
   .modal-container-body {
     width: 100%;
     padding: 0 !important;
     padding-bottom: 30px !important;
   }
-
   .register_form_div_header {
     font-size: 14px;
     margin-top: 0;
   }
-
   .wrapper_div {
     width: 100% !important;
   }
-
   .left_image {
     margin-right: 15px;
   }
-
   .right_image {
     margin-left: 15px;
   }
-
-  .left_image,
-  .right_image {
+  .left_image, .right_image {
     width: 200px;
     height: 200px;
   }
-
-  .wrapper_body_div_column_profile_left,
-  .wrapper_body_div_column_profile_right,
-  .admin_wrapper_body_div_column_profile_right {
+  .wrapper_body_div_column_profile_left, .wrapper_body_div_column_profile_right, .admin_wrapper_body_div_column_profile_right {
     width: 100%;
   }
-
   .item_summary_profile {
     font-size: smaller;
   }
-
   .contact_form_div_footer img {
     margin-top: 0;
   }
-
   .landing_wrapper_body_div_content_paragraph {
     text-align: justify;
     font-size: 14px;
   }
-
   .wrapper_body_div_profile_inner {
     width: 100%;
   }
-
   .wrapper_body_div_profile_inner {
     flex-direction: column;
   }
-
-  .contact_wrapper_body_div,
-  .login_wrapper_body_div {
+  .contact_wrapper_body_div, .login_wrapper_body_div {
     width: 100% !important;
   }
-
-  .contact_form_div,
-  .login_form_div,
-  .registration_form_div,
-  .registration_confirmation_wrapper_body_div {
+  .contact_form_div, .login_form_div, .registration_form_div, .registration_confirmation_wrapper_body_div {
     width: 85% !important;
     padding: 10px;
     margin: auto;
   }
-
   .topnav {
     margin-bottom: 20px;
   }
-
   .wrapper_header {
     margin-top: 20px;
     margin-bottom: 5px;
     font-size: 18px;
   }
-  .messages_table_detail_content,
-  .open_jobs_table_detail_description,
-  .completed_jobs_table_detail_description {
+  .messages_table_detail_content, .open_jobs_table_detail_description, .completed_jobs_table_detail_description {
     width: 80%;
   }
   .wrapper_body_div_content_paragraph {
@@ -488,29 +471,17 @@ a:link {
   .wrapper_body_div_profile_inner {
     flex-direction: column;
   }
-
-  .open_jobs_table_detail_title,
-  .open_jobs_table_detail_date,
-  .completed_jobs_table_detail_title,
-  .completed_jobs_table_detail_date,
-  .messages_table_detail_from,
-  .messages_table_detail_time {
+  .open_jobs_table_detail_title, .open_jobs_table_detail_date, .completed_jobs_table_detail_title, .completed_jobs_table_detail_date, .messages_table_detail_from, .messages_table_detail_time {
     text-align: left;
     font-size: 14px;
     width: 33.33%;
     padding: 5px;
   }
-
-  .open_jobs_table_header,
-  .completed_jobs_table_header,
-  .messages_table_header {
+  .open_jobs_table_header, .completed_jobs_table_header, .messages_table_header {
     text-align: left;
     padding: 5px;
   }
-
-  .messages_table_detail_content,
-  .open_jobs_table_detail_description,
-  .completed_jobs_table_detail_description {
+  .messages_table_detail_content, .open_jobs_table_detail_description, .completed_jobs_table_detail_description {
     text-align: left;
     width: 80%;
     padding: 5px;
@@ -534,19 +505,15 @@ a:link {
 
 .modal-container-header {
   font-size: 18px;
-  color: #64403e;
+  color: #253237;
   margin-left: 20px;
 }
 
 .modal-container-close {
   margin-right: 20px !important;
 }
-.open_job_details_expanded_body,
-.completed_job_details_expanded_body,
-.message_details_expanded_body,
-.password_reset_body,
-.new_message_container,
-.all_job_details_expanded_body {
+
+.open_job_details_expanded_body, .completed_job_details_expanded_body, .message_details_expanded_body, .password_reset_body, .new_message_container, .all_job_details_expanded_body {
   padding: 20px;
 }
 
@@ -558,7 +525,7 @@ a:link {
 }
 
 .password_reset_div_header {
-  color: #64403e;
+  color: #253237;
   padding: 5px;
   font-size: 20px;
   text-align: center;

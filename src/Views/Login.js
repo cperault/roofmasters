@@ -8,6 +8,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { TextField, Button } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 
 const Login = ({ loggedInUser, userIsLoggedIn, stateHandler, Nav, Footer }) => {
   //useState hooks to store email and password from the form
@@ -21,6 +22,30 @@ const Login = ({ loggedInUser, userIsLoggedIn, stateHandler, Nav, Footer }) => {
   const inputStyle = {
     marginBottom: "10px"
   };
+
+  const StyledTextField = makeStyles({
+    root: {
+      '& label.Mui-focused': {
+        color: '#253237',
+      },
+      '& .MuiInput-underline:after': {
+        borderBottomColor: '#253237',
+      },
+      '& .MuiOutlinedInput-root': {
+        '& fieldset': {
+          borderColor: '#253237',
+        },
+        '&:hover fieldset': {
+          borderColor: '#253237',
+        },
+        '&.Mui-focused fieldset': {
+          borderColor: '#253237',
+        },
+      },
+    },
+  });
+  const classes = StyledTextField();
+
   //authentication handler function
   const authenticate = (email, password) => {
     //page-loading effect should display while request is in progress
@@ -104,19 +129,18 @@ const Login = ({ loggedInUser, userIsLoggedIn, stateHandler, Nav, Footer }) => {
       </div>
       <div className="wrapper_div">
         <h1 className="wrapper_header">Welcome</h1>
-        <nav></nav>
         <div className="login_wrapper_body_div">
           <div className="login_form_div">
-            <br />
             <TextField
-              placeholder="Email address"
+              label="Email address"
+              className={classes.root}
               name="login_email"
               value={email}
               style={inputStyle}
               fullWidth
               InputProps={{
                 style: {
-                  color: "#64403e",
+                  color: "#253237",
                   fontSize: "14px"
                 }
               }}
@@ -126,13 +150,14 @@ const Login = ({ loggedInUser, userIsLoggedIn, stateHandler, Nav, Footer }) => {
             />
             <br />
             <TextField
-              placeholder="Password"
+              label="Password"
+              className={classes.root}
               type="password"
               name="login_password"
               style={inputStyle}
               InputProps={{
                 style: {
-                  color: "#64403e",
+                  color: "#253237",
                   fontSize: "14px"
                 }
               }}
@@ -146,7 +171,7 @@ const Login = ({ loggedInUser, userIsLoggedIn, stateHandler, Nav, Footer }) => {
             <Button
               onClick={() => authenticate(email, password)}
               variant="contained"
-              style={{ backgroundColor: "#64403e", color: "#c9cebd" }}
+              style={{ backgroundColor: "#9DB4C0", color: "#253237" }}
               size="small"
             >
               Login
@@ -161,8 +186,8 @@ const Login = ({ loggedInUser, userIsLoggedIn, stateHandler, Nav, Footer }) => {
                 </ul>
               </div>
             ) : (
-              ""
-            )}
+                ""
+              )}
           </div>
           <p className="no-account-p-link">
             <a href="/registration">No account? Sign up!</a>

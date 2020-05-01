@@ -99,8 +99,8 @@ const RemoveAccount = ({ loggedInUser }) => {
           </ul>
         </div>
       ) : (
-        ""
-      )}
+          ""
+        )}
     </div>
   );
 };

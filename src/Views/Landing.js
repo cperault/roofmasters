@@ -15,7 +15,7 @@ const Landing = ({ userIsLoggedIn, loggedInUser, Nav, Footer }) => {
         <Nav userIsLoggedIn={userIsLoggedIn} />
       </div>
       <div className="wrapper_div">
-        <h1 className="wrapper_header">Roofmasters Roofing-Siding-Gutters</h1>
+        <h1 className="wrapper_header">Roofmasters</h1>
         <div className="wrapper_body_content_div">
           <p className="landing_wrapper_body_div_content_paragraph">
             <img
@@ -71,11 +71,11 @@ const Landing = ({ userIsLoggedIn, loggedInUser, Nav, Footer }) => {
             nibh tellus molestie nunc. Non sodales neque sodales ut. Mattis nunc
             sed blandit libero volutpat sed. Fames ac turpis egestas maecenas
             pharetra convallis. Rhoncus est pellentesque elit ullamcorper
-            dignissim cras tincidunt lobortis feugiat.
+            dignissim cra tincidunt lobortis feugiat si amet valus init consectetur.
           </p>
           <br />
         </div>
-        <div className="wrapper_body_content_div">
+        {/* <div className="wrapper_body_content_div">
           <p className="landing_wrapper_body_div_content_paragraph">
             <img
               className="left_image"
@@ -101,7 +101,7 @@ const Landing = ({ userIsLoggedIn, loggedInUser, Nav, Footer }) => {
             gravida neque convallis a cras. Lectus urna duis convallis convallis
             tellus id interdum velit.
           </p>
-        </div>
+        </div> */}
       </div>
     </React.Fragment>
   );
