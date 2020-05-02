@@ -66,7 +66,7 @@ const ConfirmRegistration = ({ Nav, Footer, userIsLoggedIn }) => {
         <h1 className="wrapper_header">Email Address Confirmation</h1>
         <div className="registration_confirmation_wrapper_body_div">
           <div className="registration_confirmation_form_div">
-            <p className="loading-message">
+            <p className="loading-message-confirmation-page">
               {pageLoading ? "Verifying your request..." : ""}
             </p>
           </div>

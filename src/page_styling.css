@@ -225,6 +225,10 @@ body {
 }
 
 .loading-message {
+  color: white;
+}
+
+.loading-message-confirmation-page {
   color: #253237;
 }
 
