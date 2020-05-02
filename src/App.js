@@ -56,7 +56,7 @@ const App = () => {
     <BrowserRouter>
       <Route
         exact
-        path={["/", "/landing", "/logout"]}
+        path={["/", "/landing"]}
         render={() => (
           <Landing
             userIsLoggedIn={userIsLoggedIn}
