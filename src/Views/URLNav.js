@@ -37,25 +37,6 @@ const URLNav = ({ userIsLoggedIn }) => {
     }
   ];
 
-  <Tab
-    label="Logout"
-    onClick={logoutHandler}
-    style={
-      userIsLoggedIn === "true"
-        ? {
-          backgroundColor: "#6c6061",
-          width: "auto",
-          height: "auto",
-          margin: "5px",
-          border: "solid 1px #c9cebd",
-          borderRadius: "10px",
-          color: "white",
-          position: "static"
-        }
-        : { display: "none" }
-    }
-  />
-
   const sidebarLinks = businessLinks.concat(userLinks);
 
   const [width, setWidth] = useState("");
