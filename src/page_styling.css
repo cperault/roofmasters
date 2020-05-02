@@ -146,7 +146,7 @@ body {
   width: 100px;
 }
 
-.login_form_div, .registration_form_div, .contact_form_div, .registration_confirmation_wrapper_body_div {
+.login_form_div, .registration_form_div, .contact_form_div, .registration_confirmation_form_div {
   width: 300px;
   overflow: hidden;
   padding: 15px;
@@ -225,7 +225,7 @@ body {
 }
 
 .loading-message {
-  color: white;
+  color: #253237;
 }
 
 .profile_expansion_panel_details_div {
