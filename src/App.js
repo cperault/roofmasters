@@ -56,7 +56,7 @@ const App = () => {
     <BrowserRouter>
       <Route
         exact
-        path={["/", "/landing"]}
+        path={["/", "/landing", "/logout"]}
         render={() => (
           <Landing
             userIsLoggedIn={userIsLoggedIn}
@@ -101,13 +101,13 @@ const App = () => {
               setInviteCode={setInviteCode}
             />
           ) : (
-            <Profile
-              userIsLoggedIn={userIsLoggedIn}
-              loggedInUser={loggedInUser}
-              Nav={Nav}
-              Footer={Footer}
-            />
-          )
+              <Profile
+                userIsLoggedIn={userIsLoggedIn}
+                loggedInUser={loggedInUser}
+                Nav={Nav}
+                Footer={Footer}
+              />
+            )
         }
       />
       <Route
@@ -156,13 +156,13 @@ const App = () => {
               Footer={Footer}
             />
           ) : (
-            <Profile
-              userIsLoggedIn={userIsLoggedIn}
-              loggedInUser={loggedInUser}
-              Nav={Nav}
-              Footer={Footer}
-            />
-          )
+              <Profile
+                userIsLoggedIn={userIsLoggedIn}
+                loggedInUser={loggedInUser}
+                Nav={Nav}
+                Footer={Footer}
+              />
+            )
         }
       />
     </BrowserRouter>

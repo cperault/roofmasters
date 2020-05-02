@@ -54,7 +54,7 @@ const URLNav = ({ userIsLoggedIn }) => {
   };
 
   const navRedirectHandler = link => {
-    if (link.value === "/logout") {
+    if (link === "/logout") {
       localStorage.clear();
       window.location.assign("/landing");
     } else {
