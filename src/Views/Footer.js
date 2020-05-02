@@ -13,14 +13,8 @@
 \******************************************************************************************************************/
 
 import React from "react";
-import { Tab } from "@material-ui/core";
 
-const Footer = ({ userIsLoggedIn }) => {
-  //function to handle logging out
-  const logoutHandler = () => {
-    localStorage.clear();
-    window.location.assign("/landing");
-  };
+const Footer = () => {
   return (
     <div className="contact_form_div_footer">
       <p>
@@ -57,24 +51,6 @@ const Footer = ({ userIsLoggedIn }) => {
           />
         </a>
       </p>
-      <Tab
-        label="Logout"
-        onClick={logoutHandler}
-        style={
-          userIsLoggedIn === "true"
-            ? {
-                backgroundColor: "#6c6061",
-                width: "auto",
-                height: "auto",
-                margin: "5px",
-                border: "solid 1px #c9cebd",
-                borderRadius: "10px",
-                color: "white",
-                position: "static"
-              }
-            : { display: "none" }
-        }
-      />
     </div>
   );
 };

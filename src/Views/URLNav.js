@@ -27,10 +27,34 @@ const URLNav = ({ userIsLoggedIn }) => {
     },
     {
       id: 6,
+      name: userIsLoggedIn === "true" ? "Logout" : "",
+      value: userIsLoggedIn === "true" ? "/logout" : "",
+    },
+    {
+      id: 7,
       name: userIsLoggedIn === "false" ? "" : "Profile",
       value: userIsLoggedIn === "false" ? "" : "/profile"
     }
   ];
+
+  <Tab
+    label="Logout"
+    onClick={logoutHandler}
+    style={
+      userIsLoggedIn === "true"
+        ? {
+          backgroundColor: "#6c6061",
+          width: "auto",
+          height: "auto",
+          margin: "5px",
+          border: "solid 1px #c9cebd",
+          borderRadius: "10px",
+          color: "white",
+          position: "static"
+        }
+        : { display: "none" }
+    }
+  />
 
   const sidebarLinks = businessLinks.concat(userLinks);
 
@@ -49,7 +73,12 @@ const URLNav = ({ userIsLoggedIn }) => {
   };
 
   const navRedirectHandler = link => {
-    window.location.assign(link);
+    if (link.value === "/logout") {
+      localStorage.clear();
+      window.location.assign("/landing");
+    } else {
+      window.location.assign(link);
+    }
   };
 
   return (
